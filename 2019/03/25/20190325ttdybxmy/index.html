@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="OtterV">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="OtterV">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="Th3 5tupid 0ne">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>谈谈最近看的电影——波希米亚狂想曲 · null</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >River5tone</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">谈谈最近看的电影——波希米亚狂想曲</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>River5tone</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/17.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            谈谈最近看的电影——波希米亚狂想曲
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Movie">Movie</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">3.2k</span>阅读时长: <span class="post-count reading-time">12 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/03/25</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>每到三月份，都会有好看的电影，想也是有趣，比如前年的&lt;爱乐之城&gt;，去年的&lt;三块广告牌&gt;，今年的&lt;绿皮书&gt;和&lt;波希米亚狂想曲&gt;，而且无一例外都有很棒的音乐与美妙的画面。</p>
+<p>指路前面的影评&gt;&gt;</p>
+<p><a href>谈谈最近看的电影——爱乐之城</a></p>
+<p><a href>谈谈最近看的电影——三块广告牌</a></p>
+<p><a href>谈谈最近看的电影——绿皮书</a></p>
+<p>（完全还没写哈哈哈哈哈哈）</p>
+<p>​    </p>
+<p>&lt; 波希米亚狂想曲 &gt;是皇后乐队（Queen）主唱 Freddie Mercury 的传记电影，是根据真实故事的艺术创作，在时间线上有一定的打乱。这个电影讲述的是这些传统的、受过良好的家庭和高等教育的英国绅士，与众不同的世界观、人生观、价值观和他们传奇的经历，他们的才华，他们的情感，他们的音乐。</p>
+<h6 id="lt-Somebody-To-Love-gt"><a href="#lt-Somebody-To-Love-gt" class="headerlink" title="&lt; Somebody To Love &gt;"></a>&lt; Somebody To Love &gt;</h6><p>开篇，明媚的光线，明亮的浅色调，干净的白色背心更凸显肌肉的曲线，工作人员替他脱下的外套，器物堆积人们忙碌着的通向舞台的路，跃上后台的矫健步伐，以及拉开帘子的一瞬间的人浪人潮，这些都让人心情愉悦，听到已经听了很多遍的歌曲，毛孔也开始兴奋了。也想到这应是大插叙，开篇只觉阳光正好，正是人生光辉时。谁又能想到，这时的他确实身体状况不好，在挣扎向前呢？谁又能想到这里面饱含着的，对家人对爱人的渴望之情呢？</p>
+<blockquote>
+<p>Each morning I get up I die a little</p>
+<p>每朝起床，离死亡更进一步</p>
+<p>Can barely stand on my feet</p>
+<p>勉强地站起身来</p>
+<p>Take a look in the mirror and cry</p>
+<p>瞅一眼镜子，不禁泪流满面</p>
+<p>Lord’ what you’re doing to me</p>
+<p>上帝啊，你对我做了什么啊</p>
+<p>I have spent all my years in believing you</p>
+<p>我花了一生的时间来信仰你</p>
+<p>But I just can’t get no relief’ Lord!</p>
+<p>但是我却不能从你那儿获得解脱</p>
+<p>Somebody’ ooh somebody</p>
+<p>有那么一个人么</p>
+<p>Can anybody find me somebody to love?</p>
+<p>可以帮我找一个人来爱么？</p>
+</blockquote>
+<p>​    </p>
+<h6 id="lt-Doing-All-Right-gt"><a href="#lt-Doing-All-Right-gt" class="headerlink" title="&lt; Doing All Right &gt;"></a>&lt; Doing All Right &gt;</h6><p>画面一转，Freddie 在希思罗机场搬运行李，却在工作中也在想着歌词，他坚定地痴迷并热爱着音乐，也确实充满了音乐才华。此时的 Freddie 也是正要走上发光之路的开端，歌词与 Freddie 当时的生存状态高度吻合。Freddie 遇到（主动地）Smile 也是在这时。</p>
+<p>Smile 原主唱要离开，Brian 和 Roger 反省自身不足，Roger说周末我有更好的事可以做，我可以把她们的名字告诉你，这时 Freddie 出现说想要加入，却被 Roger 说牙不行（ Freddie 是龅牙），于是 Freddie 唱了一段 Doing alright 让他们改变了想法，并羞涩却又得意洋洋说他因为多长出四颗龅牙有着更宽广的音域。</p>
+<p>Freddie 才华洋溢，是作曲作词弹钢琴的点子王，Brian May 有着物理理科脑，是乐队中聪明冷静的吉他手，Roger Taylor 作为架子鼓手，同时还是个俏皮搞怪帅气迷人的花花公子，John Deacon 则是温和冷幽默的贝斯手，乐队四人凑在一起开辟了一条辉煌轰烈的音乐之路。也正是在乐队创立之初，Freddie遇到了美丽温柔又坚强的 Mary，两人从一开始的爱情，到后来的友谊，一直相守。Mary 给了Freddie 大胆追求自我追求梦想的坚实支持。</p>
+<p>Freddie 去 Biba 找 Mary 时看中女式裤子并女装，也反映了皇后乐队之后不以任何标签束缚自己的精神，男女式衣服混穿，夸张的打扮，夸张狂放具有个人鲜明特色的舞台动作，一直延续。 </p>
+<blockquote>
+<p>Yesterday my life was in ruins</p>
+<p>过去的生活已经面目全非</p>
+<p>Now today I know what Im doing</p>
+<p>如今对生活有了明确的目标</p>
+<p>Got a feeling I should be doing all right</p>
+<p>总该做正确的事情</p>
+<p>Doing all right</p>
+<p>做正确的事</p>
+<p>Where will I be this time tomorrow</p>
+<p>明天的这个时刻我又会在哪</p>
+<p>Jump for joy and sinking in sorrow</p>
+<p>跃进欢乐，沉入悲伤</p>
+<p>Anyway I should be doing all right</p>
+<p>无论如何我要做正确的事</p>
+<p>Doing all right</p>
+<p>做正确的事</p>
+</blockquote>
+<p>​    </p>
+<h6 id="lt-Bohemian-Rhapsody-gt"><a href="#lt-Bohemian-Rhapsody-gt" class="headerlink" title="&lt; Bohemian Rhapsody &gt;"></a>&lt; Bohemian Rhapsody &gt;</h6><p>皇后乐队是没有标签的，他们什么都尝试，他们从一开始想让角落里的人们能找到自我，到想让更多的人们能在他们的歌曲中找到归属感。这次他们要尝试歌剧与摇滚以及更多种风格的融合，也是可爱又睿智（不是那个骂人的睿智）的迈阿密海滩爷爷第一次出现。</p>
+<p>四人入住郊外像是农场的录音棚，Freddie 被安排到最大的房间，Deacon 似乎一向低调也总是被欺负（笑）。嬉笑打闹，音乐分享，疯狂的灵感与创意的碰撞，有时伴随着争吵与摩擦，但更多的是无上的欢欣。Brian 炫酷帅气的吉他独奏，Roger 一遍遍的假声男高音”Galileo’ Galileo’（伽利略，伽利略）“，四个人默契的和声，这首倾注心血的歌注定伟大。</p>
+<p>我后来再听皇后乐队的曲子时，非常喜欢一首没有在影片中出现的曲子&lt; Save Me &gt;，非常有趣的是在那首曲子里，Freddie 呼喊着“Save me！Save me”，呼喊着他不想独自面对现实，他向爱，向爱人，求救着，而在这首曲子里却是再见吧我要离开你们独自去面对现实了。这简直就是一”曲“成谶。Freddie 之后孤独寂寞自己也感到空虚的沉沦生活，透支身体和生命的工作，以及对疾病死亡的恐慌绝望，再到接受一切，并努力绽放美丽释放光热。</p>
+<p>说来也是神奇，Queen 一演奏，Freddie 一放声歌唱，心里便激情澎湃。这大概就是 Queen 吧。</p>
+<blockquote>
+<p>Mama’ life had just begun’</p>
+<p>妈妈啊，生活才刚刚开始啊</p>
+<p>But now I’ve gone and thrown it all away</p>
+<p>然而如今我却远走并抛之脑后</p>
+<p>Mama’ ooo’</p>
+<p>妈妈，喔……</p>
+<p>Didn’t mean to make you cry</p>
+<p>我并不想让你流泪</p>
+<p>If I’m not back again this time tomorrow</p>
+<p>要是我在明天这个时候未能归来</p>
+<p>Carry on’ carry on’ as if nothing really matters</p>
+<p>让生活继续吧，如同什么都没发生</p>
+<p>Too late’ my time has come’</p>
+<p>太晚了，我的归宿要来了</p>
+<p>Sends shivers down my spine’</p>
+<p>我的脊梁开始发颤</p>
+<p>Body’s aching all the time’</p>
+<p>浑身上下疼痛难忍</p>
+<p>Goodbye everybody - I’ve got to go</p>
+<p>再见吧，各位，我要离开了</p>
+<p>Gotta leave you all behind and face the truth</p>
+<p>我将离你们而去，去接受现实的审判</p>
+<p>Nothing really matters nothing really matters to me</p>
+<p>一切都无关紧要，对我来说已无关紧要了</p>
+</blockquote>
+<h6 id="lt-Love-Of-My-Life-gt"><a href="#lt-Love-Of-My-Life-gt" class="headerlink" title="&lt; Love Of My Life &gt;"></a>&lt; Love Of My Life &gt;</h6><p>Freddie 向 Mary 出柜时正是放着这首歌的演唱会。这首歌的钢琴伴奏十分美丽动人。</p>
+<p>二人美好的爱情却无法得到圆满结果令人惋惜。而之后 Mary 依然与 Freddie 是关系很好的挚友也令人十分感动。</p>
+<p>Freddie 接受自己的同性恋身份，形象变为短发胡子。搬家后 Mary 也住到了 Freddie 隔壁，夜晚 Freddie 感到空虚又寂寞，与 Mary 通电话，两个人从一楼、二楼对面的窗户隔空相望，他说，拉一下台灯，再拉一下。两个窗户里台灯的温暖黄光仿佛轻声应和着，”我在“。</p>
+<p>”良辰美景奈何天，赏心乐事谁家院“。</p>
+<p>Mary 终究还是无法一直陪伴在他身边，Freddie 也只能独自举杯。</p>
+<p>乐队的其他成员和 Mary 都有了他们各自的生活，而 Freddie 只能在偌大的空房子里独自举杯。</p>
+<blockquote>
+<p>Love of my life you’ve hurt me</p>
+<p>我的挚爱 你伤害了我</p>
+<p>You’ve broken my heart and now you leave me</p>
+<p>你使我心碎 又离我而去</p>
+<p>Love of my life can’t you see</p>
+<p>我的挚爱 你难道不明白</p>
+<p>Bring it back bring it back</p>
+<p>回来吧 回来吧</p>
+<p>Don’t take it away from me</p>
+<p>别离我而去</p>
+<p>Because you don’t know</p>
+<p>因为你不知道</p>
+<p>What it means to me</p>
+<p>你对我的意义</p>
+</blockquote>
+<h6 id="lt-Another-One-Bites-The-Dust-gt"><a href="#lt-Another-One-Bites-The-Dust-gt" class="headerlink" title="&lt; Another One Bites The Dust &gt;"></a>&lt; Another One Bites The Dust &gt;</h6><p>Freddie 因为 Paul 的提议与大家吵架，而 Deacon 正是弹了这一首的前奏贝斯熄灭了大家的火气。</p>
+<p>而之后家人闹翻，Freddie 对三位出言不逊，被 Paul 左右与家人分离，单独出专辑。而当 Brian 说我们是一家人劝和时，Freddie 更是难过，说我们不是一家人，你们各自有家庭有妻子儿女，而我呢，我什么都没有，我一无所有。Freddie 孤独恐慌，性向不被社会主流接受，感情生活不稳定，被小人左右，缺乏安全感，正是人生失意低落时。没有比这更糟糕的境况了。</p>
+<p>后来所有联系 Freddie 的电话都被 Paul 拦下。终于还是 Mary 将他拯救，暴雨夜，她说我们都爱你的，而 Paul 才是不在乎你的那个人。</p>
+<p>之后的讲和也是非常有趣，迈阿密海滩爷爷一直都十分可爱，四个老皇后终于和好并决定一起登上 Live Aid。</p>
+<blockquote>
+<p>你认为当你离开之后，</p>
+<p>Without you, when you’re gone</p>
+<p>我是怎么继续生活的?</p>
+<p>You took me for everything that I had</p>
+<p>你夺走了我的一切</p>
+<p>And kicked me out on my own</p>
+<p>然后一脚踢开了我</p>
+<p>Are you happy, are you satisfied?</p>
+<p>你高兴了吗?你满意了吗?</p>
+<p>How long can you stand the heat?</p>
+<p>我看你在这热度下还能坚持多久?</p>
+<p>Out of the doorway the bullets rip</p>
+<p>我的子弹在门外呼啸</p>
+<p>To the sound of the beat</p>
+<p>随着这节拍响个不停</p>
+<p>Look out</p>
+<p>注意了</p>
+<p>Another one bites the dust</p>
+<p>又一个人扑街了</p>
+<p>Another one bites the dust</p>
+<p>又一个人扑街了</p>
+<p>And another one gone, and another one gone</p>
+<p>挂掉一个，又挂掉一个</p>
+</blockquote>
+<h6 id="lt-Who-Wants-To-Live-Forever-gt"><a href="#lt-Who-Wants-To-Live-Forever-gt" class="headerlink" title="&lt; Who Wants To Live Forever &gt;"></a>&lt; Who Wants To Live Forever &gt;</h6><p>Freddie 一个人去医院检查，被诊断得了艾滋。医院空空荡荡的阴暗回廊，只有一个病容憔悴的少年坐在旁边的长凳上。少年认出来他，并唱到”Ay<del>Oh“，Freddie 停住，也回应道”Ay</del>Oh“。这是他最低沉的”Ay~Oh“，没有舞台上的激情与活力，但却有着微弱的温暖和坚定的力量。</p>
+<p>他一个人承受着这痛苦，没有告诉身旁的任何人，直到后来为了 Live Aid 排练时，嗓子状况不太好，告诉了三位家人。他说不要给予同情，不要告诉他人来博得同情，我要歌唱到最后一刻。他们四个人抱在一起时，他说即使你们哭得像小姑娘，我也依然爱你们。乐队成员之间真的是如同家人一样相亲相爱，即使之前有争吵，也总是会和好。</p>
+<p>Freddie 已经时日无多，却唱到”谁又想一直活着呢“。</p>
+<blockquote>
+<p>There’s no time for us</p>
+<p>已经没有时间留给我们了</p>
+<p>There’s no place for us</p>
+<p>我们也没有了容身之地</p>
+<p>What is this thing that builds our dreams</p>
+<p>是什么建起了我们的梦想</p>
+<p>Yet slips away from us</p>
+<p>却又让它从我们身边溜走</p>
+<p>Who wants to live forever</p>
+<p>谁愿永生？</p>
+<p>Who wants to live forever</p>
+<p>谁愿长生不死？</p>
+<p>There’s no chance for us</p>
+<p>我们已经没有机会了</p>
+<p>It’s all decided for us</p>
+<p>宿命早就为我们准备了一切</p>
+<p>This world has only one sweet moment set aside for us</p>
+<p>这个世界上只有一个甜蜜的瞬间是为我们而停留的</p>
+<p>Who wants to live forever</p>
+<p>谁愿永生？</p>
+<p>Who wants to live forever</p>
+<p>谁愿永远的活下去？</p>
+</blockquote>
+<h6 id="lt-Live-Aid-gt"><a href="#lt-Live-Aid-gt" class="headerlink" title="&lt; Live Aid &gt;"></a>&lt; Live Aid &gt;</h6><p>首尾呼应又到了最后的 Live Aid 演出，Queen 不是想之前穿的骚气华丽又个性，这次大家都穿的非常清新。一开口果然燃爆全场，多少万人一起的激情啊。而他们每唱起一首，字字句句都联系着 Freddie 的生命，生活经历中的每次心痛伤神，每次充满的力量，每次一往无前，每次冲破黑暗，每次爱而不得，每次被人们当作异类不被理解，以及，将要离开，生命将走到尽头的最后爆发。</p>
+<blockquote>
+<p>Who wants to live forever?</p>
+<p>Love of my life,</p>
+<p>Save me!</p>
+<p>Goodbye everybody, I’ve got to go.</p>
+</blockquote>
+<p>You’ll never go.</p>
+<hr>
+<p>2019.3.22电影院观看</p>
+<p>2019.3.23开始写</p>
+<p>2019.3.25继续写，完</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://daddyhonggg.github.io">OtterV</a>
+            <p>原文链接：<a href="https://daddyhonggg.github.io/2019/03/25/20190325ttdybxmy/">https://daddyhonggg.github.io/2019/03/25/20190325ttdybxmy/</a>
+            <p>发表日期：<a href="https://daddyhonggg.github.io/2019/03/25/20190325ttdybxmy/">March 25th 2019, 6:16:41 pm</a>
+            <p>更新日期：<a href="https://daddyhonggg.github.io/2019/03/25/20190325ttdybxmy/">October 4th 2019, 6:54:57 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2019/06/03/20190603ccpcgirlsnj/" title= "2019CCPC女生赛南京之行">
+                    <div class="nextTitle">2019CCPC女生赛南京之行</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/11/06/2018rop/" title= "ROP_lev">
+                    <div class="prevTitle">ROP_lev</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "nNBXAkxhHnRSmyrTGkGqWol2-gzGzoHsz",
+        appKey: "8ORVnQBXp9DfAFfPTmEWk4OI",
+        placeholder: "<(` o ')/\(' ^ `)>",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:daddy_hong@foxmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/daddyhonggg" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#lt-Somebody-To-Love-gt"><span class="toc-number">1.</span> <span class="toc-text">&lt; Somebody To Love &gt;</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#lt-Doing-All-Right-gt"><span class="toc-number">2.</span> <span class="toc-text">&lt; Doing All Right &gt;</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#lt-Bohemian-Rhapsody-gt"><span class="toc-number">3.</span> <span class="toc-text">&lt; Bohemian Rhapsody &gt;</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#lt-Love-Of-My-Life-gt"><span class="toc-number">4.</span> <span class="toc-text">&lt; Love Of My Life &gt;</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#lt-Another-One-Bites-The-Dust-gt"><span class="toc-number">5.</span> <span class="toc-text">&lt; Another One Bites The Dust &gt;</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#lt-Who-Wants-To-Live-Forever-gt"><span class="toc-number">6.</span> <span class="toc-text">&lt; Who Wants To Live Forever &gt;</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#lt-Live-Aid-gt"><span class="toc-number">7.</span> <span class="toc-text">&lt; Live Aid &gt;</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 16
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 9101 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/30</span><a class="archive-post-title" href= "/9101/11/30/91020000xxxg/" >XX相关</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/03</span><a class="archive-post-title" href= "/2019/06/03/20190603ccpcgirlsnj/" >2019CCPC女生赛南京之行</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2019/03/25/20190325ttdybxmy/" >谈谈最近看的电影——波希米亚狂想曲</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018rop/" >ROP_lev</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018reverse/" >逆向题目WriteUPs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181023tpv/" >欲望，道德与逃离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181022zyc/" >栈溢出漏洞及其利用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/21</span><a class="archive-post-title" href= "/2018/10/21/20181021wmm/" >Salty</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/10</span><a class="archive-post-title" href= "/2018/10/10/20181010Vigenere/" >Vigenere破解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/20180912bcdtts/" >Ubuntu Linux 虚拟机 + IDA 动态调试 Welcome</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2018/09/10/20180910bsb/" >Binary security 基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2018/09/06/20180906cpuse/" >About Computer Easy Using</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2018/08/18/20180818tz/" >亲爱的泰呆呆：</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/14</span><a class="archive-post-title" href= "/2018/08/14/20180814fzcp/" >肥宅的快乐-维他测评</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span><a class="archive-post-title" href= "/2018/08/12/20180812start/" >BLOG:DADDY_HONG‘s の start</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href= "/2018/04/08/201804gets/" >关于gets()的危险（不安全）性</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Blog"><span class="iconfont-archer">&#xe606;</span>Blog</span>
+    
+        <span class="sidebar-tag-name" data-tags="EAT"><span class="iconfont-archer">&#xe606;</span>EAT</span>
+    
+        <span class="sidebar-tag-name" data-tags="C"><span class="iconfont-archer">&#xe606;</span>C</span>
+    
+        <span class="sidebar-tag-name" data-tags="computer"><span class="iconfont-archer">&#xe606;</span>computer</span>
+    
+        <span class="sidebar-tag-name" data-tags="for"><span class="iconfont-archer">&#xe606;</span>for</span>
+    
+        <span class="sidebar-tag-name" data-tags="Programming"><span class="iconfont-archer">&#xe606;</span>Programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="Cryptography"><span class="iconfont-archer">&#xe606;</span>Cryptography</span>
+    
+        <span class="sidebar-tag-name" data-tags="Binary Security"><span class="iconfont-archer">&#xe606;</span>Binary Security</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reverse"><span class="iconfont-archer">&#xe606;</span>Reverse</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pwn"><span class="iconfont-archer">&#xe606;</span>Pwn</span>
+    
+        <span class="sidebar-tag-name" data-tags="Movie"><span class="iconfont-archer">&#xe606;</span>Movie</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+    
+        <span class="sidebar-tag-name" data-tags="ACM"><span class="iconfont-archer">&#xe606;</span>ACM</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "OtterV"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
