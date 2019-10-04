@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="OtterV">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="OtterV">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="Th3 5tupid 0ne">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>RSA___Rivest&amp;Shamir&amp;Adleman · null</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >River5tone</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">RSA___Rivest&Shamir&Adleman</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>River5tone</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/17.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            RSA___Rivest&Shamir&Adleman
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Cryptography">Cryptography</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.5k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/12/12</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h4 id="一、RSA密码算法简介"><a href="#一、RSA密码算法简介" class="headerlink" title="一、RSA密码算法简介"></a>一、RSA密码算法简介</h4><p><strong>RSA</strong>（<strong>Rivest-Shamir-Adleman</strong>）是最早的公钥密码系统之一，广泛用于安全数据传输。公钥密码系统中，加密密钥是公共的（公钥），且它与保密的解密密钥（私钥）不同。在RSA中，这种不对称性算法的可靠性是基于两个大质数乘积的<strong>因子分解难题</strong>。</p>
+<h5 id="1-算法流程"><a href="#1-算法流程" class="headerlink" title="1.算法流程"></a>1.算法流程</h5><h6 id="密钥生成"><a href="#密钥生成" class="headerlink" title="密钥生成"></a>密钥生成</h6><ol>
+<li><p>选择两个大素数p，q，计算$$N = pq$$（p,q为大素数）</p>
+<p>$$ \varphi(n) = \varphi(p)*\varphi(q) = (p-1)(q-1) $$</p>
+</li>
+<li><p>选择随机数    $e$, $$ 1&lt;e&lt;\varphi(n) $$，$$ gcd(e,\varphi(n))=1 $$，</p>
+<p>计算私钥    $$ d = e^{-1} mod\varphi(n) $$</p>
+</li>
+<li><p>公开密钥（e，n），保密私钥（d，p，q）</p>
+</li>
+</ol>
+<h6 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h6><p>$$ c = m^emodn $$</p>
+<h6 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h6><p>$$ m=c^dmodn $$</p>
+<h5 id="2-数字签名中的应用"><a href="#2-数字签名中的应用" class="headerlink" title="2.数字签名中的应用"></a>2.数字签名中的应用</h5><h6 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h6><p>对消息字符串的散列值，使用 RSA 的私钥计算签名（实际上仍然是加密消息）后，得到一个签名字符串，与消息一并发送。</p>
+<h6 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h6><p>接收方使用对应的公钥可以从签名字符串中解密出原来的散列值，同时对原始消息再计算一次散列值。二者相比较，假如两者相符的话，则认为发信人持有正确的私钥，发信人的身份得到认证，并且这个消息在传播路径上没有被篡改过。</p>
+<h5 id="3-密钥长度"><a href="#3-密钥长度" class="headerlink" title="3.密钥长度"></a>3.密钥长度</h5><p>用户应使用 1024 位密钥，证书认证机构应用 2048 位或以上。</p>
+<h5 id="4-OpenSSL"><a href="#4-OpenSSL" class="headerlink" title="4.OpenSSL"></a>4.OpenSSL</h5><p>使用详见参考资料。</p>
+<img src="/2018/12/12/20181212RSAs/1.png" title="[]">
+
+<img src="/2018/12/12/20181212RSAs/2.png" title="[]">
+
+<img src="/2018/12/12/20181212RSAs/3.png" title="[]">
+
+<img src="/2018/12/12/20181212RSAs/4.png" title="[]">
+
+<p>​    </p>
+<hr>
+<hr>
+<h4 id="二、关于RSA的攻击"><a href="#二、关于RSA的攻击" class="headerlink" title="二、关于RSA的攻击"></a>二、关于RSA的攻击</h4><hr>
+<h5 id="1-因数分解攻击"><a href="#1-因数分解攻击" class="headerlink" title="1.因数分解攻击"></a>1.因数分解攻击</h5><p>RSA的安全性依附于质因数分解的难度，若是密钥选用的整数不当，便可能遭受因数分解攻击。</p>
+<p>针对因子分解的攻击：</p>
+<ul>
+<li>Pollard’s Rho算法：可以快速找到合数的较小因子</li>
+<li>Pollard’s P-1算法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:UTF-8 -*-</span></span><br><span class="line"><span class="comment">#因子分解攻击</span></span><br><span class="line"><span class="comment">#Pollard's Rho</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">n = input()</span><br><span class="line">e = input()</span><br><span class="line">c = input()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gcd</span><span class="params">(a,b)</span>:</span></span><br><span class="line">true<span class="keyword">if</span> b == <span class="number">0</span>:</span><br><span class="line">truetrue<span class="keyword">return</span> a</span><br><span class="line">true<span class="keyword">return</span> gcd(b,a%b)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exgcd</span><span class="params">(a,b)</span>:</span></span><br><span class="line">true<span class="keyword">if</span> b==<span class="number">0</span>:</span><br><span class="line">truetrue<span class="keyword">return</span> <span class="number">1</span>,<span class="number">0</span></span><br><span class="line">truex,y = exgcd(b,a%b)</span><br><span class="line">truetem = y</span><br><span class="line">truey = x-(a//b)*y</span><br><span class="line">truex = tem</span><br><span class="line">true<span class="keyword">return</span> x,y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Rho</span><span class="params">(x,y)</span>:</span></span><br><span class="line">true<span class="keyword">global</span> n</span><br><span class="line">true<span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">truetrueg = gcd(x-y,n)</span><br><span class="line">truetrue<span class="keyword">if</span> g&gt;<span class="number">1</span> <span class="keyword">and</span> g&lt;n:</span><br><span class="line">truetruetrue<span class="keyword">return</span> g</span><br><span class="line">truetrue<span class="keyword">elif</span> g == n:</span><br><span class="line">truetruetrue<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">truetrue<span class="keyword">elif</span> g == <span class="number">1</span>:</span><br><span class="line">truetruetruex = (x*x+<span class="number">1</span>)%n</span><br><span class="line">truetruetruey = ((y*y+<span class="number">1</span>)*(y*y+<span class="number">1</span>)+<span class="number">1</span>)%n</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getd</span><span class="params">(p)</span>:</span></span><br><span class="line">true<span class="keyword">global</span> n</span><br><span class="line">true<span class="keyword">global</span> e</span><br><span class="line">trueq = n//p</span><br><span class="line">truephi = (p<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line">truex,y = exgcd(e,phi)</span><br><span class="line">true<span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> xrange(<span class="number">2</span>,<span class="number">10</span>):</span><br><span class="line">truey = x*x+<span class="number">1</span></span><br><span class="line">truep = Rho(x,y)</span><br><span class="line">true<span class="keyword">if</span> p != <span class="number">0</span> <span class="keyword">and</span> p != <span class="number">1</span>:</span><br><span class="line">truetrued = getd(p)</span><br><span class="line">truetruem = pow(c,d,n)</span><br><span class="line">truetrueprint(m)</span><br><span class="line">truetrue<span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-选择密文攻击"><a href="#2-选择密文攻击" class="headerlink" title="2.选择密文攻击"></a>2.选择密文攻击</h5><p>若签名密钥对与加密解密密钥对相同的话，可进行一种类似“欺骗”的攻击，将明文加入盲化因子，骗取对方签名，再去盲化因子得到明文。</p>
+<p>窃听者已知李四发给张三$ c $（$ c=m^e $）</p>
+<p>选$ r&lt;n $，计算$ t=r^{-1} mod n $，$ x=r^e mod n $，$ y=x*c mod n $</p>
+<p>将$ y $发给张三，“欺骗”张三对$ y $进行签名，窃听者得到签名$ u=y^d mod n $</p>
+<p>计算$ tu=r^{-1}<em>y^d=r^{-1}(x</em>c)^d=r^{-1}<em>r</em>m mod n $得到明文m</p>
+<img src="/2018/12/12/20181212RSAs/5.png" title="[]">
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exgcd</span><span class="params">(a,b)</span>:</span></span><br><span class="line">true<span class="keyword">if</span> b==<span class="number">0</span>:</span><br><span class="line">truetrue<span class="keyword">return</span> <span class="number">1</span>,<span class="number">0</span></span><br><span class="line">truex,y = exgcd(b,a%b)</span><br><span class="line">truetem = y</span><br><span class="line">truey = x-(a//b)*y</span><br><span class="line">truex = tem</span><br><span class="line">true<span class="keyword">return</span> x,y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n = input()</span><br><span class="line">e = input()</span><br><span class="line">c = input()</span><br><span class="line"></span><br><span class="line">m1 = <span class="number">2</span></span><br><span class="line">c1 = pow(m1,e,n)</span><br><span class="line"></span><br><span class="line">x,y = exgcd(m1,n)</span><br><span class="line">re_m1 = x</span><br><span class="line"></span><br><span class="line">v = (c1*c)%n</span><br><span class="line">print(v)</span><br><span class="line"></span><br><span class="line">u = input()</span><br><span class="line">m = (re_m1*u)%n</span><br><span class="line">print(m)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="3-共用模数攻击"><a href="#3-共用模数攻击" class="headerlink" title="3.共用模数攻击"></a>3.共用模数攻击</h5><p>共用模数n时，攻击者可获得$ n,e_1,e_2,c_1,c_2 $</p>
+<p>$ c_1=m^{e_1}modn $</p>
+<p>$ c_2=m^{e_2}modn $</p>
+<p>若$e_1$和$e_2$互素，则有$ re_1+se_2=1 $</p>
+<p>可以根据$ c_1^r*c_2^s=m^{re_1+se_2}=m  mod  n $</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">1000000</span>)	<span class="comment">#扩栈</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exgcd</span><span class="params">(a,b)</span>:</span></span><br><span class="line">true<span class="keyword">if</span> b==<span class="number">0</span>:</span><br><span class="line">truetrue<span class="keyword">return</span> <span class="number">1</span>,<span class="number">0</span></span><br><span class="line">truex,y = exgcd(b,a%b)</span><br><span class="line">truetem = y</span><br><span class="line">truey = (x-(a//b)*y)</span><br><span class="line">truex = tem</span><br><span class="line">true<span class="keyword">return</span> x,y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n = input()</span><br><span class="line">e1 = input()</span><br><span class="line">c1 = input()</span><br><span class="line">e2 = input()</span><br><span class="line">c2 = input()</span><br><span class="line"></span><br><span class="line">r,s = exgcd(e1,e2)</span><br><span class="line"></span><br><span class="line"><span class="comment">#!</span></span><br><span class="line"><span class="keyword">if</span> r&lt;<span class="number">0</span>:</span><br><span class="line">truer = -r</span><br><span class="line">truec1,y = exgcd(c1,n)</span><br><span class="line"><span class="keyword">if</span> s&lt;<span class="number">0</span>:</span><br><span class="line">trues = -s</span><br><span class="line">truec2,y = exgcd(c2,n)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">m = (pow(c1,r,n)*pow(c2,s,n))%n</span><br><span class="line">print(m)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="4-CRT优化分解-加速RSA-失败时引起私钥泄露"><a href="#4-CRT优化分解-加速RSA-失败时引起私钥泄露" class="headerlink" title="4.CRT优化分解(加速RSA)失败时引起私钥泄露"></a>4.CRT优化分解(加速RSA)失败时引起私钥泄露</h5><h6 id="CRT加速原理"><a href="#CRT加速原理" class="headerlink" title="CRT加速原理"></a>CRT加速原理</h6><ul>
+<li>$ d=e^{-1}mod\varphi(n) $可展开为</li>
+</ul>
+<p>=&gt;    $ dp=e^{-1}mod(p-1) $</p>
+<p>​            $ dq=e^{-1}mod(q-1) $</p>
+<ul>
+<li>$ y=x^dmodn $</li>
+</ul>
+<p>=&gt;    $ y_1=x^{dp<em>(q-1)</em>(q-1)^{-1}mod(p-1)}mod p $</p>
+<p>​        $ y_2=x^{dq<em>(p-1)</em>(p-1)^{-1}mod(q-1)}modq $</p>
+<p>​            $ y = y_2+(y_1-y_2)*(q^{-1}mod p ) modp $</p>
+<h6 id="私钥泄露"><a href="#私钥泄露" class="headerlink" title="私钥泄露"></a>私钥泄露</h6><p>若$y_1$或$y_2$产生了计算错误，可能性较大是在$y_1$或$y_2$的计算过程时产生了错误。</p>
+<ul>
+<li><p>无错误时：</p>
+<p>$ x=y^emodn $</p>
+</li>
+</ul>
+<p>=&gt;   $ x_1=y_1^emodp $</p>
+<p>​       $ x_2=y_2^emodq$</p>
+<p>=&gt;   $ x = (y_1^e<em>q</em>q^{-1}modp+y_2^e<em>p</em>p^{-1}modq)modn $</p>
+<p>​           $ = (y_1^e<em>q^{p-1}+y_2^e</em>p^{q-1})mod n $</p>
+<ul>
+<li><p>假设$ y_1 $发生计算错误，错误算为$ y_1’ $，则$ x $误算为$ x’ $</p>
+<p>$ x’ = (y_1’^e<em>q^{p-1}+y_2^e</em>p^{q-1})mod n $</p>
+<p>$ x’-x = (y_1’^e-y_1^e)*q^{p-1}mod n $</p>
+<p>所以，</p>
+<p>大概率存在$ gcd(x’-x, n) = gcd(y^e-x, n) = q $</p>
+<p>解得q后可进行接下来的破解运算。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">n = <span class="number">317414783130165821045808930175617487601464670537823074592040709814439313429421170598096208692643181034555847239250461818568337890685803184993214355150334258064652250655643333567514373079127819952425740240056923848357657994723714554195062350207713120421222489778323142892993955679298208610869154670046475006253088141064370916548439054432244743695401792118444879262315002312654072545614448386852556641363183630761461501385451019411338842456735465115965319263560063646358653409938833605815022512370580090225483411694647809348209846840068278422177226702772182355075508529105926757724838388693883383910738155331571978924637416651098643111761325536420929467467295222943383203775975904926536083720347352981017431212906798517062595435424372927242747868846532427770029518638490921</span></span><br><span class="line"></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line"></span><br><span class="line">m = <span class="number">1066524364</span></span><br><span class="line"></span><br><span class="line">c = <span class="number">193482739944681472166649268398841256432266736840779533320141478366146561102433051287906778400856535734640533589535380018088047120252613168623083863627090014951883162534169365088522364459198619069204933607573820078075082411998324694346565612621424283800812109520139228816207125011379396420082030271744450911746811589257699610824438265850554262393906867550020386206426106295536511787488224220918456147396849783633623105573269317052260483910319720500504712711893111986143781088719391027185642831811927521318923707568350575988573880413630407329415277711875326921962451030666529992050768662684524216881840010936765724472307998320454246486649271134011152290057160437983027614696753184949072167115560166832457100113730862782304985106517460772420790481451071438951798306995834912</span></span><br><span class="line"></span><br><span class="line">y = gmpy2.mpz(c)</span><br><span class="line">x = gmpy2.mpz(m)</span><br><span class="line">e = gmpy2.mpz(e)</span><br><span class="line">n = gmpy2.mpz(n)</span><br><span class="line"></span><br><span class="line">q = gmpy2.gcd(pow(y,e,n)-x,n)</span><br><span class="line">p = n//q</span><br><span class="line"></span><br><span class="line">print(p)</span><br><span class="line">print(q)</span><br><span class="line"></span><br><span class="line">phi = (p<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">d = gmpy2.invert(e,phi)</span><br><span class="line">print(d)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="5-低加密指数广播攻击"><a href="#5-低加密指数广播攻击" class="headerlink" title="5.低加密指数广播攻击"></a>5.低加密指数广播攻击</h5><p>广播攻击发生在加密使用的<em>e</em>、<em>m</em>相同，而<em>n</em>不同的时候。</p>
+<p>当e比较小时例如e=3时，</p>
+<p>$ c_1=m^3modn $</p>
+<p>$ c_2 = m^3modn $</p>
+<p>$ c_3 = m^3modn $</p>
+<p>利用中国剩余定理CRT计算可得到$ m^3 $，开三次根在一定条件下可以得到明文。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> gmpy</span><br><span class="line"></span><br><span class="line">n1 = <span class="number">19851375730109702147410111547354144221875457321031223697134537152662954284778035659726777836419173602074243675379474758042251574628709204015344630121722181081357947554864577012170759352751954056863634879277235566401052896903737915168025406120485821600575222177565339908483871231963345316325883880725805183642711886174973831560524323612262245625356867125808729291910241533822929104554191436887669275590954686677553317406770308567916811827616983415494452891552691357470886986580784689791637773270366691010488804490695335088232109363335726209752067510335487027948414237789259493071147119114207873564472255092787796548757</span></span><br><span class="line">e1 = <span class="number">3</span></span><br><span class="line">c1 = <span class="number">13454882946725216336041450149747912801345150897738269747319625457896248720170984223193236484534898137077301146985964053694050587114190081392420937926436398915166732221806147601326052804974598044401237369173872313727529418915224956452544247250395436614772904692858338345883362615830546358880178712003244051534635046041882852867263201374871209754801875383118920093306257191680420637858437331213661376601491056259663126310104282784895433487635261665632335398264707493652353887185570468343007234872853922612324354135362251045303050159390094257102957492540509071506452893423235001402946205906541435403199551892986374804920</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n2 = <span class="number">26173521773502483247597089125243271820677225372183032349481812213016725381309207331835749003553831554633140540489226837866262707465143723936787003842437739219695454025969846598168174437311116014531279790307600380343936852182714366426205276301534919963285316772313717938106432099542920318855434061615067172765247575458191567464963759236522075416365378512744932616647264073550477949168527127402025096578055512157336517624334623370255903913904590248155257738134523374649246351120963720090091717538463753218892797487756700017617593544916093999491492264335912330825446605892101262194414610122257588430781728196281222326651</span></span><br><span class="line">e2 = <span class="number">3</span></span><br><span class="line">c2 = <span class="number">13505913121068470220847964312710175156127986501306214129578806436961037400323893789715303603187803738093907369047899145934457596188311642310861028144773439633531605220508808140662455716670082475842080321970571163395148402130729296994642849239816204269873047205730800760989269793676473215155256331437661051503440037546831165029304263381250709273274732332158416367294821131012710190159262730579799708286031962242459049360890723076878496179124292728671677882488465347042310943034512325729185236397374244668132954343101850740961483761474738710909332537524142175876638720302151108710719145864015333307963483395995537718237</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n3 = <span class="number">21202818797998627515352334625994038311482995714221672591450790765515673401535030894775203361099711195656344673329068886519004082528476627094716954416561909940135293365319683026068015518128387635258888254158981811317777785864346252540152216898844697734341077863453519579609431124462134201561065624730763893560814943258405090316816207636751619251737723450504065388791809103078820291564967984392756678881814377646778632427962036034448591000014370204337562273165150667491895831948436446074304718602008919196536063662377670980534229222981374594541340748663430129312248249332521398553163699869169510362600703426150991680327</span></span><br><span class="line">e3 = <span class="number">3</span></span><br><span class="line">c3 = <span class="number">2635549585896987063596747996023030662880935298112353023391070236788009696866126812856463364148603345293543937750291213077386941083306976983900924726863039062657867962813245750120467702651250543524273657372522053114010217848432895770161412721991002769186252112683680365847580401603924973909985759574698735663384486805551640031571297336457567716862973639891400022554522747237776054570299366418332408201620428338348053622395238810600517412562626967908191234817960510861906168470293686081083205722204699391858263306642439567802298290619076110468756807006508224515918448157214084863411103786533238277029555517164882404883</span></span><br><span class="line"></span><br><span class="line">n1 = gmpy2.mpz(n1)</span><br><span class="line">n2 = gmpy2.mpz(n2)</span><br><span class="line">n3 = gmpy2.mpz(n3)</span><br><span class="line">c1 = gmpy2.mpz(c1)</span><br><span class="line">c2 = gmpy2.mpz(c2)</span><br><span class="line">c3 = gmpy2.mpz(c3)</span><br><span class="line"></span><br><span class="line">n = n1*n2*n3</span><br><span class="line">w1 = n//n1</span><br><span class="line">w2 = n//n2</span><br><span class="line">w3 = n//n3</span><br><span class="line">t1 = gmpy2.invert(w1,n1)</span><br><span class="line">t2 = gmpy2.invert(w2,n2)</span><br><span class="line">t3 = gmpy2.invert(w3,n3)</span><br><span class="line"></span><br><span class="line">c = (c1*w1*t1+c2*w2*t2+c3*w3*t3)%n</span><br><span class="line">c = int(c)</span><br><span class="line">print(c)</span><br><span class="line"></span><br><span class="line">m = gmpy.mpz(c).root(<span class="number">3</span>)[<span class="number">0</span>].digits()<span class="comment">#开三次根gmpy库方法</span></span><br><span class="line">print(m)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<hr>
+<h4 id="三、RSA相关CTF题目（待后续填坑继续挖坑）"><a href="#三、RSA相关CTF题目（待后续填坑继续挖坑）" class="headerlink" title="三、RSA相关CTF题目（待后续填坑继续挖坑）"></a>三、RSA相关CTF题目（待后续填坑<del>继续挖坑</del>）</h4><hr>
+<hr>
+<h4 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h4><p>[1] (<a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)" target="_blank" rel="noopener">RSA(cryptosystem) WIKI</a>)</p>
+<p>[2] 段段PPT</p>
+<p>[3] (<a href="https://blog.csdn.net/kikajack/article/details/80703894" target="_blank" rel="noopener">RSA-原理、特点（加解密及签名验签）及公钥和私钥的生成</a>)</p>
+<p>[4] (<a href="https://www.cnblogs.com/yangxiaolan/p/6256838.html" target="_blank" rel="noopener">OpenSSL用法详解</a>）</p>
+<p>[5] (<a href="https://www.cnblogs.com/justinh/p/7478958.html" target="_blank" rel="noopener">RSA-CRT leaks__因使用中国余数定理计算RSA所引起的私钥泄露</a>)</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://daddyhonggg.github.io">OtterV</a>
+            <p>原文链接：<a href="https://daddyhonggg.github.io/2018/12/12/20181212RSAs/">https://daddyhonggg.github.io/2018/12/12/20181212RSAs/</a>
+            <p>发表日期：<a href="https://daddyhonggg.github.io/2018/12/12/20181212RSAs/">December 12th 2018, 8:15:55 pm</a>
+            <p>更新日期：<a href="https://daddyhonggg.github.io/2018/12/12/20181212RSAs/">October 4th 2019, 8:26:22 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2019/03/25/20190325ttdybxmy/" title= "谈谈最近看的电影——波希米亚狂想曲">
+                    <div class="nextTitle">谈谈最近看的电影——波希米亚狂想曲</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/11/06/2018rop/" title= "ROP_lev">
+                    <div class="prevTitle">ROP_lev</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "nNBXAkxhHnRSmyrTGkGqWol2-gzGzoHsz",
+        appKey: "8ORVnQBXp9DfAFfPTmEWk4OI",
+        placeholder: "<(` o ')/\(' ^ `)>",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:daddy_hong@foxmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/daddyhonggg" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、RSA密码算法简介"><span class="toc-number">1.</span> <span class="toc-text">一、RSA密码算法简介</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-算法流程"><span class="toc-number">1.1.</span> <span class="toc-text">1.算法流程</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#密钥生成"><span class="toc-number">1.1.1.</span> <span class="toc-text">密钥生成</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#加密"><span class="toc-number">1.1.2.</span> <span class="toc-text">加密</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#解密"><span class="toc-number">1.1.3.</span> <span class="toc-text">解密</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-数字签名中的应用"><span class="toc-number">1.2.</span> <span class="toc-text">2.数字签名中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#签名"><span class="toc-number">1.2.1.</span> <span class="toc-text">签名</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#验证"><span class="toc-number">1.2.2.</span> <span class="toc-text">验证</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-密钥长度"><span class="toc-number">1.3.</span> <span class="toc-text">3.密钥长度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-OpenSSL"><span class="toc-number">1.4.</span> <span class="toc-text">4.OpenSSL</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、关于RSA的攻击"><span class="toc-number">2.</span> <span class="toc-text">二、关于RSA的攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-因数分解攻击"><span class="toc-number">2.1.</span> <span class="toc-text">1.因数分解攻击</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-选择密文攻击"><span class="toc-number">2.2.</span> <span class="toc-text">2.选择密文攻击</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-共用模数攻击"><span class="toc-number">2.3.</span> <span class="toc-text">3.共用模数攻击</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-CRT优化分解-加速RSA-失败时引起私钥泄露"><span class="toc-number">2.4.</span> <span class="toc-text">4.CRT优化分解(加速RSA)失败时引起私钥泄露</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#CRT加速原理"><span class="toc-number">2.4.1.</span> <span class="toc-text">CRT加速原理</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#私钥泄露"><span class="toc-number">2.4.2.</span> <span class="toc-text">私钥泄露</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-低加密指数广播攻击"><span class="toc-number">2.5.</span> <span class="toc-text">5.低加密指数广播攻击</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、RSA相关CTF题目（待后续填坑继续挖坑）"><span class="toc-number">3.</span> <span class="toc-text">三、RSA相关CTF题目（待后续填坑继续挖坑）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文献："><span class="toc-number">4.</span> <span class="toc-text">参考文献：</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 19
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 9101 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/30</span><a class="archive-post-title" href= "/9101/11/30/91020000xxxg/" >XX相关</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/04</span><a class="archive-post-title" href= "/2019/10/04/20181225cryptosmallthings/" >密码学小记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/08</span><a class="archive-post-title" href= "/2019/07/08/20190708pwn1/" >Pwn训练1 —— 基本的漏洞利用（栈溢出、整数溢出、oﬀ by one）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/03</span><a class="archive-post-title" href= "/2019/06/03/20190603ccpcgirlsnj/" >2019CCPC女生赛南京之行</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2019/03/25/20190325ttdybxmy/" >谈谈最近看的电影——波希米亚狂想曲</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2018/12/12/20181212RSAs/" >RSA___Rivest&Shamir&Adleman</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018rop/" >ROP_lev</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018reverse/" >逆向题目WriteUPs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181023tpv/" >欲望，道德与逃离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181022zyc/" >栈溢出漏洞及其利用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/21</span><a class="archive-post-title" href= "/2018/10/21/20181021wmm/" >Salty</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/10</span><a class="archive-post-title" href= "/2018/10/10/20181010Vigenere/" >Vigenere破解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/20180912bcdtts/" >Ubuntu Linux 虚拟机 + IDA 动态调试 Welcome</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2018/09/10/20180910bsb/" >Binary security 基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2018/09/06/20180906cpuse/" >About Computer Easy Using</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2018/08/18/20180818tz/" >亲爱的泰呆呆：</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/14</span><a class="archive-post-title" href= "/2018/08/14/20180814fzcp/" >肥宅的快乐-维他测评</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span><a class="archive-post-title" href= "/2018/08/12/20180812start/" >BLOG:DADDY_HONG‘s の start</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href= "/2018/04/08/201804gets/" >关于gets()的危险（不安全）性</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Blog"><span class="iconfont-archer">&#xe606;</span>Blog</span>
+    
+        <span class="sidebar-tag-name" data-tags="EAT"><span class="iconfont-archer">&#xe606;</span>EAT</span>
+    
+        <span class="sidebar-tag-name" data-tags="computer"><span class="iconfont-archer">&#xe606;</span>computer</span>
+    
+        <span class="sidebar-tag-name" data-tags="for"><span class="iconfont-archer">&#xe606;</span>for</span>
+    
+        <span class="sidebar-tag-name" data-tags="C"><span class="iconfont-archer">&#xe606;</span>C</span>
+    
+        <span class="sidebar-tag-name" data-tags="Binary Security"><span class="iconfont-archer">&#xe606;</span>Binary Security</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reverse"><span class="iconfont-archer">&#xe606;</span>Reverse</span>
+    
+        <span class="sidebar-tag-name" data-tags="Programming"><span class="iconfont-archer">&#xe606;</span>Programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="Cryptography"><span class="iconfont-archer">&#xe606;</span>Cryptography</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pwn"><span class="iconfont-archer">&#xe606;</span>Pwn</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+    
+        <span class="sidebar-tag-name" data-tags="Movie"><span class="iconfont-archer">&#xe606;</span>Movie</span>
+    
+        <span class="sidebar-tag-name" data-tags="ACM"><span class="iconfont-archer">&#xe606;</span>ACM</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "OtterV"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
