@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="OtterV">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="OtterV">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="Th3 5tupid 0ne">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>肥宅的快乐-维他测评 · null</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >DADDY_HONG&#39;s</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">肥宅的快乐-维他测评</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>DADDY_HONG's</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/208.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            肥宅的快乐-维他测评
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "EAT">EAT</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.6k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/08/14</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h3 id="维他柠檬茶系列："><a href="#维他柠檬茶系列：" class="headerlink" title="维他柠檬茶系列："></a>维他柠檬茶系列：</h3><h4 id="低糖柠檬茶（Low-sugar）"><a href="#低糖柠檬茶（Low-sugar）" class="headerlink" title="低糖柠檬茶（Low sugar）"></a>低糖柠檬茶（Low sugar）</h4><img src="/2018/08/14/20180814fzcp/Low_sugar.png" title="[]">
+
+<p>甜度较普通柠檬茶低，没有那么甜腻。</p>
+<p>很自然的柠檬酸味得到体现，清新，微涩，非常健康的感觉。</p>
+<p>喝完口中不会留有甜甜酸酸令人不爽的余味。</p>
+<p>好评度：2</p>
+<h4 id="蜜糖柠檬茶（Honey）"><a href="#蜜糖柠檬茶（Honey）" class="headerlink" title="蜜糖柠檬茶（Honey）"></a>蜜糖柠檬茶（Honey）</h4><img src="/2018/08/14/20180814fzcp/Honey.png" title="[]">
+
+<p>加了蜂蜜，有香甜的蜜味，也不失柠檬茶本味，较甜却不腻，微酸，这个搭配很妙啊，十分好评！</p>
+<p>越喝，蜂蜜越难以感受出来，融入甜甜的柠檬茶中了，但每每回味，还能感受到蜂蜜的醇朴之甜。</p>
+<p>好评度：3</p>
+<h4 id="锡兰柠檬茶（Ceylon-Unique-tea-taste）"><a href="#锡兰柠檬茶（Ceylon-Unique-tea-taste）" class="headerlink" title="锡兰柠檬茶（Ceylon Unique tea taste）"></a>锡兰柠檬茶（Ceylon Unique tea taste）</h4><img src="/2018/08/14/20180814fzcp/ceylon.png" title="[]">
+
+<p>与诸多柠檬茶差别不大，酸甜涩兼备，甜味较低糖多，酸味较原味多，涩味较蜂蜜多，清淡，涩，清爽可口。</p>
+<p>让人联想到，夏天，冰块，与水，与泳衣，与泳衣下的姑娘（/// ///）。</p>
+<p>好评度：3</p>
+<h4 id="超级冰柠檬茶（Supericy-Cool-taste"><a href="#超级冰柠檬茶（Supericy-Cool-taste" class="headerlink" title="超级冰柠檬茶（Supericy Cool taste)"></a>超级冰柠檬茶（Supericy Cool taste)</h4><img src="/2018/08/14/20180814fzcp/supericy.png" title="[]">
+
+<p>真冰感，味道没什么差，嗓子一直凉丝丝的，不知道怎么做到的2333。</p>
+<p>夏天感觉特别棒~烈日与热蒸汽下的清冽，冰块在阳光照射下微微融化的美妙。</p>
+<p>”凉凉的，很舒服。“</p>
+<p>好评度:3</p>
+<h4 id="青柠柠檬茶（Lime-lemon-Refreshing）"><a href="#青柠柠檬茶（Lime-lemon-Refreshing）" class="headerlink" title="青柠柠檬茶（Lime lemon Refreshing）"></a>青柠柠檬茶（Lime lemon Refreshing）</h4><img src="/2018/08/14/20180814fzcp/lime.png" title="[]">
+
+<p>味道有点儿迷，就柠檬茶味，嗯加了青柠？</p>
+<p>没什么差，味道还好，没有很大亮点也没有什么槽点。小清新。</p>
+<p>好评度：2</p>
+<hr>
+<h3 id="维他果汁系列（Juice）"><a href="#维他果汁系列（Juice）" class="headerlink" title="维他果汁系列（Juice）:"></a>维他果汁系列（Juice）:</h3><h4 id="蘋果汁饮品（apple）"><a href="#蘋果汁饮品（apple）" class="headerlink" title="蘋果汁饮品（apple）"></a>蘋果汁饮品（apple）</h4><img src="/2018/08/14/20180814fzcp/pingguo.png" title="[]">
+
+<p>很苹果汁了，酸甜，没有苹果醋那么酸，也很自然，很有苹果味道。</p>
+<p>bq的评价：酸度适中，没有苹果醋那么酸，不那么甜腻，清新。</p>
+<p>好评度：2</p>
+<h4 id="芒果汁（mango）"><a href="#芒果汁（mango）" class="headerlink" title="芒果汁（mango）"></a>芒果汁（mango）</h4><p>首先是学校超市里的</p>
+<img src="/2018/08/14/20180814fzcp/mengo.png" title="[]">
+
+<p>然后是网上买的</p>
+<img src="/2018/08/14/20180814fzcp/mengo2.png" title="[]">
+
+<p>超市的更酸更甜感觉放的时间久，有点儿齁，熟透了的芒果的感觉；网上买的就清新一些。</p>
+<p>但芒果汁这个，虽然很有芒果味，但怕是不适合做饮料。</p>
+<p>芒果还是青芒美妙啊，没有甜腻不舒服的口感~</p>
+<p>好评度：1</p>
+<h4 id="番石榴汁（guava"><a href="#番石榴汁（guava" class="headerlink" title="番石榴汁（guava)"></a>番石榴汁（guava)</h4><img src="/2018/08/14/20180814fzcp/fanshiliuzhi.png" title="[]">
+
+<p>酸甜可口～没有很酸没有很甜很水果～清新清爽～</p>
+<p>强烈阳光下的叶在微微浮动的热空气中颤动，树荫下却阴凉一片。惬意呢。</p>
+<p>好评度：3</p>
+<h4 id="黑加仑子汁（blackcurrant）"><a href="#黑加仑子汁（blackcurrant）" class="headerlink" title="黑加仑子汁（blackcurrant）"></a>黑加仑子汁（blackcurrant）</h4><img src="/2018/08/14/20180814fzcp/heijialun.png" title="[]">
+
+<p>酸甜可口黑加仑，很正常的黑加仑味道了，没有暴甜，很舒服的口感，很有果香～。</p>
+<p>好评度：3</p>
+<h4 id="橙汁（orange）"><a href="#橙汁（orange）" class="headerlink" title="橙汁（orange）"></a>橙汁（orange）</h4><img src="/2018/08/14/20180814fzcp/chengzhi.png" title="[]">
+
+<p>很正常很普通的橙汁，酸甜味道都很浓。</p>
+<p>好评度：1</p>
+<hr>
+<h3 id="维他豆奶系列："><a href="#维他豆奶系列：" class="headerlink" title="维他豆奶系列："></a>维他豆奶系列：</h3><p>说起来豆奶有个共同的缺点，喝完口中都会留有余酸嘤！</p>
+<h4 id="豆奶（soyabean-milk）"><a href="#豆奶（soyabean-milk）" class="headerlink" title="豆奶（soyabean milk）"></a>豆奶（soyabean milk）</h4><img src="/2018/08/14/20180814fzcp/dounai.png" title="[]">
+
+<p>豆味好浓！</p>
+<p>一直以来觉得豆奶是个很惨的存在，豆浆和牛奶都很棒，怎么杂交出这样子的小东西？</p>
+<p>鸡肋鸡肋。</p>
+<p>好评度：1</p>
+<h4 id="低糖豆奶"><a href="#低糖豆奶" class="headerlink" title="低糖豆奶"></a>低糖豆奶</h4>
+
+<p>豆浆+微微奶甜，清新好喝～</p>
+<p>比原味豆奶更惹人喜爱～又比豆浆多了奶香风味。</p>
+<p>好评度：2</p>
+<h4 id="麦精豆奶"><a href="#麦精豆奶" class="headerlink" title="麦精豆奶"></a>麦精豆奶</h4><img src="/2018/08/14/20180814fzcp/maijingdounai.png" title="[]">
+
+<p>麦香，比较甜，有微微的酸味，还算阔以，口味感觉不那么平和。</p>
+<p>好评度:1</p>
+<h4 id="低糖麦精豆奶"><a href="#低糖麦精豆奶" class="headerlink" title="低糖麦精豆奶"></a>低糖麦精豆奶</h4><p>低糖感觉少了些甜腻的刺激，还阔以。</p>
+<p>好评度：2</p>
+<hr>
+<h3 id="菓然系茶："><a href="#菓然系茶：" class="headerlink" title="菓然系茶："></a>菓然系茶：</h3><h4 id="蘋果芒果"><a href="#蘋果芒果" class="headerlink" title="蘋果芒果"></a>蘋果芒果</h4><img src="/2018/08/14/20180814fzcp/pingguomangguo.png" title="[]">
+
+<p>正常的清新甜甜的果汁，芒果味不多，苹果味适中，混合协调。</p>
+<p>喝着果汁，仿佛感受到芒果与苹果酸甜的爱情故事。</p>
+<p>甜，微齁。</p>
+<p>好评度：2</p>
+<h4 id="冰震檸檬"><a href="#冰震檸檬" class="headerlink" title="冰震檸檬"></a>冰震檸檬</h4><img src="/2018/08/14/20180814fzcp/bingzhenningmeng.png" title="[]">
+
+<p>也是冰口感，淡淡的清新的柠檬味，比冰口感的柠檬茶，更有柠檬清新味道，更加清凉清爽清新。</p>
+<p>夏日，汽水，气泡，阳光的结合体～仿佛到了阳光海岸，清凉浪花时而打在金色沙滩，喉咙也时而感受到柠檬冰爽沁心滋味。</p>
+<p>好评度：3</p>
+<h4 id="冰震紅西柚"><a href="#冰震紅西柚" class="headerlink" title="冰震紅西柚"></a>冰震紅西柚</h4><img src="/2018/08/14/20180814fzcp/bingzhenhongxiyou.png" title="[]">
+
+<p>”好评如潮！“</p>
+<p>清新酸甜可口，冰感，冰爽刺激！冰感和红西柚搭配简直perfect！</p>
+<p>宛如 冲浪溅起的浪花，打到脸上。</p>
+<p>好评度：3</p>
+<h4 id="冰震蜜桃"><a href="#冰震蜜桃" class="headerlink" title="冰震蜜桃"></a>冰震蜜桃</h4><img src="/2018/08/14/20180814fzcp/bingzhenshuimitao.png" title="[]">
+
+<p>冰震系列都好棒鸭！</p>
+<p>蜜桃仿佛是羞涩甜甜的小姑凉，却意外的冰爽清甜呢~</p>
+<p>好评度：3</p>
+<hr>
+<h3 id="清新棧系列："><a href="#清新棧系列：" class="headerlink" title="清新棧系列："></a>清新棧系列：</h3><p>清新栈系列也太棒了叭！！！</p>
+<h4 id="竹蔗茅根"><a href="#竹蔗茅根" class="headerlink" title="竹蔗茅根"></a>竹蔗茅根</h4><img src="/2018/08/14/20180814fzcp/zhuzhemaogen.png" title="[]">
+
+<p>主要是马蹄味道，里面有竹蔗、茅根、马蹄和红萝卜，很有一番风味。</p>
+<p>清热滋润，利水祛湿，沁人心脾，清香，滋润，有一种温润之甜美，非常自然清新了。</p>
+<p>味道特别，但很平易近人。</p>
+<p>好评度：3</p>
+<h4 id="蘋果茉莉"><a href="#蘋果茉莉" class="headerlink" title="蘋果茉莉"></a>蘋果茉莉</h4><img src="/2018/08/14/20180814fzcp/pingguomoli.png" title="[]">
+
+<p>苹果茉莉，满口清香，健脾开胃，润肺生津，淡香宜神，焕发心境。</p>
+<p>肥肠自然，好喝呼呼呼呼呼呼！</p>
+<p>刚采摘的清脆苹果，与三两茉莉，一同摆在，农家的篮子里，微风过，花瓣微摇。怎能让人不心动？</p>
+<p>自然是pick她～</p>
+<p>好评度:3</p>
+<h4 id="冬蜜青檸"><a href="#冬蜜青檸" class="headerlink" title="冬蜜青檸"></a>冬蜜青檸</h4><img src="/2018/08/14/20180814fzcp/dongmiqingning.png" title="[]">
+
+<p>味道清新，没有蜂蜜柠檬茶味重，自然美好。</p>
+<p>好评度：3</p>
+<hr>
+<h3 id="维他菊花茶系列："><a href="#维他菊花茶系列：" class="headerlink" title="维他菊花茶系列："></a>维他菊花茶系列：</h3><h4 id="低糖菊花茶"><a href="#低糖菊花茶" class="headerlink" title="低糖菊花茶"></a>低糖菊花茶</h4><img src="/2018/08/14/20180814fzcp/ditangjuhua.png" title="[]">
+
+<p>清新香甜，菊花的清香得到很好的的体现，与普通泡的菊花茶相比，会稍甜一点，很喜欢了。</p>
+<p>好评度：3</p>
+<h4 id="菊花茶"><a href="#菊花茶" class="headerlink" title="菊花茶"></a>菊花茶</h4><img src="/2018/08/14/20180814fzcp/juhua.png" title="[]">
+
+<p>正常的好喝的菊花茶，正常甜度，清新可口，清热解毒。扑哧。</p>
+<p>较低糖菊花茶会稍甜一些，不太利于菊花风味的体现呢。</p>
+<p>好评度：2</p>
+<h4 id="蜜糖菊花茶"><a href="#蜜糖菊花茶" class="headerlink" title="蜜糖菊花茶"></a>蜜糖菊花茶</h4><img src="/2018/08/14/20180814fzcp/mitangjuhua.png" title="[]">
+
+<p>甜，香甜，甜蜜，菊花。太甜了？？？有点儿鬼。</p>
+<p>好评度：1</p>
+<hr>
+<h3 id="港式奶茶系列："><a href="#港式奶茶系列：" class="headerlink" title="港式奶茶系列："></a>港式奶茶系列：</h3><h4 id="港式奶茶（Milk-Tea-HK-Style）"><a href="#港式奶茶（Milk-Tea-HK-Style）" class="headerlink" title="港式奶茶（Milk Tea HK Style）"></a>港式奶茶（Milk Tea HK Style）</h4><img src="/2018/08/14/20180814fzcp/gangshinaicha.png" title="[]">
+
+<p>比正常饮料店里的奶茶更加清凉诶。大概是茶味更多了一些些。</p>
+<p>不甜腻，微微有点儿苦涩，但很有味道呐~</p>
+<p>好评度：3</p>
+<h4 id="港式奶茶特浓茶味"><a href="#港式奶茶特浓茶味" class="headerlink" title="港式奶茶特浓茶味"></a>港式奶茶特浓茶味</h4><img src="/2018/08/14/20180814fzcp/ditanggangshinaicha.png" title="[]">
+
+<p>茶味多一些，更有清凉味道，微苦涩，宛如爱而不得。</p>
+<p>好评度：3</p>
+<hr>
+<h3 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h3><h4 id="苹果绿茶"><a href="#苹果绿茶" class="headerlink" title="苹果绿茶"></a>苹果绿茶</h4><img src="/2018/08/14/20180814fzcp/pingguolvcha.png" title="[]">
+
+<p>其貌不扬，但口感意外得很好呢！</p>
+<p>清新苹果香与绿茶滋味，果茶香甜清爽。很奇妙的搭配，小舞步曲。</p>
+<p>好评度：3</p>
+<h4 id="朱古力牛奶（Chocolate-milk）"><a href="#朱古力牛奶（Chocolate-milk）" class="headerlink" title="朱古力牛奶（Chocolate milk）"></a>朱古力牛奶（Chocolate milk）</h4><img src="/2018/08/14/20180814fzcp/zhuguliniunai.png" title="[]">
+
+<p>正常的巧克力味牛奶，比较香浓又不黏腻。</p>
+<p>好评度：2</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://daddyhonggg.github.io">OtterV</a>
+            <p>原文链接：<a href="https://daddyhonggg.github.io/2018/08/14/20180814fzcp/">https://daddyhonggg.github.io/2018/08/14/20180814fzcp/</a>
+            <p>发表日期：<a href="https://daddyhonggg.github.io/2018/08/14/20180814fzcp/">August 14th 2018, 10:40:09 pm</a>
+            <p>更新日期：<a href="https://daddyhonggg.github.io/2018/08/14/20180814fzcp/">November 6th 2018, 3:00:40 am</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/08/18/20180818tz/" title= "亲爱的泰呆呆：">
+                    <div class="nextTitle">亲爱的泰呆呆：</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/08/12/20180812start/" title= "BLOG:DADDY_HONG‘s の start">
+                    <div class="prevTitle">BLOG:DADDY_HONG‘s の start</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "nNBXAkxhHnRSmyrTGkGqWol2-gzGzoHsz",
+        appKey: "8ORVnQBXp9DfAFfPTmEWk4OI",
+        placeholder: "\( ` o * )/",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:daddy_hong@foxmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/daddyhonggg" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#维他柠檬茶系列："><span class="toc-number">1.</span> <span class="toc-text">维他柠檬茶系列：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#低糖柠檬茶（Low-sugar）"><span class="toc-number">1.1.</span> <span class="toc-text">低糖柠檬茶（Low sugar）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#蜜糖柠檬茶（Honey）"><span class="toc-number">1.2.</span> <span class="toc-text">蜜糖柠檬茶（Honey）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#锡兰柠檬茶（Ceylon-Unique-tea-taste）"><span class="toc-number">1.3.</span> <span class="toc-text">锡兰柠檬茶（Ceylon Unique tea taste）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#超级冰柠檬茶（Supericy-Cool-taste"><span class="toc-number">1.4.</span> <span class="toc-text">超级冰柠檬茶（Supericy Cool taste)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#青柠柠檬茶（Lime-lemon-Refreshing）"><span class="toc-number">1.5.</span> <span class="toc-text">青柠柠檬茶（Lime lemon Refreshing）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#维他果汁系列（Juice）"><span class="toc-number">2.</span> <span class="toc-text">维他果汁系列（Juice）:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#蘋果汁饮品（apple）"><span class="toc-number">2.1.</span> <span class="toc-text">蘋果汁饮品（apple）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#芒果汁（mango）"><span class="toc-number">2.2.</span> <span class="toc-text">芒果汁（mango）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#番石榴汁（guava"><span class="toc-number">2.3.</span> <span class="toc-text">番石榴汁（guava)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#黑加仑子汁（blackcurrant）"><span class="toc-number">2.4.</span> <span class="toc-text">黑加仑子汁（blackcurrant）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#橙汁（orange）"><span class="toc-number">2.5.</span> <span class="toc-text">橙汁（orange）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#维他豆奶系列："><span class="toc-number">3.</span> <span class="toc-text">维他豆奶系列：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#豆奶（soyabean-milk）"><span class="toc-number">3.1.</span> <span class="toc-text">豆奶（soyabean milk）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#低糖豆奶"><span class="toc-number">3.2.</span> <span class="toc-text">低糖豆奶</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#麦精豆奶"><span class="toc-number">3.3.</span> <span class="toc-text">麦精豆奶</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#低糖麦精豆奶"><span class="toc-number">3.4.</span> <span class="toc-text">低糖麦精豆奶</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#菓然系茶："><span class="toc-number">4.</span> <span class="toc-text">菓然系茶：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#蘋果芒果"><span class="toc-number">4.1.</span> <span class="toc-text">蘋果芒果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#冰震檸檬"><span class="toc-number">4.2.</span> <span class="toc-text">冰震檸檬</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#冰震紅西柚"><span class="toc-number">4.3.</span> <span class="toc-text">冰震紅西柚</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#冰震蜜桃"><span class="toc-number">4.4.</span> <span class="toc-text">冰震蜜桃</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清新棧系列："><span class="toc-number">5.</span> <span class="toc-text">清新棧系列：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#竹蔗茅根"><span class="toc-number">5.1.</span> <span class="toc-text">竹蔗茅根</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#蘋果茉莉"><span class="toc-number">5.2.</span> <span class="toc-text">蘋果茉莉</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#冬蜜青檸"><span class="toc-number">5.3.</span> <span class="toc-text">冬蜜青檸</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#维他菊花茶系列："><span class="toc-number">6.</span> <span class="toc-text">维他菊花茶系列：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#低糖菊花茶"><span class="toc-number">6.1.</span> <span class="toc-text">低糖菊花茶</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#菊花茶"><span class="toc-number">6.2.</span> <span class="toc-text">菊花茶</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#蜜糖菊花茶"><span class="toc-number">6.3.</span> <span class="toc-text">蜜糖菊花茶</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#港式奶茶系列："><span class="toc-number">7.</span> <span class="toc-text">港式奶茶系列：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#港式奶茶（Milk-Tea-HK-Style）"><span class="toc-number">7.1.</span> <span class="toc-text">港式奶茶（Milk Tea HK Style）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#港式奶茶特浓茶味"><span class="toc-number">7.2.</span> <span class="toc-text">港式奶茶特浓茶味</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他："><span class="toc-number">8.</span> <span class="toc-text">其他：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#苹果绿茶"><span class="toc-number">8.1.</span> <span class="toc-text">苹果绿茶</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#朱古力牛奶（Chocolate-milk）"><span class="toc-number">8.2.</span> <span class="toc-text">朱古力牛奶（Chocolate milk）</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 13
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018rop/" >ROP_lev</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018reverse/" >逆向题目WriteUPs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181023tpv/" >欲望，道德与逃离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181022zyc/" >栈溢出漏洞及其利用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/21</span><a class="archive-post-title" href= "/2018/10/21/20181021wmm/" >Salty</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/10</span><a class="archive-post-title" href= "/2018/10/10/20181010Vigenere/" >Vigenere破解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/20180912bcdtts/" >Ubuntu Linux 虚拟机 + IDA 动态调试 Welcome</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2018/09/10/20180910bsb/" >Binary security 基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2018/09/06/20180906cpuse/" >About Computer Easy Using</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2018/08/18/20180818tz/" >亲爱的泰呆呆：</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/14</span><a class="archive-post-title" href= "/2018/08/14/20180814fzcp/" >肥宅的快乐-维他测评</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span><a class="archive-post-title" href= "/2018/08/12/20180812start/" >BLOG:DADDY_HONG‘s の start</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href= "/2018/04/08/201804gets/" >关于gets()的危险（不安全）性</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="C"><span class="iconfont-archer">&#xe606;</span>C</span>
+    
+        <span class="sidebar-tag-name" data-tags="Blog"><span class="iconfont-archer">&#xe606;</span>Blog</span>
+    
+        <span class="sidebar-tag-name" data-tags="EAT"><span class="iconfont-archer">&#xe606;</span>EAT</span>
+    
+        <span class="sidebar-tag-name" data-tags="for"><span class="iconfont-archer">&#xe606;</span>for</span>
+    
+        <span class="sidebar-tag-name" data-tags="computer"><span class="iconfont-archer">&#xe606;</span>computer</span>
+    
+        <span class="sidebar-tag-name" data-tags="Binary Security"><span class="iconfont-archer">&#xe606;</span>Binary Security</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reverse"><span class="iconfont-archer">&#xe606;</span>Reverse</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+    
+        <span class="sidebar-tag-name" data-tags="Movie"><span class="iconfont-archer">&#xe606;</span>Movie</span>
+    
+        <span class="sidebar-tag-name" data-tags="Programming"><span class="iconfont-archer">&#xe606;</span>Programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="Cryptography"><span class="iconfont-archer">&#xe606;</span>Cryptography</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pwn"><span class="iconfont-archer">&#xe606;</span>Pwn</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "OtterV"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

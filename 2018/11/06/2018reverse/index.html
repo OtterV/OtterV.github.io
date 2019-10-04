@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="OtterV">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="OtterV">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="Th3 5tupid 0ne">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>逆向题目WriteUPs · null</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >DADDY_HONG&#39;s</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">逆向题目WriteUPs</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>DADDY_HONG's</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/208.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            逆向题目WriteUPs
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Binary Security">Binary Security</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Reverse">Reverse</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">4.8k</span>阅读时长: <span class="post-count reading-time">21 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/11/06</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h3 id="持续更新——"><a href="#持续更新——" class="headerlink" title="持续更新——"></a>持续更新——</h3><hr>
+<h4 id="第一次IDC脚本：20180911practise1test2"><a href="#第一次IDC脚本：20180911practise1test2" class="headerlink" title="第一次IDC脚本：20180911practise1test2"></a>第一次IDC脚本：20180911practise1test2</h4><p>flag:<code>nctf{Embr4ce_Vm_j0in_R3}</code></p>
+<ol>
+<li><p>64位<code>elf</code>文件。</p>
+</li>
+<li><p>IDA汇编&amp;伪代码静态分析+虚拟机远程调试分析：</p>
+<p>输入一串字符，该字符串长度应为<code>18h</code>，经过<code>call    sub_4005B6</code>的运算，将字符串进行处理，然后遍历字符串每位与<code>dword_601060</code>的对应位匹配。</p>
+<p>那么关键就是对字符串进行的运算处理部分了，感受一波伪代码，挺清晰的：</p>
+<img src="/2018/11/06/2018reverse/1.png" title="[]">
+
+<p>大体意思就是有炒鸡多的操作数，每3个字节为一个单位，第一个做switch判断做哪种运算，第二个为改变字符在字符串中的数组下标，第三个为用于运算的数。</p>
+</li>
+<li><p>15000那么多的数据，5000个操作，要用脚本了叭，还没写过嘤嘤嘤</p>
+<p>嗯嗯终于学了一下，一开始完全摸不着头脑，后来看了看逆向第6题，又看了看网上的小例子，啊原来就是和C很像，有一些特殊的函数和用法：</p>
+<ol>
+<li><code>i+=3</code>要写为<code>i=i+3</code>；</li>
+<li><code>PatchByte(address,data)</code>，将data覆盖address；</li>
+<li><code>Byte(address)</code>，取出地址中1个字节的数据；</li>
+<li><code>Message()</code>的用法与<code>printf()</code>差不多；</li>
+<li><code>switch</code>不能用。</li>
+</ol>
+<p>一开始出现各种问题，各种字母打错之类的嘤嘤嘤，后来运行了发现是一堆乱码emmm，原来是直接写了那个函数里的运算忘了变成逆运算了emmm。</p>
+<p>脚本大致思路：将匹配字符串<code>dword_601060</code>（注意是<code>dword</code>！）做逆运算，5000个操作倒着进行，<code>+</code>变<code>-</code>，<code>-</code>变<code>+</code>，<code>*</code>变<code>/</code>，<strong>异或的逆运算还是它本身</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//#include &lt;idc.idc&gt;</span><br><span class="line">auto from1 = 0x6010C0;</span><br><span class="line">auto from2 = 0x601060; </span><br><span class="line"></span><br><span class="line">auto i,a,b,c;</span><br><span class="line"></span><br><span class="line">for(i = 14999; i &gt; 0; i = i-3)&#123;</span><br><span class="line">truea = Byte(from1 + i - 2);</span><br><span class="line">trueb = Byte(from1 + i - 1);</span><br><span class="line">truec = Byte(from1 + i);</span><br><span class="line">trueif (a==1) PatchByte(from2 + b*4, Byte(from2+b*4) - c);</span><br><span class="line">trueelse if (a==2) PatchByte(from2 + b*4, Byte(from2+b*4) + c);</span><br><span class="line">trueelse if (a==3) PatchByte(from2 + b*4, Byte(from2+b*4) ^ c);</span><br><span class="line">trueelse if (a==4) PatchByte(from2 + b*4, Byte(from2+b*4) / c);</span><br><span class="line">trueelse if (a==5) PatchByte(from2 + b*4, Byte(from2+b*4) ^ Byte(from2+c*4));</span><br><span class="line">trueelse continue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for(i = 0; i &lt; 24; i++)&#123;</span><br><span class="line">trueMessage(&quot;%c&quot;,Byte(from2+i*4));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Output window</code>得到flag <code>nctf{Embr4ce_Vm_j0in_R3}</code>。</p>
+</li>
+</ol>
+<h4 id="一个简单但卡我的垃圾题：20180918practise2test1"><a href="#一个简单但卡我的垃圾题：20180918practise2test1" class="headerlink" title="一个简单但卡我的垃圾题：20180918practise2test1"></a>一个简单但卡我的垃圾题：20180918practise2test1</h4><p>flag:<code>flag{123_Buff3r_0v3rf|0w}</code></p>
+<ol>
+<li><p>exe。</p>
+</li>
+<li><p><code>F5</code>查看伪代码，弹对话框，输入字符，flag形式为<code>flag{输入串_Buff3r_0v3rf|0w}</code>。</p>
+</li>
+<li><p>动态分析对于输入字符串的限制：</p>
+<ul>
+<li><p>输入字符串不超过6位；</p>
+</li>
+<li><p>输入字符串4~6位为<code>xyz</code>；</p>
+</li>
+<li><p><code>atoi</code>函数返回值+1为123；</p>
+<p>之前写C的时候用过<code>atoi</code>与<code>itoa</code>函数，数字字符串与整形之间的转换，比如本题目中的<code>“122”</code>就会变为数值<code>122</code>。然而，然而……一开始还是绕了好久，记忆不清同时没有立即再去百度这个函数驱使我去仔细分析<code>atoi</code>函数并陷入了迷茫……甚至还写了C来实现这个函数……哭死哭晕……</p>
+</li>
+</ul>
+</li>
+<li><p>所以输入<code>1233xyz</code>，得到弹出的新对话框：</p>
+<img src="/2018/11/06/2018reverse/2.png" title="[]">
+
+<p>得到flag。嘤嘤嘤，怎么觉得第一题比第二题还难怎么能绕这么一大圈嘤嘤嘤。</p>
+</li>
+</ol>
+<h4 id="写程序处理一大串（稍）复杂指令：20180918practise2test2"><a href="#写程序处理一大串（稍）复杂指令：20180918practise2test2" class="headerlink" title="写程序处理一大串（稍）复杂指令：20180918practise2test2"></a>写程序处理一大串（稍）复杂指令：20180918practise2test2</h4><p>flag:<code>nctf{th3_vM_w1th0ut_dAta}</code></p>
+<ol>
+<li><p>64位elf文件。</p>
+</li>
+<li><p>静态分析一遍过程：</p>
+<p>输入flag，长度应为<code>19h</code>，即25。然后经过一个奇怪的模块<code>Sorry, this node is too big to display</code>，（这尼玛什么鬼），空格看了一下，非常长的操作：对<code>694100</code>开始的一小段赋初值，之后分为很多段，每段开始都是对输入串的某些位进行运算，然后是对从<code>694178</code>到<code>6941E0</code>逐字与前一位进行异或，这一部分为无用操作。然后也是字符串中每一位一个个与预设匹配串<code>dword_694060</code>进行匹配，所有位匹配成功，则<code>Correct</code>。</p>
+</li>
+<li><p>很长的没办法<code>F5</code>的那一段不知如何下手，百度了一下<code>IDA too big function</code>，通过修改配置文件<code>IDA 7.0\cfg\hexrays.cfg</code>中的<code>MAX_FUNCSIZE</code> ，64改为1024，即可解决。然后等了好久终于<code>F5</code>出来。</p>
+</li>
+<li><p>程序分析明白清楚，束手无策.jpg，这个和上一次的题目不一样的地方是操作不是存在数据里的，而是写成指令的，怎么对指令写逆操作脚本还是很懵逼。后来从网上得到将指令搞下来写解密程序的思路。</p>
+<p><code>Ctrl+A</code>将伪代码指令复制到<code>txt</code>文档中，掐头去尾留中间部分（没错复制粘贴这里卡了好久嘤嘤嘤，试过各种，还试着用过<code>savefile</code>，然而我太傻了，这样save下来的也是数据啊嘤嘤嘤嘤嘤嘤）。然后写C++程序来处理文本：</p>
+<ol>
+<li><p>文件操作没<del>怎么</del>用过：</p>
+<ul>
+<li><code>FILE *fp;</code>    文件指针；</li>
+<li><code>fp = fopen(&quot;2.txt&quot;,&quot;r&quot;);</code>    打开文件，<code>r</code>为只读。</li>
+<li><code>fscanf(fp,&quot; %c&quot;,&amp;c);</code>    文件中的读入。</li>
+<li><code>fclose(fp);</code>    关闭文件</li>
+</ul>
+</li>
+<li><p>顺序读一遍，并过滤掉无用操作行；有用操作行留下操作位数，运算符，被运算数；</p>
+<p>这个过程有些复杂，各种细节问题都是在调试过程中发现的orz：</p>
+<ul>
+<li>先在文本中运用查找将<code>++</code>，<code>--</code>，均改为<code>+=</code>，<code>-=</code>（好在数量不多）；</li>
+<li>然后注意异或时的数，有的1位有的两位，有的前面有<code>0x</code>，有的后面有<code>u</code>；</li>
+<li>最后的<code>;</code>记得读掉。</li>
+<li><strong>!!!重要!!!</strong>：每一步都要记得模256！！！</li>
+<li>地址是16进制，异或的被运算数也是16进制，C中可以直接用<code>&quot;%x&quot;</code>来读！！！蠢哭！！！这样就不用怎么去考虑<code>0x</code>和<code>u</code>的问题了！</li>
+</ul>
+</li>
+<li><p>逆序处理模式匹配串（注意是<strong>双字节型</strong>！）。最后输出得到flag。</p>
+</li>
+</ol>
+<p>代码嘤调试改了好久（写的有些麻烦了，十六进制可以更简单地处理，如果用python应该会更简单）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">5e5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> enc_flag[]=&#123;</span><br><span class="line">    <span class="number">0xC0</span>,<span class="number">0x85</span>,<span class="number">0xF9</span>,<span class="number">0x6C</span>,</span><br><span class="line">    <span class="number">0xE2</span>,<span class="number">0x14</span>,<span class="number">0xBB</span>,<span class="number">0xE4</span>,</span><br><span class="line">    <span class="number">0x0D</span>,<span class="number">0x59</span>,<span class="number">0x1C</span>,<span class="number">0x23</span>,</span><br><span class="line">    <span class="number">0x88</span>,<span class="number">0x6E</span>,<span class="number">0x9B</span>,<span class="number">0xCA</span>,</span><br><span class="line">    <span class="number">0xBA</span>,<span class="number">0x5C</span>,<span class="number">0x37</span>,<span class="number">0xFF</span>,</span><br><span class="line">    <span class="number">0x48</span>,<span class="number">0xD8</span>,<span class="number">0x1F</span>,<span class="number">0xAB</span>,</span><br><span class="line">    <span class="number">0xA5</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> op[maxn];</span><br><span class="line"><span class="keyword">int</span> num[maxn][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    FILE *fp;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">50</span>],c,cc;</span><br><span class="line"></span><br><span class="line">    fp=fopen(<span class="string">"2.txt"</span>,<span class="string">"r"</span>);</span><br><span class="line">    <span class="comment">//顺序处理</span></span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">fscanf</span>(fp,<span class="string">" %s"</span>,s))&#123;</span><br><span class="line">        <span class="keyword">if</span>(s[<span class="number">0</span>]==<span class="string">'d'</span>)&#123;		<span class="comment">//无用操作跳过，但是记得要读掉</span></span><br><span class="line">            <span class="built_in">fscanf</span>(fp,<span class="string">" %s"</span>,s);</span><br><span class="line">            <span class="built_in">fscanf</span>(fp,<span class="string">" %s"</span>,s);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//十六进制数转换</span></span><br><span class="line">        num[k][<span class="number">0</span>]=<span class="built_in">isalpha</span>(s[<span class="number">9</span>])?s[<span class="number">9</span>]-<span class="string">'A'</span>+<span class="number">10</span>:s[<span class="number">9</span>]-<span class="string">'0'</span>;</span><br><span class="line">        num[k][<span class="number">0</span>]*=<span class="number">16</span>;</span><br><span class="line">        num[k][<span class="number">0</span>]+=(<span class="built_in">isalpha</span>(s[<span class="number">10</span>])?s[<span class="number">10</span>]-<span class="string">'A'</span>+<span class="number">10</span>:s[<span class="number">10</span>]-<span class="string">'0'</span>);</span><br><span class="line">        <span class="built_in">fscanf</span>(fp,<span class="string">" %c%c"</span>,&amp;op[k],&amp;c);</span><br><span class="line">        <span class="keyword">if</span>(op[k]==<span class="string">'^'</span>)&#123;		<span class="comment">//如果是异或</span></span><br><span class="line">            <span class="built_in">fscanf</span>(fp,<span class="string">" %c%c"</span>,&amp;c,&amp;cc);</span><br><span class="line">            <span class="keyword">if</span>(c==<span class="string">'0'</span>)	<span class="comment">//如果有0x</span></span><br><span class="line">                <span class="built_in">fscanf</span>(fp,<span class="string">" %c%c"</span>,&amp;c,&amp;cc);</span><br><span class="line">            num[k][<span class="number">1</span>]=<span class="built_in">isalpha</span>(c)?c-<span class="string">'A'</span>+<span class="number">10</span>:c-<span class="string">'0'</span>;</span><br><span class="line">            <span class="keyword">if</span>(cc!=<span class="string">'u'</span>)&#123;	<span class="comment">//如果是两位数，u没被读掉</span></span><br><span class="line">                num[k][<span class="number">1</span>]*=<span class="number">16</span>;</span><br><span class="line">                num[k][<span class="number">1</span>]+=(<span class="built_in">isalpha</span>(cc)?cc-<span class="string">'A'</span>+<span class="number">10</span>:cc-<span class="string">'0'</span>);</span><br><span class="line">                <span class="built_in">fscanf</span>(fp,<span class="string">" %c"</span>,&amp;c);	<span class="comment">//读掉u</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">fscanf</span>(fp,<span class="string">" %d"</span>,&amp;num[k][<span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">fscanf</span>(fp,<span class="string">" %c"</span>,&amp;c);	<span class="comment">//读掉分号</span></span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="comment">//逆序解密</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=k<span class="number">-1</span>;i&gt;=<span class="number">0</span>;--i)&#123;<span class="comment">//printf("%d:%d %c= %d\n",i,num[i][0],op[i],num[i][1]);</span></span><br><span class="line">        <span class="keyword">int</span> a=num[i][<span class="number">0</span>],b=num[i][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">switch</span>(op[i])&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'+'</span>:enc_flag[a]-=b;<span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'-'</span>:enc_flag[a]+=b;<span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'^'</span>:enc_flag[a]^=b;<span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        enc_flag[a]%=<span class="number">256</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,enc_flag);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="一个不难适合看汇编代码反编译代码理解错的题目：20180925practise3test1"><a href="#一个不难适合看汇编代码反编译代码理解错的题目：20180925practise3test1" class="headerlink" title="一个不难适合看汇编代码反编译代码理解错的题目：20180925practise3test1"></a>一个不难适合看汇编代码反编译代码理解错的题目：20180925practise3test1</h4><p>flag <code>DDCTF-5943293119a845e9bbdbde5a369c1f50@didichuxing.com</code></p>
+<p>IDA静态分析</p>
+<img src="/2018/11/06/2018reverse/3.png" title="[]">
+
+<ul>
+<li><p><code>printf</code>的返回值为输出字符的长度；</p>
+</li>
+<li><p>v2的值一开始理解为<del>函数返回值</del>相减右移两位又异或<code>0x41</code>，然而，然而，那并不是函数返回值！</p>
+</li>
+<li><p>v2的值应该是<strong>地址</strong>相减右移两位再异或<code>0x41</code>。</p>
+<p><code>(char *)start - (char *)sub_100000C90)</code> = <code>0x100000CB0-0x100000C90</code> = <code>0x20</code>；</p>
+<p>汇编语句为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lea     rsi, sub_100000C90		//取的地址！！！</span><br><span class="line">lea     rdi, start</span><br><span class="line">sub     rdi, rsi</span><br></pre></td></tr></table></figure>
+
+<p>所以v2的值为<code>73</code>。</p>
+</li>
+<li><p>将<code>byte_100000C90</code>处的字符串用程序实现上诉操作即可解得 <code>DDCTF-5943293119a845e9bbdbde5a369c1f50@didichuxing.com</code></p>
+</li>
+<li><p>PS：中间觉得v2的值可能不对，就打了表，一开始还进行了不停改变字符串的操作，后来改正确了以后依然难以从128行中找到flag嘤嘤嘤菜哭。</p>
+</li>
+</ul>
+<h4 id="可怕的OD（稍）复杂调试：20180925practise3test2"><a href="#可怕的OD（稍）复杂调试：20180925practise3test2" class="headerlink" title="可怕的OD（稍）复杂调试：20180925practise3test2"></a>可怕的OD（稍）复杂调试：20180925practise3test2</h4><p>flag <code>{FLAG:3Ks-grEaT_j0b!}</code></p>
+<ol>
+<li><p>32位exe；</p>
+</li>
+<li><p>IDA打开，一堆函数，各种调用各种，无法阅读；</p>
+</li>
+<li><p>OD打开，右键字符串搜索（字符串检索法），发现有<code>&quot;你赢了&quot;</code>这样的一条，找到关键函数；</p>
+<img src="/2018/11/06/2018reverse/5.png" title="[]">
+
+<img src="/2018/11/06/2018reverse/6.png" title="[]">
+</li>
+<li><p>OD打了几个断点动态调试，大体过程是，先对字符串进行异或运算操作，异或的数在动态调试中记下，再与预设串比较；</p>
+<img src="/2018/11/06/2018reverse/7.png" title="[]">
+</li>
+<li><p>异或逆运算解密</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> enc_flag[]=&#123;</span><br><span class="line">    <span class="number">0x1B</span>,<span class="number">0x1C</span>,<span class="number">0x17</span>,<span class="number">0x46</span>,<span class="number">0xF4</span>,<span class="number">0xFD</span>,<span class="number">0x20</span>,<span class="number">0x30</span>,</span><br><span class="line">    <span class="number">0xB7</span>,<span class="number">0x0C</span>,<span class="number">0x8E</span>,<span class="number">0x7E</span>,<span class="number">0x78</span>,<span class="number">0xDE</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> x[]=&#123;</span><br><span class="line">true<span class="number">0x28</span>,<span class="number">0x57</span>,<span class="number">0x64</span>,<span class="number">0x6B</span>,<span class="number">0x93</span>,<span class="number">0x8F</span>,<span class="number">0x65</span>,<span class="number">0x51</span>,</span><br><span class="line">true<span class="number">0xE3</span>,<span class="number">0x53</span>,<span class="number">0xE4</span>,<span class="number">0x4E</span>,<span class="number">0x1A</span>,<span class="number">0xFF</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">14</span>;++i)&#123;</span><br><span class="line">true<span class="built_in">printf</span>(<span class="string">"%c"</span>,enc_flag[i]^x[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2018/11/06/2018reverse/4.png" title="[]">
+
+
+</li>
+</ol>
+<h4 id="net反编译及其工具初接触：20181002practise4test1"><a href="#net反编译及其工具初接触：20181002practise4test1" class="headerlink" title=".net反编译及其工具初接触：20181002practise4test1"></a>.net反编译及其工具初接触：20181002practise4test1</h4><p>flag:<code>PCTF{Ea5y_Do_Net_Cr4ck3r}</code></p>
+<ol>
+<li><p>听CB大佬说Kali有一些逆向的工具，就百度了一下，发现了一个叫做<code>Radare2</code>的工具，可以用 <code>rabin2</code>打印出二进制文件的系统属性、语言、字节序、框架、以及使用了哪些加固技术：</p>
+<img src="/2018/11/06/2018reverse/9.png" title="[]">
+
+<p>可以知道这个程序是用<code>Cli</code>语言编写的。然并卵。</p>
+</li>
+<li><p>虚拟机中file命令十分好用：</p>
+<img src="/2018/11/06/2018reverse/16.png" title="[]">
+
+<p>可知是<code>.net</code>文件。</p>
+</li>
+<li><p>用了CB大佬给的工具<code>Gray Wolf</code>：</p>
+<img src="/2018/11/06/2018reverse/15.png" title="[]">
+
+<p>由上图可知，该程序是将输入的字符串base64一下与预设串进行匹配。</p>
+</li>
+<li><p>丢到base64解码网站，得flag。</p>
+</li>
+<li><p>感到非常神奇。</p>
+</li>
+</ol>
+<h4 id="python反编译：20181002practise4test2"><a href="#python反编译：20181002practise4test2" class="headerlink" title="python反编译：20181002practise4test2"></a>python反编译：20181002practise4test2</h4><p>flag:<code>PCTF{PyC_Cr4ck3r}</code></p>
+<ol>
+<li><p>虚拟机中<code>file</code>命令查看文件</p>
+<img src="/2018/11/06/2018reverse/16.png" title="[]">
+
+<p>可知程序是由python写的，将test2的后缀改为<code>.pyc</code>即可运行。</p>
+</li>
+<li><p>CB大佬给了强大的工具<code>Easy Python Decompiler</code>，将<code>.pyc</code>文件反编译为<code>.pyc_dis</code>文件。</p>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Embedded file name: findkey</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">lookup = [<span class="number">196</span>, <span class="number">153</span>, <span class="number">149</span>, <span class="number">206</span>, <span class="number">17</span>, <span class="number">221</span>, <span class="number">10</span>, <span class="number">217</span>, <span class="number">167</span>, <span class="number">18</span>,</span><br><span class="line">truetrue  <span class="number">36</span>, <span class="number">135</span>, <span class="number">103</span>, <span class="number">61</span>, <span class="number">111</span>, <span class="number">31</span>, <span class="number">92</span>, <span class="number">152</span>, <span class="number">21</span>, <span class="number">228</span>,</span><br><span class="line">truetrue  <span class="number">105</span>, <span class="number">191</span>, <span class="number">173</span>, <span class="number">41</span>, <span class="number">2</span>, <span class="number">245</span>, <span class="number">23</span>, <span class="number">144</span>, <span class="number">1</span>, <span class="number">246</span>, </span><br><span class="line">truetrue  <span class="number">89</span>, <span class="number">178</span>, <span class="number">182</span>, <span class="number">119</span>, <span class="number">38</span>, <span class="number">85</span>, <span class="number">48</span>, <span class="number">226</span>, <span class="number">165</span>, <span class="number">241</span>,</span><br><span class="line">truetrue  <span class="number">166</span>, <span class="number">214</span>, <span class="number">71</span>, <span class="number">90</span>, <span class="number">151</span>, <span class="number">3</span>, <span class="number">109</span>, <span class="number">169</span>, <span class="number">150</span>, <span class="number">224</span>,</span><br><span class="line">truetrue  <span class="number">69</span>, <span class="number">156</span>, <span class="number">158</span>, <span class="number">57</span>, <span class="number">181</span>, <span class="number">29</span>, <span class="number">200</span>, <span class="number">37</span>, <span class="number">51</span>, <span class="number">252</span>,</span><br><span class="line">truetrue  <span class="number">227</span>, <span class="number">93</span>, <span class="number">65</span>, <span class="number">82</span>, <span class="number">66</span>, <span class="number">80</span>, <span class="number">170</span>, <span class="number">77</span>, <span class="number">49</span>, <span class="number">177</span>,</span><br><span class="line">truetrue  <span class="number">81</span>, <span class="number">94</span>, <span class="number">202</span>, <span class="number">107</span>, <span class="number">25</span>, <span class="number">73</span>, <span class="number">148</span>, <span class="number">98</span>, <span class="number">129</span>, <span class="number">231</span>, </span><br><span class="line">truetrue  <span class="number">212</span>, <span class="number">14</span>, <span class="number">84</span>, <span class="number">121</span>, <span class="number">174</span>, <span class="number">171</span>, <span class="number">64</span>, <span class="number">180</span>, <span class="number">233</span>, <span class="number">74</span>,</span><br><span class="line">truetrue  <span class="number">140</span>, <span class="number">242</span>, <span class="number">75</span>, <span class="number">104</span>, <span class="number">253</span>, <span class="number">44</span>, <span class="number">39</span>, <span class="number">87</span>, <span class="number">86</span>, <span class="number">27</span>,</span><br><span class="line">truetrue  <span class="number">68</span>, <span class="number">22</span>, <span class="number">55</span>, <span class="number">76</span>, <span class="number">35</span>, <span class="number">248</span>, <span class="number">96</span>, <span class="number">5</span>, <span class="number">56</span>, <span class="number">20</span>,</span><br><span class="line">truetrue  <span class="number">161</span>, <span class="number">213</span>, <span class="number">238</span>, <span class="number">220</span>, <span class="number">72</span>, <span class="number">100</span>, <span class="number">247</span>, <span class="number">8</span>, <span class="number">63</span>, <span class="number">249</span>,</span><br><span class="line">truetrue  <span class="number">145</span>, <span class="number">243</span>, <span class="number">155</span>, <span class="number">222</span>, <span class="number">122</span>, <span class="number">32</span>, <span class="number">43</span>, <span class="number">186</span>, <span class="number">0</span>, <span class="number">102</span>,</span><br><span class="line">truetrue  <span class="number">216</span>, <span class="number">126</span>, <span class="number">15</span>, <span class="number">42</span>, <span class="number">115</span>, <span class="number">138</span>, <span class="number">240</span>, <span class="number">147</span>, <span class="number">229</span>, <span class="number">204</span>,</span><br><span class="line">truetrue  <span class="number">117</span>, <span class="number">223</span>, <span class="number">141</span>, <span class="number">159</span>, <span class="number">131</span>, <span class="number">232</span>, <span class="number">124</span>, <span class="number">254</span>, <span class="number">60</span>, <span class="number">116</span>,</span><br><span class="line">truetrue  <span class="number">46</span>, <span class="number">113</span>, <span class="number">79</span>, <span class="number">16</span>, <span class="number">128</span>, <span class="number">6</span>, <span class="number">251</span>, <span class="number">40</span>, <span class="number">205</span>, <span class="number">137</span>,</span><br><span class="line">truetrue  <span class="number">199</span>, <span class="number">83</span>, <span class="number">54</span>, <span class="number">188</span>, <span class="number">19</span>, <span class="number">184</span>, <span class="number">201</span>, <span class="number">110</span>, <span class="number">255</span>, <span class="number">26</span>,</span><br><span class="line">truetrue  <span class="number">91</span>, <span class="number">211</span>, <span class="number">132</span>, <span class="number">160</span>, <span class="number">168</span>, <span class="number">154</span>, <span class="number">185</span>, <span class="number">183</span>, <span class="number">244</span>, <span class="number">78</span>,</span><br><span class="line">truetrue  <span class="number">33</span>, <span class="number">123</span>, <span class="number">28</span>, <span class="number">59</span>, <span class="number">12</span>, <span class="number">210</span>, <span class="number">218</span>, <span class="number">47</span>, <span class="number">163</span>, <span class="number">215</span>,</span><br><span class="line">truetrue  <span class="number">209</span>, <span class="number">108</span>, <span class="number">235</span>, <span class="number">237</span>, <span class="number">118</span>, <span class="number">101</span>, <span class="number">24</span>, <span class="number">234</span>, <span class="number">106</span>, <span class="number">143</span>, </span><br><span class="line">truetrue  <span class="number">88</span>, <span class="number">9</span>, <span class="number">136</span>, <span class="number">95</span>, <span class="number">30</span>, <span class="number">193</span>, <span class="number">176</span>, <span class="number">225</span>, <span class="number">198</span>, <span class="number">197</span>,</span><br><span class="line">truetrue  <span class="number">194</span>, <span class="number">239</span>, <span class="number">134</span>, <span class="number">162</span>, <span class="number">192</span>, <span class="number">11</span>, <span class="number">70</span>, <span class="number">58</span>, <span class="number">187</span>, <span class="number">50</span>,</span><br><span class="line">truetrue  <span class="number">67</span>, <span class="number">236</span>, <span class="number">230</span>, <span class="number">13</span>, <span class="number">99</span>, <span class="number">190</span>, <span class="number">208</span>, <span class="number">207</span>, <span class="number">7</span>, <span class="number">53</span>,</span><br><span class="line">truetrue  <span class="number">219</span>, <span class="number">203</span>, <span class="number">62</span>, <span class="number">114</span>, <span class="number">127</span>, <span class="number">125</span>, <span class="number">164</span>, <span class="number">179</span>, <span class="number">175</span>, <span class="number">112</span>,</span><br><span class="line">truetrue  <span class="number">172</span>, <span class="number">250</span>, <span class="number">133</span>, <span class="number">130</span>, <span class="number">52</span>, <span class="number">189</span>, <span class="number">97</span>, <span class="number">146</span>, <span class="number">34</span>, <span class="number">157</span>,</span><br><span class="line">truetrue  <span class="number">120</span>, <span class="number">195</span>, <span class="number">45</span>, <span class="number">4</span>, <span class="number">142</span>, <span class="number">139</span>]</span><br><span class="line">pwda = [<span class="number">188</span>, <span class="number">155</span>, <span class="number">11</span>, <span class="number">58</span>, <span class="number">251</span>, <span class="number">208</span>, <span class="number">204</span>, <span class="number">202</span>, <span class="number">150</span>, <span class="number">120</span>,</span><br><span class="line">true    <span class="number">206</span>, <span class="number">237</span>, <span class="number">114</span>, <span class="number">92</span>, <span class="number">126</span>, <span class="number">6</span>, <span class="number">42</span>]</span><br><span class="line">pwdb = [<span class="number">53</span>, <span class="number">222</span>, <span class="number">230</span>, <span class="number">35</span>, <span class="number">67</span>, <span class="number">248</span>, <span class="number">226</span>, <span class="number">216</span>, <span class="number">17</span>, <span class="number">209</span>,</span><br><span class="line">true    <span class="number">32</span>, <span class="number">2</span>, <span class="number">181</span>, <span class="number">200</span>, <span class="number">171</span>, <span class="number">60</span>, <span class="number">108</span>]</span><br><span class="line">flag = raw_input(<span class="string">'Input your Key:'</span>).strip()</span><br><span class="line"><span class="keyword">if</span> len(flag) != <span class="number">17</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Wrong Key!!'</span></span><br><span class="line">    sys.exit(<span class="number">1</span>)</span><br><span class="line">flag = flag[::<span class="number">-1</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(flag)):</span><br><span class="line">    <span class="keyword">if</span> ord(flag[i]) + pwda[i] &amp; <span class="number">255</span> != lookup[i + pwdb[i]]:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Wrong Key!!'</span></span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">'Congratulations!!'</span></span><br></pre></td></tr></table></figure>
+
+<p>分析代码可知，flag长度为17，逆操作即可得到flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">17</span>):</span><br><span class="line">trueprint(chr(lookup[i + pwdb[i]] - pwda[i] &amp; <span class="number">255</span>))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="字修改非常复杂很难炒鸡牛啤：20181002practise4test3"><a href="#字修改非常复杂很难炒鸡牛啤：20181002practise4test3" class="headerlink" title="字修改非常复杂很难炒鸡牛啤：20181002practise4test3"></a>字修改非常复杂很难炒鸡牛啤：20181002practise4test3</h4><p>flag:<code>{FLAG:A78EC98ADC239E94}</code></p>
+<ol>
+<li><p>32位exe文件。</p>
+</li>
+<li><p>IDA打开之后，汇编如下</p>
+<img src="/2018/11/06/2018reverse/8.png" title="[]">
+
+<p>可以得到信息有，密码不长于16位，不为0，<code>call sub_40116B</code>之后，返回值不能为<code>-1</code>。</p>
+</li>
+<li><p><code>sub_40116B</code>函数内很长很复杂变量很多，要耐心地一点一点分析：</p>
+<img src="/2018/11/06/2018reverse/10.png" title="[]">
+
+<img src="/2018/11/06/2018reverse/11.png" title="[]">
+
+<img src="/2018/11/06/2018reverse/12.png" title="[]">
+
+<p>一个子进程：</p>
+<img src="/2018/11/06/2018reverse/13.png" title="[]">
+
+<img src="/2018/11/06/2018reverse/14.png" title="[]">
+
+<ul>
+<li><p><code>GetCommandLineW()</code>：获取程序的命令行参数，即程序存放的路径。</p>
+</li>
+<li><p><code>qmemcpy()</code>：</p>
+<p>原型：<code>extern void *memcpy(void *dest, void *src, unsigned int count);</code></p>
+<p>由<code>src</code>所指内存区域复制<code>count</code>个字节到<code>dest</code>所指内存区域。<code>src</code>和<code>dest</code>所指内存区域不能重叠，函数返回指向<code>dest</code>的指针。与<code>strcpy</code>相比，<code>memcpy</code>并不是遇到’\0’就结束，而是一定会拷贝完n个字节。</p>
+</li>
+<li><p><code>WriteProcessMemory(ProcessInformation.hProcess, (LPVOID)(Context.Eip - 1), &amp;v22, 0xDu, &amp;NumberOfBytesWritten);</code></p>
+<p>这一句为<strong>字修改</strong>操作，将v22开始的13个字节写入：<code>90 46 8A 14 0E 30 14 0F 41 3B C8 75 F5</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">WriteProcessMemory</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">HANDLE hProcess,  <span class="comment">// 想要写的进程句柄</span></span></span></span><br><span class="line"><span class="function"><span class="params">LPVOID lpBaseAddress,<span class="comment">//想要改成代码的地址</span></span></span></span><br><span class="line"><span class="function"><span class="params">LPVOID lpBuffer,  <span class="comment">// 要写入的内容的地址</span></span></span></span><br><span class="line"><span class="function"><span class="params">DWORD nSize,      <span class="comment">// 准备写入的字节</span></span></span></span><br><span class="line"><span class="function"><span class="params">LPDWORD lpNumberOfBytesWritten，实际写入的字节</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>一直卡在<code>cmp     [esp+11B8h+DebugEvent.dwDebugEventCode], ebx</code> <code>jnz     short loc_11812F1</code>这个循环里，然后学长说关掉杀毒软件emmm……虽然已经把题目路径作为信任区了然而还是不行吗emmm。关掉就正常了嘤嘤嘤卡了好久啊嘤嘤嘤甚至想改寄存器跳过去，然而后面写地址的部分就不对了emmmorz。</p>
+</li>
+</ul>
+<img src="/2018/11/06/2018reverse/17.png" title="[]">
+
+<p>设为断点的地方即<code>WriteProcessMemory</code>修改的地址，关掉火绒安全打开加载的时候为<code>01181145</code>。</p>
+</li>
+<li><p><code>G</code>查找刚才找到的地址，修改为刚才记录下的<code>90 46 8A 14 0E 30 14 0F 41 3B C8 75 F5</code></p>
+<img src="/2018/11/06/2018reverse/18.png" title="[]">
+</li>
+<li><img src="/2018/11/06/2018reverse/19.png" title="[]">
+
+<img src="/2018/11/06/2018reverse/20.png" title="[]">
+
+<p>分析代码可知，算法是将输入字符异或字符串<code>off_98FEC0+1</code>即<code>elcome to CFF test!</code>，再将每一位+1，静态分析还有些懵，动态分析之后才确定。</p>
+<p>那么就很容易写出逆操作：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> enc_flag[]=&#123;</span><br><span class="line">    <span class="number">0x25</span>,<span class="number">0x5C</span>,<span class="number">0x5C</span>,<span class="number">0x2B</span>,</span><br><span class="line">    <span class="number">0x2F</span>,<span class="number">0x5D</span>,<span class="number">0x19</span>,<span class="number">0x36</span>,</span><br><span class="line">    <span class="number">0x2C</span>,<span class="number">0x64</span>,<span class="number">0x72</span>,<span class="number">0x76</span>,</span><br><span class="line">    <span class="number">0x80</span>,<span class="number">0x66</span>,<span class="number">0x4E</span>,<span class="number">0x52</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">char</span> a[]=<span class="string">"elcome to CFF test!"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">16</span>;++i)&#123;</span><br><span class="line">    enc_flag[i]-=<span class="number">1</span>;</span><br><span class="line">    enc_flag[i]^=a[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s\n"</span>,enc_flag);</span><br></pre></td></tr></table></figure>
+
+<p>得到字符串<code>A78EC98ADC239E94</code>。</p>
+</li>
+</ol>
+<p>这个题目之前曾分析了好一段时间，然而主要得程序部分，那段很长得截屏部分，前面一段看上去简单的部分没有分析出来在做什么，只知道动态调试的时候遍历了路径和输入字符串，之后后面复杂的部分，就更不理解了；虽然一下能看到v22-v25，但无法知道它们用来做了什么，也知道buffer，v27-v29，应该的值，想过倒推然而无法入手，所以还是要耐心细心的一条条分析，分析一行行的代码目的，可能的关键点。看到不知道什么意思的函数，百度就好。</p>
+<h4 id="稍复杂的-net反编译-amp-分析：20181016practise5test1"><a href="#稍复杂的-net反编译-amp-分析：20181016practise5test1" class="headerlink" title="稍复杂的.net反编译&amp;分析：20181016practise5test1"></a>稍复杂的.net反编译&amp;分析：20181016practise5test1</h4><p>flag:<code>PCTF{Dot_Net_UnPack3r_yoo}</code></p>
+<ol>
+<li><p>也是一个<code>.net</code>文件。</p>
+</li>
+<li><p>分别用<code>Gray Wolf</code>与<code>dnspy</code>打开看了看，初步分析：</p>
+<p>找到了判别字符串函数：</p>
+<img src="/2018/11/06/2018reverse/23.png" title="[]">
+
+<img src="/2018/11/06/2018reverse/21.png" title="[]">
+
+<p>这一部分所做的事情是，将我们输入的字符串赋给<code>text</code>，又用那个乱码类中的某个算法对其进行加密并赋给<code>text2</code>，当输入不为空且<code>text2</code>与后面运算得到的字符串匹配的话，即成功。</p>
+<p>乱码名字类做了什么：</p>
+<p><code>Rijndael</code>即<code>AES</code>算法，密钥为某运算后的字符串<code>bytes</code>，模式为ECB，补码方式为<code>PKCS7</code>。</p>
+<p>之后又进行了<code>base64</code>。</p>
+<img src="/2018/11/06/2018reverse/22.png" title="[]">
+</li>
+<li><p><code>dnspy</code>动态调试：</p>
+<p>点进去关键的操作函数，大致了解是对字符串进行了一系列操作，打断点动态调试，<code>dnspy</code>好强大，非常好用。</p>
+<p>1.</p>
+<img src="/2018/11/06/2018reverse/24.png" title="[]">
+
+<p>打断点动态调试，得到AES加密算法的密钥为<code>pctf2016pctf2016pctf2016pctf2016</code>。</p>
+<p>2.</p>
+<img src="/2018/11/06/2018reverse/25.png" title="[]">
+
+<p>得到匹配字符串为<code>x/nzolo0TTIyrEISd4AP1spCzlhSWJXeNbY81SjPgmk=</code>。</p>
+</li>
+<li><p>然后我就试图丢到解密网站里去，然而，由于有不可见字符等，就凉了。还是不能偷懒，<del>自己</del>（上网复制粘贴）老老实实写脚本吧（pip包搞了好久python真有意思黑脸.jpg）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line">s = <span class="string">'x/nzolo0TTIyrEISd4AP1spCzlhSWJXeNbY81SjPgmk='</span></span><br><span class="line"></span><br><span class="line">key = <span class="string">'pctf2016pctf2016pctf2016pctf2016'</span></span><br><span class="line">aes = AES.new(str.encode(key), AES.MODE_ECB)</span><br><span class="line"></span><br><span class="line">text_decrypted = str(aes.decrypt(base64.decodebytes(bytes(s, encoding=<span class="string">'utf8'</span>))).rstrip(<span class="string">b'\0'</span>).decode(<span class="string">"utf8"</span>))</span><br><span class="line"></span><br><span class="line">print(text_decrypted)</span><br></pre></td></tr></table></figure>
+
+<img src="/2018/11/06/2018reverse/26.png" title="[]">
+
+<p>得到flag如图。</p>
+</li>
+</ol>
+<h4 id="很难MFC相关碰运气看题解也不会做最后瞎几把做：20181016practise5test2"><a href="#很难MFC相关碰运气看题解也不会做最后瞎几把做：20181016practise5test2" class="headerlink" title="很难MFC相关碰运气看题解也不会做最后瞎几把做：20181016practise5test2"></a>很难MFC相关碰运气看题解也不会做最后瞎几把做：20181016practise5test2</h4><p>flag:<code>C7C536FC625CEFCD</code></p>
+<ol>
+<li><p>exe文件，运行后发现<code>确认</code>按钮是灰色的无法点击。</p>
+</li>
+<li><p>IDA用了下<code>jump by name</code>的功能，查到了一个<code>GetMSG</code>的函数：</p>
+<img src="/2018/11/06/2018reverse/28.png" title="[]">
+
+<p>可知输入不超过16位，又发现，输入16位的时候，确定按钮就可以点了。并且不能输入小写字母。</p>
+</li>
+<li><p>IDA动态调试，<code>F2</code>打断点，随便选择输入<code>0123456789012345</code>，遇到了下面的情况（遇到这种情况都是各种无措，各种瞎几把试）：</p>
+<img src="/2018/11/06/2018reverse/29.png" title="[]">
+
+<p>手动去了取跳去的地址的地址<code>edx</code> <code>E51458</code>查看：</p>
+<img src="/2018/11/06/2018reverse/30.png" title="[]">
+
+<p>发现这里是我的16位输入，之后16位是我的后8位输入，并变成双字节型。</p>
+<p>查看右边列出的调用这些的函数，发现能看的能反编译的<code>sub_CE1970</code>，很长，就去查找了调用这个函数的地方是<code>sub_CE1B80</code>函数（名称右键X）：</p>
+<img src="/2018/11/06/2018reverse/31.png" title="[]">
+
+<img src="/2018/11/06/2018reverse/32.png" title="[]">
+
+<p>小注：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOBYTE(x)   (*((_BYTE*)&amp;(x)))   <span class="comment">// low byte</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HIBYTE(x)   (*((_BYTE*)&amp;(x)+1))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BYTEn(x, n)   (*((_BYTE*)&amp;(x)+n))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BYTE1(x)   BYTEn(x,  1)         <span class="comment">// byte 1 (counting from 0)</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BYTE2(x)   BYTEn(x,  2)</span></span><br></pre></td></tr></table></figure>
+
+<p>可计算出经过上面复杂函数的<code>E51458</code>的数据：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x0+x1+x2+x3=<span class="number">71</span></span><br><span class="line">x0=x1+<span class="number">68</span></span><br><span class="line">x1=x2+<span class="number">2</span></span><br><span class="line">x2=x3<span class="number">-59</span></span><br><span class="line"></span><br><span class="line">x5+x6+x7=<span class="number">3</span></span><br><span class="line">x6=x4+<span class="number">10</span></span><br><span class="line">x6=x7+<span class="number">9</span></span><br><span class="line">x4=x5+<span class="number">52</span></span><br></pre></td></tr></table></figure>
+
+<p>为<code>w31ld0ne</code>，即<code>7733316C64306E65</code>。</p>
+<p>仔细分析前面的<code>sub_CE1970</code>函数：</p>
+<img src="/2018/11/06/2018reverse/33.png" title="[]">
+
+<img src="/2018/11/06/2018reverse/34.png" title="[]">
+
+<p>很复杂很长，分析一遍，逆操作大都可以实现，主要是是<code>byte_E4B0D0</code>数组的查表：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> change[]=&#123;</span><br><span class="line">    <span class="number">0x63</span>,<span class="number">0x7C</span>,<span class="number">0x77</span>,<span class="number">0x7B</span>,<span class="number">0xF2</span>,<span class="number">0x6B</span>,<span class="number">0x6F</span>,<span class="number">0xC5</span>,<span class="number">0x30</span>,<span class="number">0x01</span>,<span class="number">0x67</span>,<span class="number">0x2B</span>,<span class="number">0xFE</span>,<span class="number">0xD7</span>,<span class="number">0xAB</span>,<span class="number">0x76</span>,</span><br><span class="line">    <span class="number">0xCA</span>,<span class="number">0x82</span>,<span class="number">0xC9</span>,<span class="number">0x7D</span>,<span class="number">0xFA</span>,<span class="number">0x59</span>,<span class="number">0x47</span>,<span class="number">0xF0</span>,<span class="number">0xAD</span>,<span class="number">0xD4</span>,<span class="number">0xA2</span>,<span class="number">0xAF</span>,<span class="number">0x9C</span>,<span class="number">0xA4</span>,<span class="number">0x72</span>,<span class="number">0xC0</span>,</span><br><span class="line">    <span class="number">0xB7</span>,<span class="number">0xFD</span>,<span class="number">0x93</span>,<span class="number">0x26</span><span class="comment">/*0x26,0x93,0xFD,0xB7*/</span>,<span class="number">0x36</span>,<span class="number">0x3F</span>,<span class="number">0xF7</span>,<span class="number">0xCC</span>,<span class="number">0x34</span>,<span class="number">0xA5</span>,<span class="number">0xE5</span>,<span class="number">0xF1</span>,<span class="number">0x71</span>,<span class="number">0xD8</span>,<span class="number">0x31</span>,<span class="number">0x15</span>,</span><br><span class="line">    <span class="number">0x04</span>,<span class="number">0xC7</span>,<span class="number">0x23</span>,<span class="number">0xC3</span>,<span class="number">0x18</span>,<span class="number">0x96</span>,<span class="number">0x05</span>,<span class="number">0x9A</span>,<span class="number">0x07</span>,<span class="number">0x12</span>,<span class="number">0x80</span>,<span class="number">0xE2</span>,<span class="number">0xEB</span>,<span class="number">0x27</span>,<span class="number">0xB2</span>,<span class="number">0x75</span>,</span><br><span class="line">    <span class="number">0x09</span>,<span class="number">0x83</span>,<span class="number">0x2C</span>,<span class="number">0x1A</span><span class="comment">/*0x1A,0x2C,0x83,0x09*/</span>,<span class="number">0x1B</span>,<span class="number">0x6E</span>,<span class="number">0x5A</span>,<span class="number">0xA0</span>,<span class="number">0x52</span>,<span class="number">0x3B</span>,<span class="number">0xD6</span>,<span class="number">0xB3</span>,<span class="number">0x29</span>,<span class="number">0xE3</span>,<span class="number">0x2F</span>,<span class="number">0x84</span>,</span><br><span class="line">    <span class="number">0x53</span>,<span class="number">0xD1</span>,<span class="number">0x00</span>,<span class="number">0xED</span>,<span class="number">0x20</span>,<span class="number">0xFC</span>,<span class="number">0xB1</span>,<span class="number">0x5B</span>,<span class="number">0x6A</span>,<span class="number">0xCB</span>,<span class="number">0xBE</span>,<span class="number">0x39</span>,<span class="number">0x4A</span>,<span class="number">0x4C</span>,<span class="number">0x58</span>,<span class="number">0xCF</span>,</span><br><span class="line">    <span class="number">0xD0</span>,<span class="number">0xEF</span>,<span class="number">0xAA</span>,<span class="number">0xFB</span>,<span class="number">0x43</span>,<span class="number">0x4D</span>,<span class="number">0x33</span>,<span class="number">0x85</span>,<span class="number">0x45</span>,<span class="number">0xF9</span>,<span class="number">0x02</span>,<span class="number">0x7F</span>,<span class="number">0x50</span>,<span class="number">0x3C</span>,<span class="number">0x9F</span>,<span class="number">0xA8</span>,</span><br><span class="line">    <span class="number">0x51</span>,<span class="number">0xA3</span>,<span class="number">0x40</span>,<span class="number">0x8F</span>,<span class="number">0x92</span>,<span class="number">0x9D</span>,<span class="number">0x38</span>,<span class="number">0xF5</span>,<span class="number">0xBC</span>,<span class="number">0xB6</span>,<span class="number">0xDA</span>,<span class="number">0x21</span>,<span class="number">0x10</span>,<span class="number">0xFF</span>,<span class="number">0xF3</span>,<span class="number">0xD2</span>,</span><br><span class="line">    <span class="number">0xCD</span>,<span class="number">0x0C</span>,<span class="number">0x13</span>,<span class="number">0xEC</span>,<span class="number">0x5F</span>,<span class="number">0x97</span>,<span class="number">0x44</span>,<span class="number">0x17</span>,<span class="number">0xC4</span>,<span class="number">0xA7</span>,<span class="number">0x7E</span>,<span class="number">0x3D</span>,<span class="number">0x64</span>,<span class="number">0x5D</span>,<span class="number">0x19</span>,<span class="number">0x73</span>,</span><br><span class="line">    <span class="number">0x60</span>,<span class="number">0x81</span>,<span class="number">0x4F</span>,<span class="number">0xDC</span>,<span class="number">0x22</span>,<span class="number">0x2A</span>,<span class="number">0x90</span>,<span class="number">0x88</span>,<span class="number">0x46</span>,<span class="number">0xEE</span>,<span class="number">0xB8</span>,<span class="number">0x14</span>,<span class="number">0xDE</span>,<span class="number">0x5E</span>,<span class="number">0x0B</span>,<span class="number">0xDB</span>,</span><br><span class="line">    <span class="number">0xE0</span>,<span class="number">0x32</span>,<span class="number">0x3A</span>,<span class="number">0x0A</span>,<span class="number">0x49</span>,<span class="number">0x06</span>,<span class="number">0x24</span>,<span class="number">0x5C</span>,<span class="number">0xC2</span>,<span class="number">0xD3</span>,<span class="number">0xAC</span>,<span class="number">0x62</span>,<span class="number">0x91</span>,<span class="number">0x95</span>,<span class="number">0xE4</span>,<span class="number">0x79</span>,</span><br><span class="line">    <span class="number">0xE7</span>,<span class="number">0xC8</span>,<span class="number">0x37</span>,<span class="number">0x6D</span>,<span class="number">0x8D</span>,<span class="number">0xD5</span>,<span class="number">0x4E</span>,<span class="number">0xA9</span>,<span class="number">0x6C</span>,<span class="number">0x56</span>,<span class="number">0xF4</span>,<span class="number">0xEA</span>,<span class="number">0x65</span>,<span class="number">0x7A</span>,<span class="number">0xAE</span>,<span class="number">0x08</span>,</span><br><span class="line">    <span class="number">0xBA</span>,<span class="number">0x78</span>,<span class="number">0x25</span>,<span class="number">0x2E</span>,<span class="number">0x1C</span>,<span class="number">0xA6</span>,<span class="number">0xB4</span>,<span class="number">0xC6</span>,<span class="number">0xE8</span>,<span class="number">0xDD</span>,<span class="number">0x74</span>,<span class="number">0x1F</span>,<span class="number">0x4B</span>,<span class="number">0xBD</span>,<span class="number">0x8B</span>,<span class="number">0x8A</span>,</span><br><span class="line">    <span class="number">0x70</span>,<span class="number">0x3E</span>,<span class="number">0xB5</span>,<span class="number">0x66</span>,<span class="number">0x48</span>,<span class="number">0x03</span>,<span class="number">0xF6</span>,<span class="number">0x0E</span>,<span class="number">0x61</span>,<span class="number">0x35</span>,<span class="number">0x57</span>,<span class="number">0xB9</span>,<span class="number">0x86</span>,<span class="number">0xC1</span>,<span class="number">0x1D</span>,<span class="number">0x9E</span>,</span><br><span class="line">    <span class="number">0xE1</span>,<span class="number">0xF8</span>,<span class="number">0x98</span>,<span class="number">0x11</span>,<span class="number">0x69</span>,<span class="number">0xD9</span>,<span class="number">0x8E</span>,<span class="number">0x94</span>,<span class="number">0x9B</span>,<span class="number">0x1E</span>,<span class="number">0x87</span>,<span class="number">0xE9</span>,<span class="number">0xCE</span>,<span class="number">0x55</span>,<span class="number">0x28</span>,<span class="number">0xDF</span>,</span><br><span class="line">    <span class="number">0x8C</span>,<span class="number">0xA1</span>,<span class="number">0x89</span>,<span class="number">0x0D</span>,<span class="number">0xBF</span>,<span class="number">0xE6</span>,<span class="number">0x42</span>,<span class="number">0x68</span>,<span class="number">0x41</span>,<span class="number">0x99</span>,<span class="number">0x2D</span>,<span class="number">0x0F</span>,<span class="number">0xB0</span>,<span class="number">0x54</span>,<span class="number">0xBB</span>,<span class="number">0x16</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> re_change[<span class="number">256</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cal_re</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">256</span>;++i)&#123;</span><br><span class="line">        re_change[change[i]]=i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果原数是<code>00</code>，那么查出来就会变成<code>b[0]=0x63</code>，那么变回去就是逆表中第<code>0x63</code>个数的值为<code>0x00</code>。</p>
+<p>就跟密码学<code>AES</code>中的S盒很像，只不过把二维变成一维查表，本质没有任何差别。</p>
+<p>然后就开始写64遍循环的逆操作。一开始一条一条逆操作，变量也定义了一堆，就这样我居然全逆下来了orz，然而，照着逆，写着写着觉得有些不对，有的地方不是单纯的右=左即可，有一些无用的冗余操作，不仅无用，不应该逆也。仔细又分析了一下，发现是居然是每个变量都进行了4次查表操作orz。（相同变量名称高亮真好看）。哭了。</p>
+<p>然后写程序，觉得很清晰明了了，结果怎么都不对emmm。百度了一下，发现，原来运行的时候，<code>byte_E4B0D0</code>变化了一点点！好坑！我好蠢！所以以后记得要在动态调试的时候取数据。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> s[]=<span class="string">"w31ld0ne"</span>;</span><br><span class="line"><span class="keyword">int</span> e[<span class="number">8</span>]=&#123;<span class="number">119</span>,<span class="number">51</span>,<span class="number">49</span>,<span class="number">108</span>,<span class="number">100</span>,<span class="number">48</span>,<span class="number">110</span>,<span class="number">101</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> cnt=<span class="number">64</span>;</span><br><span class="line"></span><br><span class="line">cal_re();</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(cnt--)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">8</span>;++i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">4</span>;++j)&#123;</span><br><span class="line">            e[i]=re_change[e[i]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><img src="/2018/11/06/2018reverse/35.png" title="[]">
+
+<p>得到flag。</p>
+</li>
+</ol>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://daddyhonggg.github.io">OtterV</a>
+            <p>原文链接：<a href="https://daddyhonggg.github.io/2018/11/06/2018reverse/">https://daddyhonggg.github.io/2018/11/06/2018reverse/</a>
+            <p>发表日期：<a href="https://daddyhonggg.github.io/2018/11/06/2018reverse/">November 6th 2018, 3:09:47 am</a>
+            <p>更新日期：<a href="https://daddyhonggg.github.io/2018/11/06/2018reverse/">November 6th 2018, 4:31:08 am</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/11/06/2018rop/" title= "ROP_lev">
+                    <div class="nextTitle">ROP_lev</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/10/23/20181023tpv/" title= "欲望，道德与逃离">
+                    <div class="prevTitle">欲望，道德与逃离</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "nNBXAkxhHnRSmyrTGkGqWol2-gzGzoHsz",
+        appKey: "8ORVnQBXp9DfAFfPTmEWk4OI",
+        placeholder: "\( ` o * )/",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:daddy_hong@foxmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/daddyhonggg" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#持续更新——"><span class="toc-number">1.</span> <span class="toc-text">持续更新——</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一次IDC脚本：20180911practise1test2"><span class="toc-number">1.1.</span> <span class="toc-text">第一次IDC脚本：20180911practise1test2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一个简单但卡我的垃圾题：20180918practise2test1"><span class="toc-number">1.2.</span> <span class="toc-text">一个简单但卡我的垃圾题：20180918practise2test1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写程序处理一大串（稍）复杂指令：20180918practise2test2"><span class="toc-number">1.3.</span> <span class="toc-text">写程序处理一大串（稍）复杂指令：20180918practise2test2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一个不难适合看汇编代码反编译代码理解错的题目：20180925practise3test1"><span class="toc-number">1.4.</span> <span class="toc-text">一个不难适合看汇编代码反编译代码理解错的题目：20180925practise3test1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可怕的OD（稍）复杂调试：20180925practise3test2"><span class="toc-number">1.5.</span> <span class="toc-text">可怕的OD（稍）复杂调试：20180925practise3test2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#net反编译及其工具初接触：20181002practise4test1"><span class="toc-number">1.6.</span> <span class="toc-text">.net反编译及其工具初接触：20181002practise4test1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#python反编译：20181002practise4test2"><span class="toc-number">1.7.</span> <span class="toc-text">python反编译：20181002practise4test2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字修改非常复杂很难炒鸡牛啤：20181002practise4test3"><span class="toc-number">1.8.</span> <span class="toc-text">字修改非常复杂很难炒鸡牛啤：20181002practise4test3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#稍复杂的-net反编译-amp-分析：20181016practise5test1"><span class="toc-number">1.9.</span> <span class="toc-text">稍复杂的.net反编译&amp;分析：20181016practise5test1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#很难MFC相关碰运气看题解也不会做最后瞎几把做：20181016practise5test2"><span class="toc-number">1.10.</span> <span class="toc-text">很难MFC相关碰运气看题解也不会做最后瞎几把做：20181016practise5test2</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 13
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018rop/" >ROP_lev</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018reverse/" >逆向题目WriteUPs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181023tpv/" >欲望，道德与逃离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181022zyc/" >栈溢出漏洞及其利用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/21</span><a class="archive-post-title" href= "/2018/10/21/20181021wmm/" >Salty</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/10</span><a class="archive-post-title" href= "/2018/10/10/20181010Vigenere/" >Vigenere破解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/20180912bcdtts/" >Ubuntu Linux 虚拟机 + IDA 动态调试 Welcome</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2018/09/10/20180910bsb/" >Binary security 基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2018/09/06/20180906cpuse/" >About Computer Easy Using</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2018/08/18/20180818tz/" >亲爱的泰呆呆：</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/14</span><a class="archive-post-title" href= "/2018/08/14/20180814fzcp/" >肥宅的快乐-维他测评</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span><a class="archive-post-title" href= "/2018/08/12/20180812start/" >BLOG:DADDY_HONG‘s の start</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href= "/2018/04/08/201804gets/" >关于gets()的危险（不安全）性</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="C"><span class="iconfont-archer">&#xe606;</span>C</span>
+    
+        <span class="sidebar-tag-name" data-tags="Blog"><span class="iconfont-archer">&#xe606;</span>Blog</span>
+    
+        <span class="sidebar-tag-name" data-tags="EAT"><span class="iconfont-archer">&#xe606;</span>EAT</span>
+    
+        <span class="sidebar-tag-name" data-tags="for"><span class="iconfont-archer">&#xe606;</span>for</span>
+    
+        <span class="sidebar-tag-name" data-tags="computer"><span class="iconfont-archer">&#xe606;</span>computer</span>
+    
+        <span class="sidebar-tag-name" data-tags="Binary Security"><span class="iconfont-archer">&#xe606;</span>Binary Security</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reverse"><span class="iconfont-archer">&#xe606;</span>Reverse</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+    
+        <span class="sidebar-tag-name" data-tags="Movie"><span class="iconfont-archer">&#xe606;</span>Movie</span>
+    
+        <span class="sidebar-tag-name" data-tags="Programming"><span class="iconfont-archer">&#xe606;</span>Programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="Cryptography"><span class="iconfont-archer">&#xe606;</span>Cryptography</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pwn"><span class="iconfont-archer">&#xe606;</span>Pwn</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "OtterV"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
