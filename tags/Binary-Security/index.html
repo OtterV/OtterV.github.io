@@ -346,6 +346,51 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/07/08/20190708pwn1/" >
+            
+                <span>Pwn训练1 —— 基本的漏洞利用（栈溢出、整数溢出、oﬀ by one）</span>
+        </a>
+        <div class="abstract-content">
+            题目清单：
+
+ 2018鹏程杯初赛OverInt
+ whichRepeater
+ 2018安恒杯6月Over
+
+Such_over（overInt）
+64位elf，IDA静态分析，程序比较繁琐
+
+输入4字节数key，由sub_4007D1进行check，得到的值应为35，可通过暴力z3跑出很多结果，通过该判定
+
+
+
+
+1234567891011121314151617181920from z3 import *a = [BitVec('a[%d]'%i,32) for i in range(0,4)]ans = 0s = Solver()for i in range(4):trues.a...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Binary Security">Binary Security</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Pwn">Pwn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/11/06/2018rop/" >
             
                 <span>ROP_lev</span>

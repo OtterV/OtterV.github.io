@@ -11,7 +11,7 @@
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="author" content="OtterV">
     <meta name="renderer" content="webkit">
@@ -198,7 +198,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
     <!-- 百度统计  -->
     
-    <!-- 谷歌统计  -->
+    <!-- 谷歌统计  --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 </head>
 
@@ -206,7 +206,7 @@
         <body class="post-body">
     
     
-<header class="header">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.5k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.5k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -404,7 +404,7 @@ height:50vh;
         <h4 id="一、RSA密码算法简介"><a href="#一、RSA密码算法简介" class="headerlink" title="一、RSA密码算法简介"></a>一、RSA密码算法简介</h4><p><strong>RSA</strong>（<strong>Rivest-Shamir-Adleman</strong>）是最早的公钥密码系统之一，广泛用于安全数据传输。公钥密码系统中，加密密钥是公共的（公钥），且它与保密的解密密钥（私钥）不同。在RSA中，这种不对称性算法的可靠性是基于两个大质数乘积的<strong>因子分解难题</strong>。</p>
 <h5 id="1-算法流程"><a href="#1-算法流程" class="headerlink" title="1.算法流程"></a>1.算法流程</h5><h6 id="密钥生成"><a href="#密钥生成" class="headerlink" title="密钥生成"></a>密钥生成</h6><ol>
 <li><p>选择两个大素数p，q，计算$$N = pq$$（p,q为大素数）</p>
-<p>$$ \varphi(n) = \varphi(p)*\varphi(q) = (p-1)(q-1) $$</p>
+<p>$$<br>\varphi(n) = \varphi(p)*\varphi(q) = (p-1)(q-1)<br>$$</p>
 </li>
 <li><p>选择随机数    $e$, $$ 1&lt;e&lt;\varphi(n) $$，$$ gcd(e,\varphi(n))=1 $$，</p>
 <p>计算私钥    $$ d = e^{-1} mod\varphi(n) $$</p>
@@ -412,8 +412,8 @@ height:50vh;
 <li><p>公开密钥（e，n），保密私钥（d，p，q）</p>
 </li>
 </ol>
-<h6 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h6><p>$$ c = m^emodn $$</p>
-<h6 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h6><p>$$ m=c^dmodn $$</p>
+<h6 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h6><p>$$<br>c = m^emodn<br>$$</p>
+<h6 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h6><p>$$<br>m = c^dmodn<br>$$</p>
 <h5 id="2-数字签名中的应用"><a href="#2-数字签名中的应用" class="headerlink" title="2.数字签名中的应用"></a>2.数字签名中的应用</h5><h6 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h6><p>对消息字符串的散列值，使用 RSA 的私钥计算签名（实际上仍然是加密消息）后，得到一个签名字符串，与消息一并发送。</p>
 <h6 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h6><p>接收方使用对应的公钥可以从签名字符串中解密出原来的散列值，同时对原始消息再计算一次散列值。二者相比较，假如两者相符的话，则认为发信人持有正确的私钥，发信人的身份得到认证，并且这个消息在传播路径上没有被篡改过。</p>
 <h5 id="3-密钥长度"><a href="#3-密钥长度" class="headerlink" title="3.密钥长度"></a>3.密钥长度</h5><p>用户应使用 1024 位密钥，证书认证机构应用 2048 位或以上。</p>
@@ -450,34 +450,18 @@ height:50vh;
 
 <hr>
 <h5 id="3-共用模数攻击"><a href="#3-共用模数攻击" class="headerlink" title="3.共用模数攻击"></a>3.共用模数攻击</h5><p>共用模数n时，攻击者可获得$ n,e_1,e_2,c_1,c_2 $</p>
-<p>$ c_1=m^{e_1}modn $</p>
-<p>$ c_2=m^{e_2}modn $</p>
+<p>$$<br>c_1 = m^{e_1}modn<br>\c_2 = m^{e_2}modn<br>$$</p>
 <p>若$e_1$和$e_2$互素，则有$ re_1+se_2=1 $</p>
 <p>可以根据$ c_1^r*c_2^s=m^{re_1+se_2}=m  mod  n $</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">1000000</span>)	<span class="comment">#扩栈</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exgcd</span><span class="params">(a,b)</span>:</span></span><br><span class="line">true<span class="keyword">if</span> b==<span class="number">0</span>:</span><br><span class="line">truetrue<span class="keyword">return</span> <span class="number">1</span>,<span class="number">0</span></span><br><span class="line">truex,y = exgcd(b,a%b)</span><br><span class="line">truetem = y</span><br><span class="line">truey = (x-(a//b)*y)</span><br><span class="line">truex = tem</span><br><span class="line">true<span class="keyword">return</span> x,y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n = input()</span><br><span class="line">e1 = input()</span><br><span class="line">c1 = input()</span><br><span class="line">e2 = input()</span><br><span class="line">c2 = input()</span><br><span class="line"></span><br><span class="line">r,s = exgcd(e1,e2)</span><br><span class="line"></span><br><span class="line"><span class="comment">#!</span></span><br><span class="line"><span class="keyword">if</span> r&lt;<span class="number">0</span>:</span><br><span class="line">truer = -r</span><br><span class="line">truec1,y = exgcd(c1,n)</span><br><span class="line"><span class="keyword">if</span> s&lt;<span class="number">0</span>:</span><br><span class="line">trues = -s</span><br><span class="line">truec2,y = exgcd(c2,n)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">m = (pow(c1,r,n)*pow(c2,s,n))%n</span><br><span class="line">print(m)</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="4-CRT优化分解-加速RSA-失败时引起私钥泄露"><a href="#4-CRT优化分解-加速RSA-失败时引起私钥泄露" class="headerlink" title="4.CRT优化分解(加速RSA)失败时引起私钥泄露"></a>4.CRT优化分解(加速RSA)失败时引起私钥泄露</h5><h6 id="CRT加速原理"><a href="#CRT加速原理" class="headerlink" title="CRT加速原理"></a>CRT加速原理</h6><ul>
-<li>$ d=e^{-1}mod\varphi(n) $可展开为</li>
-</ul>
-<p>=&gt;    $ dp=e^{-1}mod(p-1) $</p>
-<p>​            $ dq=e^{-1}mod(q-1) $</p>
-<ul>
-<li>$ y=x^dmodn $</li>
-</ul>
-<p>=&gt;    $ y_1=x^{dp<em>(q-1)</em>(q-1)^{-1}mod(p-1)}mod p $</p>
-<p>​        $ y_2=x^{dq<em>(p-1)</em>(p-1)^{-1}mod(q-1)}modq $</p>
-<p>​            $ y = y_2+(y_1-y_2)*(q^{-1}mod p ) modp $</p>
+<h5 id="4-CRT优化分解-加速RSA-失败时引起私钥泄露"><a href="#4-CRT优化分解-加速RSA-失败时引起私钥泄露" class="headerlink" title="4.CRT优化分解(加速RSA)失败时引起私钥泄露"></a>4.CRT优化分解(加速RSA)失败时引起私钥泄露</h5><h6 id="CRT加速原理"><a href="#CRT加速原理" class="headerlink" title="CRT加速原理"></a>CRT加速原理</h6><p>$$<br>\begin{align}<br>&amp;d=e^{-1}mod\varphi(n)<br>\\Rightarrow &amp;dp=e^{-1}mod(p-1)<br>\&amp;dq=e^{-1}mod(q-1)<br>\&amp;y=x^dmodn<br>\\Rightarrow &amp;y_1=x^{dp<em>(q-1)</em>(q-1)^{-1}mod(p-1)}mod p<br>\&amp;y_2=x^{dq<em>(p-1)</em>(p-1)^{-1}mod(q-1)}modq<br>\\Rightarrow &amp;y = y_2+(y_1-y_2)*(q^{-1}mod p ) modp<br>\end{align}<br>$$</p>
 <h6 id="私钥泄露"><a href="#私钥泄露" class="headerlink" title="私钥泄露"></a>私钥泄露</h6><p>若$y_1$或$y_2$产生了计算错误，可能性较大是在$y_1$或$y_2$的计算过程时产生了错误。</p>
 <ul>
-<li><p>无错误时：</p>
-<p>$ x=y^emodn $</p>
-</li>
+<li>无错误时：</li>
 </ul>
-<p>=&gt;   $ x_1=y_1^emodp $</p>
-<p>​       $ x_2=y_2^emodq$</p>
-<p>=&gt;   $ x = (y_1^e<em>q</em>q^{-1}modp+y_2^e<em>p</em>p^{-1}modq)modn $</p>
-<p>​           $ = (y_1^e<em>q^{p-1}+y_2^e</em>p^{q-1})mod n $</p>
+<p>$$<br>\begin{align}<br>&amp;x=y^emodn<br>\\Rightarrow &amp;x_1=y_1^emodp<br>\&amp;x_2=y_2^emodq<br>\\Rightarrow &amp;x = (y_1^e<em>q</em>q^{-1}modp+y_2^e<em>p</em>p^{-1}modq)modn<br>\\Rightarrow &amp;x = (y_1^e<em>q^{p-1}+y_2^e</em>p^{q-1})mod n<br>\end{align}<br>$$</p>
 <ul>
 <li><p>假设$ y_1 $发生计算错误，错误算为$ y_1’ $，则$ x $误算为$ x’ $</p>
 <p>$ x’ = (y_1’^e<em>q^{p-1}+y_2^e</em>p^{q-1})mod n $</p>
@@ -492,9 +476,7 @@ height:50vh;
 <hr>
 <h5 id="5-低加密指数广播攻击"><a href="#5-低加密指数广播攻击" class="headerlink" title="5.低加密指数广播攻击"></a>5.低加密指数广播攻击</h5><p>广播攻击发生在加密使用的<em>e</em>、<em>m</em>相同，而<em>n</em>不同的时候。</p>
 <p>当e比较小时例如e=3时，</p>
-<p>$ c_1=m^3modn $</p>
-<p>$ c_2 = m^3modn $</p>
-<p>$ c_3 = m^3modn $</p>
+<p>$$<br>c_1 = m^3modn<br>\c_2 = m^3modn<br>\c_3 = m^3modn<br>$$</p>
 <p>利用中国剩余定理CRT计算可得到$ m^3 $，开三次根在一定条件下可以得到明文。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> gmpy</span><br><span class="line"></span><br><span class="line">n1 = <span class="number">19851375730109702147410111547354144221875457321031223697134537152662954284778035659726777836419173602074243675379474758042251574628709204015344630121722181081357947554864577012170759352751954056863634879277235566401052896903737915168025406120485821600575222177565339908483871231963345316325883880725805183642711886174973831560524323612262245625356867125808729291910241533822929104554191436887669275590954686677553317406770308567916811827616983415494452891552691357470886986580784689791637773270366691010488804490695335088232109363335726209752067510335487027948414237789259493071147119114207873564472255092787796548757</span></span><br><span class="line">e1 = <span class="number">3</span></span><br><span class="line">c1 = <span class="number">13454882946725216336041450149747912801345150897738269747319625457896248720170984223193236484534898137077301146985964053694050587114190081392420937926436398915166732221806147601326052804974598044401237369173872313727529418915224956452544247250395436614772904692858338345883362615830546358880178712003244051534635046041882852867263201374871209754801875383118920093306257191680420637858437331213661376601491056259663126310104282784895433487635261665632335398264707493652353887185570468343007234872853922612324354135362251045303050159390094257102957492540509071506452893423235001402946205906541435403199551892986374804920</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n2 = <span class="number">26173521773502483247597089125243271820677225372183032349481812213016725381309207331835749003553831554633140540489226837866262707465143723936787003842437739219695454025969846598168174437311116014531279790307600380343936852182714366426205276301534919963285316772313717938106432099542920318855434061615067172765247575458191567464963759236522075416365378512744932616647264073550477949168527127402025096578055512157336517624334623370255903913904590248155257738134523374649246351120963720090091717538463753218892797487756700017617593544916093999491492264335912330825446605892101262194414610122257588430781728196281222326651</span></span><br><span class="line">e2 = <span class="number">3</span></span><br><span class="line">c2 = <span class="number">13505913121068470220847964312710175156127986501306214129578806436961037400323893789715303603187803738093907369047899145934457596188311642310861028144773439633531605220508808140662455716670082475842080321970571163395148402130729296994642849239816204269873047205730800760989269793676473215155256331437661051503440037546831165029304263381250709273274732332158416367294821131012710190159262730579799708286031962242459049360890723076878496179124292728671677882488465347042310943034512325729185236397374244668132954343101850740961483761474738710909332537524142175876638720302151108710719145864015333307963483395995537718237</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n3 = <span class="number">21202818797998627515352334625994038311482995714221672591450790765515673401535030894775203361099711195656344673329068886519004082528476627094716954416561909940135293365319683026068015518128387635258888254158981811317777785864346252540152216898844697734341077863453519579609431124462134201561065624730763893560814943258405090316816207636751619251737723450504065388791809103078820291564967984392756678881814377646778632427962036034448591000014370204337562273165150667491895831948436446074304718602008919196536063662377670980534229222981374594541340748663430129312248249332521398553163699869169510362600703426150991680327</span></span><br><span class="line">e3 = <span class="number">3</span></span><br><span class="line">c3 = <span class="number">2635549585896987063596747996023030662880935298112353023391070236788009696866126812856463364148603345293543937750291213077386941083306976983900924726863039062657867962813245750120467702651250543524273657372522053114010217848432895770161412721991002769186252112683680365847580401603924973909985759574698735663384486805551640031571297336457567716862973639891400022554522747237776054570299366418332408201620428338348053622395238810600517412562626967908191234817960510861906168470293686081083205722204699391858263306642439567802298290619076110468756807006508224515918448157214084863411103786533238277029555517164882404883</span></span><br><span class="line"></span><br><span class="line">n1 = gmpy2.mpz(n1)</span><br><span class="line">n2 = gmpy2.mpz(n2)</span><br><span class="line">n3 = gmpy2.mpz(n3)</span><br><span class="line">c1 = gmpy2.mpz(c1)</span><br><span class="line">c2 = gmpy2.mpz(c2)</span><br><span class="line">c3 = gmpy2.mpz(c3)</span><br><span class="line"></span><br><span class="line">n = n1*n2*n3</span><br><span class="line">w1 = n//n1</span><br><span class="line">w2 = n//n2</span><br><span class="line">w3 = n//n3</span><br><span class="line">t1 = gmpy2.invert(w1,n1)</span><br><span class="line">t2 = gmpy2.invert(w2,n2)</span><br><span class="line">t3 = gmpy2.invert(w3,n3)</span><br><span class="line"></span><br><span class="line">c = (c1*w1*t1+c2*w2*t2+c3*w3*t3)%n</span><br><span class="line">c = int(c)</span><br><span class="line">print(c)</span><br><span class="line"></span><br><span class="line">m = gmpy.mpz(c).root(<span class="number">3</span>)[<span class="number">0</span>].digits()<span class="comment">#开三次根gmpy库方法</span></span><br><span class="line">print(m)</span><br></pre></td></tr></table></figure>
 
@@ -515,7 +497,7 @@ height:50vh;
             <p>原文作者：<a href="https://daddyhonggg.github.io">OtterV</a>
             <p>原文链接：<a href="https://daddyhonggg.github.io/2018/12/12/20181212RSAs/">https://daddyhonggg.github.io/2018/12/12/20181212RSAs/</a>
             <p>发表日期：<a href="https://daddyhonggg.github.io/2018/12/12/20181212RSAs/">December 12th 2018, 8:15:55 pm</a>
-            <p>更新日期：<a href="https://daddyhonggg.github.io/2018/12/12/20181212RSAs/">October 4th 2019, 8:26:22 pm</a>
+            <p>更新日期：<a href="https://daddyhonggg.github.io/2018/12/12/20181212RSAs/">October 28th 2019, 9:13:11 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -1111,7 +1093,7 @@ jsonContent:
     </div>
     <!-- async load share.js -->
     
-        <script src="/scripts/share.js" async></script>    
+        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->    
      
     </body>
 </html>
