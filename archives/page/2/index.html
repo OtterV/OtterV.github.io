@@ -346,6 +346,45 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/10/23/20181022zyc/" >
+            
+                <span>栈溢出漏洞及其利用</span>
+        </a>
+        <div class="abstract-content">
+            //感谢wyx学姐0x00 栈帧复习栈帧建立过程：压参(从右向左)—&gt;将紧接着CALL后面的那条指令的内存地址即返回地址压入栈中—&gt;压入当前栈帧EBP—&gt;EBP指向ESP指向的栈顶即刚压入的当前栈帧EBP—&gt;ESP上移设置新的栈顶
+栈帧销毁过程：ESP下移指向EBP销毁栈空间—&gt;弹出上一个栈帧的EBP(ESP指向返回地址)—&gt;弹出返回地址
+0x01 栈溢出栈溢出指的是程序向栈中某个变量中写入的字节数超过了这个变量本身所申请的字节数，因而导致栈中与其相邻的变量的值被改变。
+栈溢出前提
+
+程序必须向栈上写入数据。
+写入的数据大小没有被良好地控制。
+
+ebp...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/23</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Binary Security">Binary Security</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Pwn">Pwn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/10/21/20181021wmm/" >
             
                 <span>Salty</span>
@@ -1000,9 +1039,10 @@ DJ’s question:
     
     
     
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 19
+        Total : 20
         </div>
         <!-- search  -->
         
@@ -1029,6 +1069,11 @@ DJ’s question:
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/12</span><a class="archive-post-title" href= "/2019/11/12/20191112vmp/" >虚拟化保护 VMP</a>
+        </li>
     
     
         <li class="archive-post-item">
