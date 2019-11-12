@@ -408,9 +408,9 @@ height:50vh;
 </blockquote>
 <h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><h5 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h5><p>虚拟机保护技术是指，将程序代码转换为自定义的中间操作码OpCode（当操作码只占一个字节可称作ByteCode），通过一种解释执行系统或者模拟器（Emulator）解释执行，实现代码基本功能。</p>
 <p>逆向这种程序，一般需要对emulator结构进行逆向，结合opcode进行分析，得到各个操作码对应的基本操作，从而理解程序功能，整个程序逆向工程将会十分繁琐。（图片来自：<a href="https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q）" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q）</a></p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3RhuVysG9LcsPdyLRGb9yibyEQX6bAZAAPZpF4ZtrBBKJQ1O8kcC0nDqYSQPDyEgCiac1TJxDToRibkn4QmKbeTjw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
+<p><img src="https://wangyx-max.github.io/%E8%99%9A%E6%8B%9F%E5%8C%96%E4%BF%9D%E6%8A%A4%E5%90%88%E9%9B%86/1530847718783.png" alt></p>
 <p>这种虚拟化的思想，广泛用于计算机科学领域。从某种程度上来说，解释执行的脚本语言都需要有一个虚拟机，例如LuaVM，PythonInterpreter。静态语言类似Java通过JVM实现了平台无关性，每个安装JVM的机器都可以执行Java程序。这些虚拟机可以提供一种平台无关的编程环境，将源程序翻译为平台无关的中间码，然后翻译执行。JVM虚拟机的基本架构（图片来自geeksforgeeks）</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3RhuVysG9LcsPdyLRGb9yibyEQX6bAZAAXLV5NteOVttYQpQxT1xcqkPaFfpr4YYfmdyur1YALVBLxmdQiaE8W1A/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt></p>
+<p><img src="https://wangyx-max.github.io/%E8%99%9A%E6%8B%9F%E5%8C%96%E4%BF%9D%E6%8A%A4%E5%90%88%E9%9B%86/1530848472213.png" alt></p>
 <h5 id="VMP虚拟机"><a href="#VMP虚拟机" class="headerlink" title="VMP虚拟机"></a>VMP虚拟机</h5><p>VMP虚拟机保护技术指的是将基于x86汇编系统的可执行代码转换为字节码指令系统的代码，达到保护原有指令不被轻易逆向和修改的目的。从本质上来说，就是创建一套虚拟指令系统对原本的x86汇编指令系统进行一次封装，将原本的汇编指令转换为另一种表现形式。</p>
 <p>虚拟指令有自己的机器码，但和原本的x86汇编机器码完全不一样，而且常常是一堆无意义的代码，他们只能由VM虚拟解释器（Dispatcher）来解释并执行。我们在逆向时看到的汇编代码其实不是x86汇编代码，而是字节码（伪指令），它是由指令执行系统定义的一套指令和数据组成的一串数据流，所以虚拟机的脱壳很难写出一个通用的脱壳机，原则上只要虚拟指令集一变动，原本的伪指令的解释就会发生变化。</p>
 <h5 id="VMProtect-壳"><a href="#VMProtect-壳" class="headerlink" title="VMProtect 壳"></a>VMProtect 壳</h5><p>VMProtect 是一款纯虚拟机保护软件，效果很好，但也有缺点，就是会影响程序速度，因此在一些对速度要求很高的场合就不适合用了。</p>
@@ -613,7 +613,7 @@ height:50vh;
             <p>原文作者：<a href="https://daddyhonggg.github.io">OtterV</a>
             <p>原文链接：<a href="https://daddyhonggg.github.io/2019/11/12/20191112vmp/">https://daddyhonggg.github.io/2019/11/12/20191112vmp/</a>
             <p>发表日期：<a href="https://daddyhonggg.github.io/2019/11/12/20191112vmp/">November 12th 2019, 2:18:10 pm</a>
-            <p>更新日期：<a href="https://daddyhonggg.github.io/2019/11/12/20191112vmp/">November 12th 2019, 2:56:53 pm</a>
+            <p>更新日期：<a href="https://daddyhonggg.github.io/2019/11/12/20191112vmp/">November 12th 2019, 3:12:37 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
