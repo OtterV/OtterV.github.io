@@ -433,14 +433,14 @@ height:50vh;
 <p>没错这个题目就是构造 opcode 读取 flag 的。</p>
 <p>IDA64位打开，main函数很清晰：</p>
 <p><code>sub_401E98</code>和<code>sub_4016BD</code>是虚拟机保护部分的指令初始代码；<code>*(v4 + 16)</code>读入字节码指令，前4个字符应是<code>exit</code>，调用<code>judge_603F00</code>并使其为<code>1</code>的是<code>sub_40133D</code>函数。</p>
+<img src="/2019/11/12/20191112vmp/h1.png" title="[]">
 
-
-
+<img src="/2019/11/12/20191112vmp/h2.png" title="[]">
 
 <p><code>sub_4016BD</code>函数的返回值应是<code>1</code>才会进入到正确分支。</p>
+<img src="/2019/11/12/20191112vmp/h3.png" title="[]">
 
-
-
+<img src="/2019/11/12/20191112vmp/h4.png" title="[]">
 
 <p>静态调试 &amp; 动态调试分析一下该函数做了什么：</p>
 <p>(下面是巨丑无比的草稿)</p>
@@ -448,7 +448,7 @@ height:50vh;
 
 <p>以上为虚拟机初始化各种解析的东西，，</p>
 <p>可以看到<code>sub_401A48</code>是将输入作为虚拟机指令解析，执行对应操作函数：</p>
-
+<img src="/2019/11/12/20191112vmp/h5.png" title="[]">
 
 <p>一共有 9 种操作，输入 op，遍历 9 种操作查看与哪个匹配，<code>b600[op] == a1 + 0x198 + [a1 + 4*(j + 0x48LL)+ 8]</code>，那么 handler 在<code>a1 + 0x2A0</code>中存放为<code>a1 + 8*(p + 0x54) + 8</code>。<code>a1 + 0x298</code>为下一个指令。</p>
 <p>idc 脚本跑出 opcode 和 handler，注意要在动态调试时跑，数据有变动。</p>
@@ -461,7 +461,7 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">24 $ 400dc1		// tmp = base[reg0];</span><br><span class="line">38 8 400e7a		// base[reg0] = tmp;</span><br><span class="line">43 C 400f3a		// tmp = tmp + nxtop - 0x21;</span><br><span class="line">74 t 401064		// tmp = tmp - nxtop + 0x21;</span><br><span class="line">30 0 4011c9		// ++reg0;</span><br><span class="line">45 E 40133d		// if nxtop == &apos;s&apos; then puts(s = base[reg0+(0,20)]);</span><br><span class="line">75 u 4012f3		// --reg0;</span><br><span class="line">23 # 4014b9		// base[reg0] = input[reg0 + nxtop - 0x30] - 0x31;</span><br><span class="line">3b ; 400cf1		// reg0 += nxtop; base[reg0] = input[reg0 + nxtop - 0x30] - 0x31;</span><br></pre></td></tr></table></figure>
 
 <p>可以看到比较关键的函数 <code>sub_40133D</code> ，当下一个指令为<code>s</code>时，进入 if 分支，<code>judge_603F00</code>为1，即主函数中成功输出 flag 文件。具体的判断函数分析有、、复杂，但我们可以看到主函数的提示信息<code>\n\nPlease Input Your Passcode,If You See print the \&quot;Binggo\&quot; string,Congratulations,You Win. Good luck!</code>，所以我们需要让这个函数中的<code>s</code>输出为<code>Binggo\x00</code>。</p>
-
+<img src="/2019/11/12/20191112vmp/h6.png" title="[]">
 
 <p>构造指令，注意最后<code>\00</code>的构造，因为有判断不能为 0 ，所以不能延续之前的构造方式，考虑用<code>#</code>指令对应的函数<code>#B1</code>构造得：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cc80CH80C&amp;80t(8080C)80#B1uuuuuuEs</span><br></pre></td></tr></table></figure>
@@ -472,18 +472,18 @@ height:50vh;
 
 <h5 id="RCTF2018-magic"><a href="#RCTF2018-magic" class="headerlink" title="RCTF2018 magic"></a>RCTF2018 magic</h5><p>这是一个（我觉得很）难的综合题，涉及动态调试程序入口点、暴力破解、程序复用思想、rc4、虚拟机指令分析等知识点。</p>
 <h6 id="寻找程序入口点"><a href="#寻找程序入口点" class="headerlink" title="寻找程序入口点"></a>寻找程序入口点</h6><p>第一步关键函数定位，运行程序得到如下结果</p>
-
+<img src="/2019/11/12/20191112vmp/0.png" title="[]">
 
 <p>查找字符串，IDA分析出的main函数有点儿假，动态调试什么时候输出字符串，得到<code>sub_402357</code>中调用的<code>sub_402218</code>输出了字符串，<code>2357</code>运行中才运行到的函数，是关键函数，静态状态下交叉引用无结果。大体逻辑如下，先经过了一个<code>sub_402268</code>check函数。</p>
+<img src="/2019/11/12/20191112vmp/1.png" title="[]">
 
-
-
+<img src="/2019/11/12/20191112vmp/3.png" title="[]">
 
 <h6 id="爆破时间验证"><a href="#爆破时间验证" class="headerlink" title="爆破时间验证"></a>爆破时间验证</h6><p>根据上面关键函数的内容，我们可知<code>dword_4099D0[0]</code>不能为0，所以需要使程序进入if流程，即需要使 <code>v4 == 0x700</code>。</p>
 <p>下面异或的随机数的生成也有当前时间决定，所以应该是有一个确定的时间。</p>
 <p><code>timeoff</code>即time64返回值的范围大约是$ 2^{17} $，可以考虑暴力。</p>
 <p><code>table</code>数组会异或生成随机数，参与执行<code>sub_4027ED</code>，改变<code>v4</code>与<code>v3</code>的值。</p>
-
+<img src="/2019/11/12/20191112vmp/2.png" title="[]">
 
 <p>爆破时间的思路主要就是程序的复用，而复用方式有很多种</p>
 <ol>
@@ -504,30 +504,30 @@ height:50vh;
 <ol>
 <li><p><code>Patch</code> <code>call time64</code> 为 <code>mov eax, 5B00E398h</code></p>
 <p>将补丁应用到原有的二进制文件上的步骤为<code>Edit</code>-&gt;<code>Patch Program</code>/<code>Apply patchs to input file</code>…</p>
-
+<img src="/2019/11/12/20191112vmp/4.png" title="[]">
 </li>
 <li><p><code>mov [rbp+timeoff], eax</code> 打断点，每次手动更改为<code>0x5b00e398</code>。</p>
 </li>
 </ol>
 <h6 id="分析输入验证主函数"><a href="#分析输入验证主函数" class="headerlink" title="分析输入验证主函数"></a>分析输入验证主函数</h6><p>调到这里让我好找1551，接下来运行有了正常的输入输出但是没找到在哪里，随便输入试了下，跳到了这里输出错误，交叉引用发现<code>sub_4023B1</code>中读入大小为 26 的字符串，是主要逻辑函数。</p>
 <p>执行过程其实是：<code>key_func``sub_402357</code>在执行完成之后回到函数<code>sub_4032A0</code>，经过几次跳转来到函数<code>sub_403180</code>，发现<code>onexit()</code>函数，这个函数的作用是注册一个函数，使得程序在<code>exit()</code>的时候自动调用这个被注册的函数，所以在假<code>main</code>函数<code>exit()</code>时，执行到了<code>sub_403260</code>，调用了<code>sub_4023B1</code>， 即<code>main_func</code>。</p>
-
+<img src="/2019/11/12/20191112vmp/5.png" title="[]">
 
 <p>主函数用了时间验证中得到的<code>dword_4099D0[0]</code>，即<code>time_data</code>；</p>
 <p>输出了输入提示信息，用<code>time_data</code>作为 key 加密过的亚子；</p>
 <p>读入长度为 26 的字符串，某加密算法（其实就是rc4）加密；</p>
 <p>if 条件句判断函数是循环指令码的感觉，虚拟机指令；</p>
 <p>判断函数返回值为 0 则进入错误分支，反之，某加密算法解密，因为相同可知为对称加密算法，可以考虑程序复用，（不太清楚<code>sub_401FFB</code>进行了什么操作，）然后 putssomething 输出相关正确分支内容。</p>
-
+<img src="/2019/11/12/20191112vmp/6.png" title="[]">
 
 <p>程序运行：<code>vm(rc4(flag))</code></p>
 <p>逆向思路：<code>vm -&gt; mid_str -&gt; rc4 -&gt; flag</code></p>
 <h6 id="虚拟机指令分析"><a href="#虚拟机指令分析" class="headerlink" title="虚拟机指令分析"></a>虚拟机指令分析</h6><p>先上该部分代码</p>
+<img src="/2019/11/12/20191112vmp/7.png" title="[]">
 
+<img src="/2019/11/12/20191112vmp/8.png" title="[]">
 
-
-
-
+<img src="/2019/11/12/20191112vmp/9.png" title="[]">
 
 <p>虚拟机实现用到了<strong><code>setjmp|longjmp</code></strong>，参考资料（<a href="http://www.cs.cmu.edu/afs/cs/academic/class/15213-s02/www/applications/recitation/recitation7/B/r07-B.pdf），我是无脑~~翻译~~谷歌翻译搬运工：" target="_blank" rel="noopener">http://www.cs.cmu.edu/afs/cs/academic/class/15213-s02/www/applications/recitation/recitation7/B/r07-B.pdf），我是无脑~~翻译~~谷歌翻译搬运工：</a></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setjmp</span><span class="params">(jmp_buf env)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">longjmp</span><span class="params">(jmp_buf env, <span class="keyword">int</span> val)</span></span>;</span><br></pre></td></tr></table></figure>
@@ -549,32 +549,32 @@ height:50vh;
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (*signal(<span class="keyword">int</span> sig, <span class="keyword">void</span> (*func)(<span class="keyword">int</span>)))(<span class="keyword">int</span>)</span><br></pre></td></tr></table></figure>
 
 <p>这个地方很巧妙地，先将<code>input_flag</code>拷贝到<code>Count</code>，然后用<code>signal</code>设置一个函数。</p>
+<img src="/2019/11/12/20191112vmp/10.png" title="[]">
 
-
-
+<img src="/2019/11/12/20191112vmp/13.png" title="[]">
 
 <p>汇编更清晰一点</p>
-
+<img src="/2019/11/12/20191112vmp/11.png" title="[]">
 
 
 
 <p>设置函数如下</p>
-
+<img src="/2019/11/12/20191112vmp/12.png" title="[]">
 
 <p>接下来看<strong>取指令过程</strong></p>
 <p><code>op = setjmp(Count)</code> 返回值一开始为 0，到如下分支</p>
-
+<img src="/2019/11/12/20191112vmp/15.png" title="[]">
 
 <p><code>sub_404716</code>中调用<code>longjmp</code>，设置 <code>v5</code> 为 <code>op = setjmp(Count)</code> 返回值，即 <code>op = opcode[i]</code>。故 <code>byte_405340</code>是<code>opcode</code>数组。</p>
 <p>在各个 handler 中有一个如下操作，除法，除数为 0 时会引起异常，会到 sign_func 执行操作，执行完又到了循环中的 setjmp 执行再次取指令等操作。所以这一部分其实是执行的 sign_func 中的运算操作。</p>
-
+<img src="/2019/11/12/20191112vmp/14.png" title="[]">
 
 <p><code>dword_409040</code>作为虚拟机寄存器<code>reg</code>。</p>
 <p>静态/动态调试<strong>分析</strong>可得出如下<strong>指令集</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">before while(1):</span><br><span class="line">truereg[1] = &amp;match_str</span><br><span class="line">truereg[2] = &amp;rc4(input_flag)</span><br><span class="line">AB 03 00:</span><br><span class="line">truereg[3] = 0;</span><br><span class="line">AB 04 1A:</span><br><span class="line">truereg[4] = 0x1A;( = len(rc4(input_flag)))</span><br><span class="line">AB 00 66:</span><br><span class="line">truereg[0] = 0x66;</span><br><span class="line">loop:</span><br><span class="line">AA 05 02:</span><br><span class="line">truereg[5] = reg[2];( = &amp;rc4(input_flag))</span><br><span class="line">A9 53:</span><br><span class="line">truereg[5] += reg[3];( = &amp;rc4(input_flag)[i])</span><br><span class="line">A0 05:</span><br><span class="line">truereg[5] = [reg[5]];( = rc4(input_flag)[i])</span><br><span class="line">AB 06 CC:</span><br><span class="line">truereg[6] = 0xCC;</span><br><span class="line">A9 56:</span><br><span class="line">truereg[5] += reg[6];( = rc4(input_flag)[i] + 0xCC)</span><br><span class="line">AB 06 FF:</span><br><span class="line">truereg[6] = 0xFF;</span><br><span class="line">AC 56:</span><br><span class="line">truereg[5] &amp;= reg[6];( = (rc4(input_flag)[i] + 0xCC) &amp; 0xFF)</span><br><span class="line">AE 50:</span><br><span class="line">truereg[5] ^= reg[0];( = ((rc4(input_flag)[i] + 0xCC) &amp; 0xFF) ^ (i &amp; 1 ? 0x99 : 0x66))</span><br><span class="line">AD 00:</span><br><span class="line">truereg[0] = ~reg[0];</span><br><span class="line">AA 06 05:</span><br><span class="line">truereg[6] = reg[5];</span><br><span class="line">AA 05 01:</span><br><span class="line">truereg[5] = reg[1];( = &amp;match_str)</span><br><span class="line">A9 53:</span><br><span class="line">truereg[5] += reg[3];( = &amp;match_str[i])</span><br><span class="line">A0 05:</span><br><span class="line">truereg[5] = [reg[5]];( = match_str[i])</span><br><span class="line">AF 56 00:</span><br><span class="line">truereg[5] = (reg[5] == reg[6]);</span><br><span class="line">A7 01:</span><br><span class="line">trueif(reg[5]) reg_ip += 1;</span><br><span class="line">CC:</span><br><span class="line">trueret = reg[5]; exit;</span><br><span class="line">A9 35:</span><br><span class="line">truereg[3] += reg[5];</span><br><span class="line">AA 05 03:</span><br><span class="line">truereg[5] = reg[3];</span><br><span class="line">AF 54 00:</span><br><span class="line">truereg[5] = (reg[5] == reg[4]);</span><br><span class="line">A6 D1:</span><br><span class="line">trueif(!reg[5]) reg_ip += 0XD1;(reg_ip -= 0x2F =&gt; goto loop)</span><br><span class="line">CC:</span><br><span class="line">trueret = reg[5]; exit;</span><br></pre></td></tr></table></figure>
 
 <p>动态调试 got match_str ：</p>
-
+<img src="/2019/11/12/20191112vmp/16.png" title="[]">
 
 <p>根据分析出来的程序写脚本，逆过程得到<code>rc4</code>加密过的<code>flag</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">enc = [</span><br><span class="line">true<span class="number">0x89</span>, <span class="number">0xC1</span>, <span class="number">0xEC</span>, <span class="number">0x50</span>, <span class="number">0x97</span>, <span class="number">0x3A</span>, <span class="number">0x57</span>, <span class="number">0x59</span>,</span><br><span class="line">true<span class="number">0xE4</span>, <span class="number">0xE6</span>, <span class="number">0xE4</span>, <span class="number">0x42</span>, <span class="number">0xCB</span>, <span class="number">0xD9</span>, <span class="number">0x08</span>, <span class="number">0x22</span>,</span><br><span class="line">true<span class="number">0xAE</span>, <span class="number">0x9D</span>, <span class="number">0x7C</span>, <span class="number">0x07</span>, <span class="number">0x80</span>, <span class="number">0x8F</span>, <span class="number">0x1B</span>, <span class="number">0x45</span>,</span><br><span class="line">true<span class="number">0x04</span>, <span class="number">0xE8</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">en_flag = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0x1A</span>)]</span><br><span class="line">en_str = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0x1A</span>):</span><br><span class="line">true<span class="keyword">if</span> i &amp; <span class="number">1</span>:</span><br><span class="line">truetruetemp = <span class="number">0x99</span></span><br><span class="line">true<span class="keyword">else</span>:</span><br><span class="line">truetruetemp = <span class="number">0x66</span></span><br><span class="line">trueenc[i] ^= temp</span><br><span class="line">trueenc[i] -= <span class="number">0xCC</span></span><br><span class="line">trueen_flag[i] = enc[i] &amp; <span class="number">0xFF</span></span><br><span class="line">trueen_str += hex(en_flag[i])</span><br><span class="line">trueen_str += <span class="string">' '</span></span><br><span class="line"></span><br><span class="line">print(en_str)</span><br></pre></td></tr></table></figure>
@@ -613,7 +613,7 @@ height:50vh;
             <p>原文作者：<a href="https://daddyhonggg.github.io">OtterV</a>
             <p>原文链接：<a href="https://daddyhonggg.github.io/2019/11/12/20191112vmp/">https://daddyhonggg.github.io/2019/11/12/20191112vmp/</a>
             <p>发表日期：<a href="https://daddyhonggg.github.io/2019/11/12/20191112vmp/">November 12th 2019, 2:18:10 pm</a>
-            <p>更新日期：<a href="https://daddyhonggg.github.io/2019/11/12/20191112vmp/">November 12th 2019, 3:12:37 pm</a>
+            <p>更新日期：<a href="https://daddyhonggg.github.io/2019/11/12/20191112vmp/">November 12th 2019, 3:19:51 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
