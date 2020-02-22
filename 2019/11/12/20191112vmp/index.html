@@ -432,7 +432,7 @@ height:50vh;
 </blockquote>
 <p>没错这个题目就是构造 opcode 读取 flag 的。</p>
 <p>IDA64位打开，main函数很清晰：</p>
-<p><code>sub_401E98</code>和<code>sub_4016BD</code>是虚拟机保护部分的指令初始代码；<code>*(v4 + 16)</code>读入字节码指令，前4个字符应是<code>exit</code>，调用<code>judge_603F00</code>并使其为<code>1</code>的是<code>sub_40133D</code>函数。</p>
+<p><code>sub_401E98</code>和<code>sub_4016BD</code>是虚拟机保护部分的指令初始代码；<code>*(v4 + 16)</code>读入字节码指令，前4个字符不是<code>exit</code>，调用<code>judge_603F00</code>并使其为<code>1</code>的是<code>sub_40133D</code>函数。</p>
 <img src="/2019/11/12/20191112vmp/h1.png" title="[]">
 
 <img src="/2019/11/12/20191112vmp/h2.png" title="[]">
@@ -610,10 +610,10 @@ height:50vh;
     <!-- license  -->
     
         <div class="license-wrapper">
-            <p>原文作者：<a href="https://daddyhonggg.github.io">OtterV</a>
-            <p>原文链接：<a href="https://daddyhonggg.github.io/2019/11/12/20191112vmp/">https://daddyhonggg.github.io/2019/11/12/20191112vmp/</a>
-            <p>发表日期：<a href="https://daddyhonggg.github.io/2019/11/12/20191112vmp/">November 12th 2019, 2:18:10 pm</a>
-            <p>更新日期：<a href="https://daddyhonggg.github.io/2019/11/12/20191112vmp/">November 12th 2019, 3:19:51 pm</a>
+            <p>原文作者：<a href="https://otterv.github.io">OtterV</a>
+            <p>原文链接：<a href="https://otterv.github.io/2019/11/12/20191112vmp/">https://otterv.github.io/2019/11/12/20191112vmp/</a>
+            <p>发表日期：<a href="https://otterv.github.io/2019/11/12/20191112vmp/">November 12th 2019, 2:18:10 pm</a>
+            <p>更新日期：<a href="https://otterv.github.io/2019/11/12/20191112vmp/">November 12th 2019, 4:55:05 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -678,13 +678,13 @@ height:50vh;
     
         
             
-                <a href="mailto:daddy_hong@foxmail.com" class="iconfont-archer email" title=email ></a>
+                <a href="mailto:xgh211otterv@qq.com" class="iconfont-archer email" title=email ></a>
             
         
     
         
             
-                <a href="//github.com/daddyhonggg" class="iconfont-archer github" target="_blank" title=github></a>
+                <a href="//github.com/otterv" class="iconfont-archer github" target="_blank" title=github></a>
             
         
     
@@ -772,6 +772,10 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
     
     
     
@@ -1143,29 +1147,29 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Blog"><span class="iconfont-archer">&#xe606;</span>Blog</span>
     
+        <span class="sidebar-tag-name" data-tags="EAT"><span class="iconfont-archer">&#xe606;</span>EAT</span>
+    
         <span class="sidebar-tag-name" data-tags="for"><span class="iconfont-archer">&#xe606;</span>for</span>
     
         <span class="sidebar-tag-name" data-tags="computer"><span class="iconfont-archer">&#xe606;</span>computer</span>
-    
-        <span class="sidebar-tag-name" data-tags="EAT"><span class="iconfont-archer">&#xe606;</span>EAT</span>
     
         <span class="sidebar-tag-name" data-tags="Binary Security"><span class="iconfont-archer">&#xe606;</span>Binary Security</span>
     
         <span class="sidebar-tag-name" data-tags="Reverse"><span class="iconfont-archer">&#xe606;</span>Reverse</span>
     
+        <span class="sidebar-tag-name" data-tags="Programming"><span class="iconfont-archer">&#xe606;</span>Programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="Cryptography"><span class="iconfont-archer">&#xe606;</span>Cryptography</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pwn"><span class="iconfont-archer">&#xe606;</span>Pwn</span>
+    
         <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
     
         <span class="sidebar-tag-name" data-tags="Movie"><span class="iconfont-archer">&#xe606;</span>Movie</span>
     
-        <span class="sidebar-tag-name" data-tags="Pwn"><span class="iconfont-archer">&#xe606;</span>Pwn</span>
-    
-        <span class="sidebar-tag-name" data-tags="Cryptography"><span class="iconfont-archer">&#xe606;</span>Cryptography</span>
-    
-        <span class="sidebar-tag-name" data-tags="Programming"><span class="iconfont-archer">&#xe606;</span>Programming</span>
+        <span class="sidebar-tag-name" data-tags="C"><span class="iconfont-archer">&#xe606;</span>C</span>
     
         <span class="sidebar-tag-name" data-tags="ACM"><span class="iconfont-archer">&#xe606;</span>ACM</span>
-    
-        <span class="sidebar-tag-name" data-tags="C"><span class="iconfont-archer">&#xe606;</span>C</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
