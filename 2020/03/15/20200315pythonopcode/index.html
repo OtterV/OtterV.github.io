@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="OtterV">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="OtterV">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="Th3 5tupid 0ne">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Python 字节码能吃吗？ · null</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >River5tone</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Python 字节码能吃吗？</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>River5tone</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/17.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Python 字节码能吃吗？
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Reverse">Reverse</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2.5k</span>阅读时长: <span class="post-count reading-time">10 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/03/15</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>HGAME 似乎年年都有 python 字节码的题目，于是感受了一下 python 字节码</p>
+<p>python 是一门解释型语言，边解释边执行（效率比C低，暴力脚本经常炸），通常不会进行整体地编译和链接，使用专门的解释器逐行编译解释成特定字节码，其工作流程如下：</p>
+<ol>
+<li>将源代码编译转换为字节码</li>
+<li>解释器执行字节码（是不是像虚拟机:smiley:）</li>
+</ol>
+<h3 id="pyc-文件的生成"><a href="#pyc-文件的生成" class="headerlink" title="pyc 文件的生成"></a>pyc 文件的生成</h3><p>pyc 文件是 py 文件编译后生成的字节码文件，在 <code>__pycache__</code> 目录中。其目的是提高加载速度：运行时会检查字节码文件修改时间是否与源代码一致，一致则编译步骤将会被跳过，解释器直接加载 pyc 文件；否则编译保存新生成的字节码。</p>
+<p>一般以 module 形式加载时，会生成 pyc 文件。</p>
+<p>pyc 文件生成方式有很多，如下列举了几种：</p>
+<h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m test</span><br></pre></td></tr></table></figure>
+
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><h5 id="生成单个-pyc-文件"><a href="#生成单个-pyc-文件" class="headerlink" title="生成单个 pyc 文件"></a>生成单个 pyc 文件</h5><p>1 py_compile 编译</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> py_compile</span><br><span class="line">py_compile.compile(<span class="string">r'path/test.py'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>2 load_module 间接加载</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> imp</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_pyc</span><span class="params">(name)</span>:</span></span><br><span class="line">truefp, pathname, description = imp.find_module(name)</span><br><span class="line">true<span class="keyword">try</span>:</span><br><span class="line">truetrueimp.load_module(name, fp, pathname, description)</span><br><span class="line">true<span class="keyword">finally</span>:</span><br><span class="line">truetrue<span class="keyword">if</span> fp:</span><br><span class="line">truetruetruefp.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">truegenerate_pyc(input())</span><br></pre></td></tr></table></figure>
+
+<h5 id="批量生成-pyc-文件"><a href="#批量生成-pyc-文件" class="headerlink" title="批量生成 pyc 文件"></a>批量生成 pyc 文件</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> compileall</span><br><span class="line">compileall.compile_dir(<span class="string">r'path'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="pyc-文件格式解析"><a href="#pyc-文件格式解析" class="headerlink" title="pyc 文件格式解析"></a>pyc 文件格式解析</h3><p>pyc文件一般由 3 个部分组成：</p>
+<ul>
+<li>最开始 4 个字节是一个 Maigc int，标识此 pyc 的版本信息，不同的版本的 Magic 都在 <code>Python/import.c</code> 内定义</li>
+<li>接下来 4 个字节还是个 int，是 pyc 产生的时间（TIMESTAMP, 1970.01.01 到产生 pyc 时候的秒数）</li>
+<li>接下来是个序列化了的 PyCodeObject，此结构在 <code>Include/code.h</code> 内定义，序列化方法在 <code>Python/marshal.c</code> 内定义</li>
+</ul>
+<p>康一个实例（python2.7，010editor template 用官方 PYC.bt）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="number">2333</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="./1.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">struct Magic magic		0A0DF303h</span><br><span class="line">char mtime[4]			5E6E3AB6h</span><br><span class="line"></span><br><span class="line">TYPE_CODE (63h)</span><br><span class="line">trueint co_argcount			0h</span><br><span class="line">trueint co_nlocals			0h</span><br><span class="line">trueint co_stacksize		1h</span><br><span class="line">trueint co_flags			40h</span><br><span class="line">truestruct PyObject code	</span><br><span class="line">truetrueenum ObjType type		TYPE_STRING (73h)	</span><br><span class="line">truetrueint n					9h</span><br><span class="line">truetrue64 00 00 47 48 64 01 00</span><br><span class="line">truetruetruestruct Instruction inst[0]		LOAD_CONST 0	opcode 64h	oparg 0h</span><br><span class="line">truetruetruestruct Instruction inst[1]		PRINT_ITEM		opcode 47h</span><br><span class="line">truetruetruestruct Instruction inst[2]		PRINT_NEWLINE	opcode 48h</span><br><span class="line">truetruetruestruct Instruction inst[3]		LOAD_CONST 1	opcode 64h	oparg 1h</span><br><span class="line">truetruetruestruct Instruction inst[4]		RETURN_VALUE	opcode 53h	</span><br><span class="line">truestruct PyObject co_consts</span><br><span class="line">truetrueenum ObjType type		TYPE_TUPLE (28h)</span><br><span class="line">truetrueint n					2h</span><br><span class="line">truetruetrueTYPE_INT (69h)	 	91Dh(2333)</span><br><span class="line">truetruetrueTYPE_NONE (4Eh)</span><br><span class="line">truestruct PyObject co_names		</span><br><span class="line">truestruct PyObject co_varnames	</span><br><span class="line">truestruct PyObject co_freevars	</span><br><span class="line">truestruct PyObject co_cellvars</span><br><span class="line">truestruct PyObject co_filename</span><br><span class="line">truetrueenum ObjType type		TYPE_STRING (73h)</span><br><span class="line">truetrueint n					9h</span><br><span class="line">truetrue./test.py</span><br><span class="line">truestruct PyObject co_name</span><br><span class="line">truetrueenum ObjType type		TYPE_INTERNED (74h)</span><br><span class="line">truetrueint n					8h</span><br><span class="line">truetrue&lt;module&gt;</span><br><span class="line">trueint co_firstlineno		1h</span><br><span class="line">truestruct PyObject co_lnotab</span><br></pre></td></tr></table></figure>
+
+<p>每个作用域（block）对应一个 PyCodeObject 对象，在 python 源码目录下 <code>Include/code.h</code> 文件中，可以看到 PyCodeObject 的定义如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Bytecode object */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    PyObject_HEAD</span><br><span class="line">    <span class="keyword">int</span> co_argcount;		<span class="comment">/* #arguments, except *args */</span></span><br><span class="line">    <span class="keyword">int</span> co_nlocals;		<span class="comment">/* #local variables */</span></span><br><span class="line">    <span class="keyword">int</span> co_stacksize;		<span class="comment">/* #entries needed for evaluation stack */</span></span><br><span class="line">    <span class="keyword">int</span> co_flags;		<span class="comment">/* CO_..., see below */</span></span><br><span class="line">    PyObject *co_code;		<span class="comment">/* instruction opcodes | code对应的字节码 */</span></span><br><span class="line">    PyObject *co_consts;	<span class="comment">/* list (constants used) | 所有常量组成的tuple */</span></span><br><span class="line">    PyObject *co_names;		<span class="comment">/* list of strings (names used) | code所用的到符号表,tuple类型,元素是字符串 */</span></span><br><span class="line">    PyObject *co_varnames;	<span class="comment">/* tuple of strings (local variable names) | code所用到的局部变量名,tuple类型,元素是PyStringObject('s/t/R') */</span></span><br><span class="line">    PyObject *co_freevars;	<span class="comment">/* tuple of strings (free variable names) */</span></span><br><span class="line">    PyObject *co_cellvars;      <span class="comment">/* tuple of strings (cell variable names) */</span></span><br><span class="line">    PyObject *co_filename;	<span class="comment">/* unicode (where it was loaded from) */</span></span><br><span class="line">    PyObject *co_name;		<span class="comment">/* unicode (name, for reference) */</span></span><br><span class="line">    PyObject *co_lnotab;	<span class="comment">/* string (encoding addr&lt;-&gt;lineno mapping) See</span></span><br><span class="line"><span class="comment">				   Objects/lnotab_notes.txt for details. */</span></span><br><span class="line">&#125; PyCodeObject;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Python-字节码“反汇编”分析"><a href="#Python-字节码“反汇编”分析" class="headerlink" title="Python 字节码“反汇编”分析"></a>Python 字节码“反汇编”分析</h3><p>python 提供 dis 模块，为 python 字节码提供 “反汇编”，通过 <code>dis.dis()</code> 或 <code>dis.disassemble()</code> 可获得字节码的可阅读理解版本，可以看作虚拟机 opcode。</p>
+<p>通过使用 <code>dis.dis()</code> 可以对代码实现进行比较，像是“为什么 <code>{}</code> 比 <code>dict()</code> 更快”的问题，能够更加直接得到解答。</p>
+<h4 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h4><p>（我后悔了我为什么要写这么长的例子（不是）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dis</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">truea = <span class="string">'hello'</span></span><br><span class="line">trueb = <span class="number">2</span></span><br><span class="line">truec = <span class="number">3782</span></span><br><span class="line">trued = a + str(b + c)</span><br><span class="line">trueprint(d)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">truetest()</span><br><span class="line">truedis.dis(test)</span><br></pre></td></tr></table></figure>
+
+<p>通过 dis 得到能分析的 opcode，第一列是源代码行数，第二列是字节偏移，第三列是命令，第四列是命令参数。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&gt;python3 test.py                                             </span><br><span class="line">hello3784     </span><br><span class="line">  <span class="number">5</span>           <span class="number">0</span> LOAD_CONST               <span class="number">1</span> ('hello')	# 将co_consts[<span class="number">1</span>]即'hello'字符串压栈</span><br><span class="line">truetruetrue  <span class="number">2</span> STORE_FAST               <span class="number">0</span> (a)			# 将栈顶TOS存放到co_varnames[<span class="number">0</span>]即变量a</span><br><span class="line"></span><br><span class="line">  <span class="number">6</span>           <span class="number">4</span> LOAD_CONST               <span class="number">2</span> (<span class="number">2</span>)			# 将co_consts[<span class="number">2</span>]即数值<span class="number">2</span>压栈</span><br><span class="line">truetruetrue  <span class="number">6</span> STORE_FAST               <span class="number">1</span> (b)			# 将TOS存放到co_varnames[<span class="number">1</span>]即变量b</span><br><span class="line"></span><br><span class="line">  <span class="number">7</span>           <span class="number">8</span> LOAD_CONST               <span class="number">3</span> (<span class="number">3782</span>)		# 将co_consts[<span class="number">3</span>]即数值<span class="number">3782</span>压栈</span><br><span class="line">  			 <span class="number">10</span> STORE_FAST               <span class="number">2</span> (c)			# 将TOS存放到co_varnames[<span class="number">2</span>]即变量c</span><br><span class="line"></span><br><span class="line">  <span class="number">8</span>          <span class="number">12</span> LOAD_FAST                <span class="number">0</span> (a)			# 将co_varnames[<span class="number">0</span>]即变量a压栈</span><br><span class="line">  			 <span class="number">14</span> LOAD_GLOBAL              <span class="number">0</span> (str)		# 将co_names[<span class="number">0</span>]即str压栈</span><br><span class="line">  			 <span class="number">16</span> LOAD_FAST                <span class="number">1</span> (b)			# 将co_varnames[<span class="number">1</span>]即变量b压栈</span><br><span class="line">  			 <span class="number">18</span> LOAD_FAST                <span class="number">2</span> (c)			# 将co_varnames[<span class="number">2</span>]即变量c压栈</span><br><span class="line">  			 <span class="number">20</span> BINARY_ADD								# 将栈顶的变量c和变量b弹出,并做相加运算,将结果压栈</span><br><span class="line">  			 <span class="number">22</span> CALL_FUNCTION            <span class="number">1</span>				# 调用参数数量为<span class="number">1</span>个的函数,即str(b+c)</span><br><span class="line">  			 <span class="number">24</span> BINARY_ADD								# 弹出栈顶的字符串a和temp=str(b+c),连接,将结果压栈</span><br><span class="line">  			 <span class="number">26</span> STORE_FAST               <span class="number">3</span> (d)			# 将TOS存放到co_varnames[<span class="number">3</span>]即变量d</span><br><span class="line"></span><br><span class="line">  <span class="number">9</span>          <span class="number">28</span> LOAD_GLOBAL              <span class="number">1</span> (<span class="built_in">print</span>)		# 将co_names[<span class="number">1</span>]即<span class="built_in">print</span>压栈</span><br><span class="line">  			 <span class="number">30</span> LOAD_FAST                <span class="number">3</span> (d)			# 将co_varnames[<span class="number">3</span>]即变量d压栈</span><br><span class="line">  			 <span class="number">32</span> CALL_FUNCTION            <span class="number">1</span>				</span><br><span class="line">  			 <span class="number">34</span> POP_TOP									# 弹栈顶</span><br><span class="line">  			 <span class="number">36</span> LOAD_CONST               <span class="number">0</span> (None)		# 将co_consts[<span class="number">0</span>]即空对象None压栈</span><br><span class="line">  			 <span class="number">38</span> RETURN_VALUE							# 返回TOS到调用者,返回空</span><br></pre></td></tr></table></figure>
+
+<p>Python 有着基于栈的运行机制。CPython 使用三种类型的栈：</p>
+<ol>
+<li><strong>调用栈(call stack)</strong>，为每个当前活动的函数调用使用了<em>帧(frame)</em>。栈底是程序的入口点，每个函数调用会推送一个新的帧到调用栈，函数调用返回后帧被销毁。</li>
+<li>在每个函数/帧中，对应有一个 <strong>计算栈(evaluation stack)</strong> （也称为 <strong>数据栈(data stack)</strong>），大多数指令操作在计算栈中进行，如例子。</li>
+<li>在每个函数/帧中，对应有一个 <strong>块栈(block stack)</strong>，被用于跟踪某些类型的控制结构：循环、<code>try</code> / <code>except</code> 块、以及 <code>with</code> 块，进入这些控制结构时会被推入 Block 到块栈中。有助于了解任意给定时刻的活动块，After all，一个 <code>continue</code> 或者 <code>break</code> 语句可能影响正确的块。</li>
+</ol>
+<h4 id="部分指令操作"><a href="#部分指令操作" class="headerlink" title="部分指令操作"></a>部分指令操作</h4><p>1 一般指令</p>
+<ul>
+<li><code>POP_TOP</code>：删除堆栈顶部（TOS）项。</li>
+<li><code>ROT_TWO</code>：交换两个最顶层的堆栈项。</li>
+<li><code>DUP_TOP</code>：复制堆栈顶部的引用。</li>
+</ul>
+<p>2 Unary 一元操作：弹栈运算后压栈，<code>UNARY_NEGATIVE</code>、<code>UNARY_NOT</code>、<code>UNARY_INVERT</code>、<code>GET_ITER</code>（实现 <code>TOS = iter(TOS)</code> ）</p>
+<p>3 Binary 二元操作：弹出栈顶两个值运算后压栈，<code>BINARY_POWER</code>、<code>BINARY_MULTIPLY</code>、<code>BINARY_MATRIX_MULTIPLY</code>、<code>BINARY_FLOOR_DIVIDE</code>、<code>BINARY_TRUE_DIVIDE</code>、<code>BINARY_MODULO</code>、<code>BINARY_ADD</code>、<code>BINARY_SUBTRACT</code>、<code>BINARY_SUBSCR</code>（实现<code>TOS=TOS1[TOS]</code>，TOP1 为栈中第二顶）、<code>BINARY_LSHIFT</code>、<code>BINARY_RSHIFT</code>、<code>BINARY_AND</code>、<code>BINARY_XOR</code>、<code>BINARY_OR</code></p>
+<p>4 Inplace 就地二元操作</p>
+<p>5 Load 压栈操作（相当于 push）</p>
+<ul>
+<li><code>LOAD_CONST</code>(<em>consti</em>)：将 <code>co_consts[consti]</code> 的常量推入栈顶。</li>
+<li><code>LOAD_GLOBAL</code>(<em>namei</em>)：加载名称为 <code>co_names[namei]</code> 的全局对象推入栈顶。</li>
+<li><code>LOAD_FAST</code>(<em>var_num</em>)：将指向局部对象 <code>co_varnames[var_num]</code> 的引用推入栈顶。</li>
+</ul>
+<p>6 Store 弹栈赋值操作（相当于 top+pop）（对应 Load 种类）</p>
+<ul>
+<li><code>STORE_FAST</code>(<em>var_num</em>)：将 TOS 存放到局部变量 <code>co_varnames[var_num]</code>。</li>
+</ul>
+<p>7 判断跳转循环</p>
+<ul>
+<li><code>COMPARE_OP</code>(<em>opname</em>)：执行布尔运算操作。 操作名称可在 <code>cmp_op[opname]</code> 中找到。相当于汇编中的比较指令。</li>
+<li><code>POP_JUMP_IF_TRUE(FALSE)</code>(<em>target</em>)：如果 TOS 为真/假值，则将字节码计数器的值设为 <em>target</em>。 TOS 会被弹出。</li>
+<li><code>JUMP_IF_TRUE(FALSE)_OR_POP</code>(<em>target</em>)：如果 TOS 为真/假值，则将字节码计数器的值设为 <em>target</em> 并将 TOS 留在栈顶。 否则（如 TOS 为假/真值），TOS 会被弹出。</li>
+<li><code>JUMP_ABSOLUTE</code>(<em>target</em>)：将字节码计数器的值设为 <em>target</em>。</li>
+<li><code>JUMP_FORWARD</code>(<em>delta</em>)：将字节码计数器的值增加 <em>delta</em>。</li>
+<li><code>FOR_ITER</code>(<em>delta</em>)：TOS 是一个 iterator。可调用它的 <a href="https://docs.python.org/zh-cn/3.6/library/stdtypes.html#iterator.__next__" target="_blank" rel="noopener"><code>__next__()</code></a> 方法。如果产生了一个新值，则将其推入栈顶（将迭代器留在其下方）。如果迭代器提示已耗尽则 TOS 会被弹出，并将字节码计数器的值增加 <em>delta</em>。</li>
+<li><code>SETUP_LOOP</code>(<em>delta</em>)：将要循环的代码块压入堆栈。该代码块从当前指令开始扩展，大小为 <em>delta</em> 字节。</li>
+<li><code>BREAK_LOOP</code>、<code>CONTINUE_LOOP</code>(<em>target</em>)</li>
+</ul>
+<p>8 函数调用</p>
+<ul>
+<li><code>CALL_FUNCTION</code>(<em>argc</em>)：调用一个可调用对象并传入位置参数。<em>argc</em> 指明位置参数的数量。栈顶包含位置参数，其中最右边的参数在最顶端。在参数之下是一个待调用的可调用对象。<code>CALL_FUNCTION</code> 会从栈中弹出所有参数以及可调用对象，附带这些参数调用该可调用对象，并将可调用对象所返回的返回值推入栈顶。<em>在 3.6 版更改:</em> 此操作码仅用于附带位置参数的调用。</li>
+<li><code>RETURN_VALUE</code>：返回 TOS 到函数的调用者。</li>
+</ul>
+<p>列出来不够直观，再康几个例子</p>
+<h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><h5 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">true<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0x10</span>):</span><br><span class="line">truetrue<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span>           <span class="number">0</span> SETUP_LOOP              <span class="number">16</span> (to <span class="number">18</span>)		# 循环开始</span><br><span class="line">            <span class="number">2</span> LOAD_GLOBAL              <span class="number">0</span> (range)</span><br><span class="line">            <span class="number">4</span> LOAD_CONST               <span class="number">1</span> (<span class="number">16</span>)</span><br><span class="line">            <span class="number">6</span> CALL_FUNCTION            <span class="number">1</span>				# 函数调用,range(<span class="number">16</span>)</span><br><span class="line">            <span class="number">8</span> GET_ITER								# TOS=iter(TOS),即将指向栈顶的指针压栈</span><br><span class="line">      &gt;&gt;   <span class="number">10</span> FOR_ITER                 <span class="number">4</span> (to <span class="number">16</span>)		# 不断调用即可遍历iterator(range(<span class="number">16</span>)),将每次产生的新值放于栈顶,迭代器上方,迭代器耗尽时弹出并修改字节码计数器增加<span class="number">4</span>,即跳到<span class="number">12</span>(字节码计数器当前值)+<span class="number">4</span>=<span class="number">16</span>POP_BLOCK</span><br><span class="line">           <span class="number">12</span> STORE_FAST               <span class="number">0</span> (i)			</span><br><span class="line"></span><br><span class="line"><span class="number">6</span>          <span class="number">14</span> JUMP_ABSOLUTE           <span class="number">10</span>				# 简言之,蹦到<span class="number">10</span></span><br><span class="line">      &gt;&gt;   <span class="number">16</span> POP_BLOCK								# 弹出循环Block</span><br><span class="line">      &gt;&gt;   <span class="number">18</span> LOAD_CONST               <span class="number">0</span> (None)		# 函数结束部分</span><br><span class="line">           <span class="number">20</span> RETURN_VALUE</span><br></pre></td></tr></table></figure>
+
+<h5 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">truei = <span class="number">0</span></span><br><span class="line">true<span class="keyword">while</span> i &lt; <span class="number">0x16</span>:</span><br><span class="line">truetruei += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span>           <span class="number">0</span> LOAD_CONST               <span class="number">1</span> (<span class="number">0</span>)</span><br><span class="line">            <span class="number">2</span> STORE_FAST               <span class="number">0</span> (i)</span><br><span class="line"></span><br><span class="line"><span class="number">6</span>           <span class="number">4</span> SETUP_LOOP              <span class="number">20</span> (to <span class="number">26</span>)		# 循环开始,循环Block压栈,大小为<span class="number">20</span></span><br><span class="line">      &gt;&gt;    <span class="number">6</span> LOAD_FAST                <span class="number">0</span> (i)</span><br><span class="line">            <span class="number">8</span> LOAD_CONST               <span class="number">2</span> (<span class="number">22</span>)</span><br><span class="line">           <span class="number">10</span> COMPARE_OP               <span class="number">0</span> (&lt;)			# 比较弹栈顶两个,即i&lt;<span class="number">22</span>,比较结果布尔值压栈</span><br><span class="line">           <span class="number">12</span> POP_JUMP_IF_FALSE       <span class="number">24</span>				# 弹出TOS,如果为假值,则将字节码计数器的值设为<span class="number">24</span>,即跳到<span class="number">24</span>POP_BLOCK</span><br><span class="line"></span><br><span class="line"><span class="number">7</span>          <span class="number">14</span> LOAD_FAST                <span class="number">0</span> (i)</span><br><span class="line">           <span class="number">16</span> LOAD_CONST               <span class="number">3</span> (<span class="number">1</span>)</span><br><span class="line">           <span class="number">18</span> INPLACE_ADD</span><br><span class="line">           <span class="number">20</span> STORE_FAST               <span class="number">0</span> (i)</span><br><span class="line">           <span class="number">22</span> JUMP_ABSOLUTE            <span class="number">6</span>				# 跳到<span class="number">6</span></span><br><span class="line">      &gt;&gt;   <span class="number">24</span> POP_BLOCK</span><br><span class="line">      &gt;&gt;   <span class="number">26</span> LOAD_CONST               <span class="number">0</span> (None)</span><br><span class="line">           <span class="number">28</span> RETURN_VALUE</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">true<span class="keyword">return</span> testt(<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">testt</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line">true<span class="keyword">return</span> a + b - c</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (testt)</span><br><span class="line">            <span class="number">2</span> LOAD_CONST               <span class="number">1</span> (<span class="number">2</span>)</span><br><span class="line">            <span class="number">4</span> LOAD_CONST               <span class="number">2</span> (<span class="number">3</span>)</span><br><span class="line">            <span class="number">6</span> LOAD_CONST               <span class="number">3</span> (<span class="number">5</span>)</span><br><span class="line">            <span class="number">8</span> CALL_FUNCTION            <span class="number">3</span>				# 函数调用,testt(<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>),返回值压栈</span><br><span class="line">           <span class="number">10</span> RETURN_VALUE							# 返回TOS到函数的调用者</span><br></pre></td></tr></table></figure>
+
+<h3 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h3><p>在路上…</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://docs.python.org/zh-cn/3.6/library/dis.html" target="_blank" rel="noopener">dis — Python 字节码反汇编器</a></p>
+<p><a href="https://www.cnblogs.com/0xJDchen/p/6995204.html" target="_blank" rel="noopener">浮生半日：探究Python字节码</a></p>
+<p><a href="https://kdr2.com/tech/python/pyc-format.html" target="_blank" rel="noopener">PYC文件格式分析</a></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://otterv.github.io">OtterV</a>
+            <p>原文链接：<a href="https://otterv.github.io/2020/03/15/20200315pythonopcode/">https://otterv.github.io/2020/03/15/20200315pythonopcode/</a>
+            <p>发表日期：<a href="https://otterv.github.io/2020/03/15/20200315pythonopcode/">March 15th 2020, 11:51:00 pm</a>
+            <p>更新日期：<a href="https://otterv.github.io/2020/03/15/20200315pythonopcode/">March 15th 2020, 11:53:08 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/9101/11/30/91020000xxxg/" title= "XX相关">
+                    <div class="nextTitle">XX相关</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/11/12/20191112vmp/" title= "虚拟化保护 VMP">
+                    <div class="prevTitle">虚拟化保护 VMP</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "nNBXAkxhHnRSmyrTGkGqWol2-gzGzoHsz",
+        appKey: "8ORVnQBXp9DfAFfPTmEWk4OI",
+        placeholder: "<(` o ')/\(' ^ `)>",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:xgh211otterv@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/otterv" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#pyc-文件的生成"><span class="toc-number">1.</span> <span class="toc-text">pyc 文件的生成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命令"><span class="toc-number">1.1.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#生成单个-pyc-文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">生成单个 pyc 文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#批量生成-pyc-文件"><span class="toc-number">1.2.2.</span> <span class="toc-text">批量生成 pyc 文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pyc-文件格式解析"><span class="toc-number">2.</span> <span class="toc-text">pyc 文件格式解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python-字节码“反汇编”分析"><span class="toc-number">3.</span> <span class="toc-text">Python 字节码“反汇编”分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一个简单的例子"><span class="toc-number">3.1.</span> <span class="toc-text">一个简单的例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#部分指令操作"><span class="toc-number">3.2.</span> <span class="toc-text">部分指令操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环"><span class="toc-number">3.3.</span> <span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#for-循环"><span class="toc-number">3.3.1.</span> <span class="toc-text">for 循环</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#while-循环"><span class="toc-number">3.3.2.</span> <span class="toc-text">while 循环</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数调用"><span class="toc-number">3.4.</span> <span class="toc-text">函数调用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关题目"><span class="toc-number">4.</span> <span class="toc-text">相关题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 21
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 9101 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/30</span><a class="archive-post-title" href= "/9101/11/30/91020000xxxg/" >XX相关</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span><a class="archive-post-title" href= "/2020/03/15/20200315pythonopcode/" >Python 字节码能吃吗？</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/12</span><a class="archive-post-title" href= "/2019/11/12/20191112vmp/" >虚拟化保护 VMP</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/08</span><a class="archive-post-title" href= "/2019/07/08/20190708pwn1/" >Pwn训练1 —— 基本的漏洞利用（栈溢出、整数溢出、oﬀ by one）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/03</span><a class="archive-post-title" href= "/2019/06/03/20190603ccpcgirlsnj/" >2019CCPC女生赛南京之行</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2019/03/25/20190325ttdybxmy/" >谈谈最近看的电影——波希米亚狂想曲</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/25</span><a class="archive-post-title" href= "/2018/12/25/20181225cryptosmallthings/" >密码学小记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2018/12/12/20181212RSAs/" >RSA___Rivest&Shamir&Adleman</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018rop/" >ROP_lev</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2018/11/06/2018reverse/" >逆向题目WriteUPs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181023tpv/" >欲望，道德与逃离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/20181022zyc/" >栈溢出漏洞及其利用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/21</span><a class="archive-post-title" href= "/2018/10/21/20181021wmm/" >Salty</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/10</span><a class="archive-post-title" href= "/2018/10/10/20181010Vigenere/" >Vigenere破解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/12</span><a class="archive-post-title" href= "/2018/09/12/20180912bcdtts/" >Ubuntu Linux 虚拟机 + IDA 动态调试 Welcome</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2018/09/10/20180910bsb/" >Binary security 基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2018/09/06/20180906cpuse/" >About Computer Easy Using</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2018/08/18/20180818tz/" >亲爱的泰呆呆：</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/14</span><a class="archive-post-title" href= "/2018/08/14/20180814fzcp/" >肥宅的快乐-维他测评</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span><a class="archive-post-title" href= "/2018/08/12/20180812start/" >BLOG:DADDY_HONG‘s の start</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href= "/2018/04/08/201804gets/" >关于gets()的危险（不安全）性</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Blog"><span class="iconfont-archer">&#xe606;</span>Blog</span>
+    
+        <span class="sidebar-tag-name" data-tags="EAT"><span class="iconfont-archer">&#xe606;</span>EAT</span>
+    
+        <span class="sidebar-tag-name" data-tags="Binary Security"><span class="iconfont-archer">&#xe606;</span>Binary Security</span>
+    
+        <span class="sidebar-tag-name" data-tags="for"><span class="iconfont-archer">&#xe606;</span>for</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reverse"><span class="iconfont-archer">&#xe606;</span>Reverse</span>
+    
+        <span class="sidebar-tag-name" data-tags="computer"><span class="iconfont-archer">&#xe606;</span>computer</span>
+    
+        <span class="sidebar-tag-name" data-tags="Programming"><span class="iconfont-archer">&#xe606;</span>Programming</span>
+    
+        <span class="sidebar-tag-name" data-tags="Cryptography"><span class="iconfont-archer">&#xe606;</span>Cryptography</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+    
+        <span class="sidebar-tag-name" data-tags="Movie"><span class="iconfont-archer">&#xe606;</span>Movie</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pwn"><span class="iconfont-archer">&#xe606;</span>Pwn</span>
+    
+        <span class="sidebar-tag-name" data-tags="C"><span class="iconfont-archer">&#xe606;</span>C</span>
+    
+        <span class="sidebar-tag-name" data-tags="ACM"><span class="iconfont-archer">&#xe606;</span>ACM</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "OtterV"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->    
+     
+    </body>
+</html>
+
+
